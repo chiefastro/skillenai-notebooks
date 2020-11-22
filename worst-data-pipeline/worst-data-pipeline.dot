@@ -1,0 +1,29 @@
+digraph worst_data_pipeline {
+
+  //setup
+  compound = True;
+  splines = True;
+
+  // inputs in red
+  campaigns [color = red]
+  views [color = red]
+  visitors [color = red]
+  signups [color = red]
+  sales [color = red]
+
+  // outputs in blue
+  campaign_performance [color = blue]
+  acquisition_report [color = blue]
+  funnel_report [color = blue]
+  customer_profiles [color = blue]
+
+  // subgraphs
+  subgraph etl {
+    label = "etl";
+
+    subgraph prep_traffic {
+      
+    }
+  }
+
+}
