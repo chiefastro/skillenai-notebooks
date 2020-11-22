@@ -12,6 +12,7 @@ digraph best_data_pipeline {
   sales_raw [color = red]
 
   // outputs in blue
+  campaign_performance [color = blue]
   acquisition_report [color = blue]
   funnel_report [color = blue]
   customer_profiles [color = blue]
@@ -43,9 +44,10 @@ digraph best_data_pipeline {
       label = "transform"
 
       // run core business logic
+      {campaigns, views, visitors, signups, sales} -> campaign_performance_local [label="campaign_performance_job"]
       {campaigns, views, visitors} -> acquisition_report_local [label="acquisition_report_job"]
       {views, signups, sales} -> funnel_report_local [label="funnel_report_job"]
-      {signups, sales} -> customer_profiles_local [label="customer_profiles_job"]
+      {views, visitors, signups, sales} -> customer_profiles_local [label="customer_profiles_job"]
 
     }
 
@@ -53,10 +55,11 @@ digraph best_data_pipeline {
       label = "load"
 
       // load results into final data store
+      campaign_performance_local -> campaign_performance [label="load_to_data_store"]
       acquisition_report_local -> acquisition_report [label="load_to_data_store"]
       funnel_report_local -> funnel_report [label="load_to_data_store"]
       customer_profiles_local -> customer_profiles [label="load_to_data_store"]
-
+    
     }
 
   }
