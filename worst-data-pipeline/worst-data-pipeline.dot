@@ -1,4 +1,4 @@
-digraph best_data_pipeline {
+digraph worst_data_pipeline {
 
   //setup
   compound = True;
