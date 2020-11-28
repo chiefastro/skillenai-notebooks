@@ -1,0 +1,64 @@
+digraph best_data_pipeline {
+
+  //setup
+  compound = True;
+  splines = True;
+
+  // inputs in red
+  campaigns_raw [color = red]
+  views_raw [color = red]
+  visitors_raw [color = red]
+  signups_raw [color = red]
+  sales_raw [color = red]
+
+  // outputs in blue
+  acquisition_report [color = blue]
+  funnel_report [color = blue]
+  customer_profiles [color = blue]
+
+  // subgraphs
+  subgraph etl {
+    label = "etl";
+
+    subgraph extract {
+      label = "extract"
+
+      // extract columns and rows you need
+      campaigns_raw -> campaigns_slice [label="extract_from_source"]
+      views_raw -> views_slice [label="extract_from_source"]
+      visitors_raw -> visitors_slice [label="extract_from_source"]
+      signups_raw -> signups_slice [label="extract_from_source"]
+      sales_raw -> sales_slice [label="extract_from_source"]
+
+      // cast types and standardize nulls
+      campaigns_slice -> campaigns [label="clean"]
+      views_slice -> views [label="clean"]
+      visitors_slice -> visitors [label="clean"]
+      signups_slice -> signups [label="clean"]
+      sales_slice -> sales [label="clean"]
+
+    }
+
+    subgraph transform {
+      label = "transform"
+
+      // run core business logic
+      {campaigns, views, visitors} -> acquisition_report_local [label="acquisition_report_job"]
+      {views, signups, sales} -> funnel_report_local [label="funnel_report_job"]
+      {signups, sales} -> customer_profiles_local [label="customer_profiles_job"]
+
+    }
+
+    subgraph load {
+      label = "load"
+
+      // load results into final data store
+      acquisition_report_local -> acquisition_report [label="load_to_data_store"]
+      funnel_report_local -> funnel_report [label="load_to_data_store"]
+      customer_profiles_local -> customer_profiles [label="load_to_data_store"]
+
+    }
+
+  }
+
+}

@@ -1,0 +1,43 @@
+digraph worst_data_pipeline {
+
+  //setup
+  compound = True;
+  splines = True;
+
+  // inputs in red
+  campaigns_raw [color = red]
+  views_raw [color = red]
+  visitors_raw [color = red]
+
+  // outputs in blue
+  acquisition_report [color = blue]
+
+  // intermediates in green
+  past_visitors [color = green]
+  past_acquisition [color = green]
+
+  // subgraphs
+  subgraph etl {
+    label = "etl";
+
+    subgraph prep_traffic {
+      label = "prep_traffic"
+
+      // get new vs returning visitors
+      views_raw -> views_today [label="get_views_today"]
+      {views_today, past_visitors} -> new_visitors [label="todays_new_visitors"]
+      {new_visitors, past_visitors, views_today} -> visitors_processed [label="new_vs_returning"]
+      {visitors_raw, new_visitors} -> past_visitors [label="update_past_visitors"]
+
+    }
+
+    subgraph acquisition_report {
+      {campaigns_raw, views_today, visitors_processed} -> acquisition_today [label="get_acquisition_today"]
+      {past_acquisition, acquisition_today} -> acquisition_report [label="get_acquisition_report"]
+      {past_acquisition, acquisition_today} -> past_acquisition [label="update_past_acquisition"]
+
+    }
+
+  }
+
+}
