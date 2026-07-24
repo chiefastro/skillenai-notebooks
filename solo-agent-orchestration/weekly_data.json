@@ -1,0 +1,23 @@
+{
+  "_note": "One solo developer, Jun 1 - Jul 20 2026. tokens=total incl. cache reads (ccusage). prs=merged PRs authored (GitHub). tickets=Linear issues completed. cost_api_equiv=ccusage API-list-price equivalent (NOT paid; actual is a $100/mo subscription).",
+  "weeks": [
+    {"week": "2026-06-01", "tokens": 75815704,   "prs": 29, "tickets": 9,  "cost_api_equiv": 56.2},
+    {"week": "2026-06-08", "tokens": 775250575,  "prs": 36, "tickets": 14, "cost_api_equiv": 557.6},
+    {"week": "2026-06-15", "tokens": 468516712,  "prs": 25, "tickets": 10, "cost_api_equiv": 324.8},
+    {"week": "2026-06-22", "tokens": 109294698,  "prs": 7,  "tickets": 3,  "cost_api_equiv": 85.1},
+    {"week": "2026-06-29", "tokens": 647923289,  "prs": 21, "tickets": 5,  "cost_api_equiv": 570.3},
+    {"week": "2026-07-06", "tokens": 1165944114, "prs": 27, "tickets": 16, "cost_api_equiv": 987.9},
+    {"week": "2026-07-13", "tokens": 368571086,  "prs": 6,  "tickets": 5,  "cost_api_equiv": 317.1},
+    {"week": "2026-07-20", "tokens": 136210971,  "prs": 8,  "tickets": 1,  "cost_api_equiv": 129.0}
+  ],
+  "totals": {
+    "prs_full_window": 573,
+    "prs_by_repo": {"skillenai-app": 294, "skillenai-ds": 230, "skillenai-notebooks": 29, "skillenai-api-skill": 17, "labor-data-skills": 2, "opm-fwd-skill": 1},
+    "opus_share_tokens": 0.989,
+    "opus_share_cost": 0.996,
+    "cache_read_share_tokens": 0.969,
+    "cost_api_equiv_total": 3032,
+    "actual_subscription_per_month": 100
+  },
+  "jellyfish_curve": {"form": "y = a*ln(x) + b", "a": 0.78, "b": -11.9, "pr_ceiling": 3.9, "x_max_on_chart": 500000000}
+}
