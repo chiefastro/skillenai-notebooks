@@ -61,7 +61,7 @@ ax_top.annotate("one solo developer, after hours",
                 fontsize=11.5, color=NAVY, ha="center", fontweight="bold",
                 arrowprops=dict(arrowstyle="-|>", color=NAVY, lw=1.5,
                                 connectionstyle="arc3,rad=-0.12"))
-ax_top.text(3.4e8, 34.4, "no standups · no handoffs · no coordination tax",
+ax_top.text(3.4e8, 34.4, "no standups, no handoffs — one coordinator: me",
             fontsize=9.5, color=GREY, ha="center", style="italic")
 
 # ---- the break marks + the Coordination Tax label ----

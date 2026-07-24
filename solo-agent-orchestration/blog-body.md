@@ -1,4 +1,4 @@
-![The Real AI Development Barrier: The Coordination Tax — a broken-axis chart. Below the break, one million developers plateau near 4 merged PRs per week on the Jellyfish curve; above the break, one solo developer's weeks sit at 20 to 36 PRs on a different scale entirely](https://skillenai-blog-assets-prod.s3.us-east-1.amazonaws.com/uploads/2026/07/24/e955cb79-d6bf-4b65-9c50-5facd727e73f/uwbD0fjk8DA-01-hero-meme.png)
+![The Real AI Development Barrier: The Coordination Tax — a broken-axis chart. Below the break, one million developers plateau near 4 merged PRs per week on the Jellyfish curve; above the break, one solo developer's weeks sit at 20 to 36 PRs on a different scale entirely](https://skillenai-blog-assets-prod.s3.us-east-1.amazonaws.com/uploads/2026/07/24/e955cb79-d6bf-4b65-9c50-5facd727e73f/n4tt6l0h6ew-01-hero-meme.png)
 
 Jellyfish published a chart I can't stop thinking about. They took **one million developer-weeks** of Cursor and Claude Code usage and plotted tokens spent per week against merged PRs shipped per week. Two "headwinds" fall out of it:
 
@@ -32,15 +32,19 @@ It's the steady state. Most weeks land 20–36 merged PRs and 5–16 completed t
 
 Across the full window it's **573 merged PRs**. And the tickets — a separate, coarser tracker of *units of work finished* — move right alongside the PR count. That matters, because it means the number isn't an artifact of chopping work into tiny PRs to game a metric. Real things got finished.
 
-## So why doesn't the plateau apply to me?
+## So why does a solo dev clear the plateau?
 
-Here's the claim I'll actually defend: **the Jellyfish curve flattens because of coordination, and I don't pay for any.**
+Here's the claim I'll actually defend: **the Jellyfish curve flattens because of coordination — and I didn't escape it. I became it.**
 
-In a [companion Skillenai analysis](https://skillenai.com/2026/06/15/how-to-build-agents-in-2026-low-level-runtimes-vs-orchestration-frameworks) I've been picking apart how engineering orgs spend their marginal effort, and the pattern is stubborn: coordination is nearly invariant — roughly **7–9 engineers per manager** — and most of it gets *badged* as engineering-management, TPM, and product-owner headcount rather than shown as the overhead it is. The bigger the team, the larger the fraction of every new hour that disappears into standups, handoffs, review queues waiting on a human in another timezone, and the sheer work of keeping N people's mental models in sync. That is the Coordination Tax, and it is exactly the kind of cost that makes an output curve bend over. You add capacity, and the capacity gets eaten by the friction of using it together.
+In a [companion Skillenai analysis](https://skillenai.com/2026/06/15/how-to-build-agents-in-2026-low-level-runtimes-vs-orchestration-frameworks) I've been picking apart how engineering orgs spend their marginal effort, and the pattern is stubborn: coordination is nearly invariant — roughly **7–9 engineers per manager** — and most of it gets *badged* as engineering-management, TPM, and product-owner headcount rather than shown as the overhead it is. The bigger the team, the larger the fraction of every new hour that disappears into standups, handoffs, review queues waiting on a human in another timezone, and the sheer work of keeping N people's mental models in sync. That is the Coordination Tax, and it's exactly the kind of cost that makes an output curve bend over.
 
-A solo human plus a fleet of agents has a **span of control of zero.** The agents *are* the team, and they need no coordinating with each other. No standup. No handoff. No cross-team dependency. No PR sitting for two days waiting on a reviewer. The marginal token goes almost entirely into *work* instead of into *coordinating the work* — so the thing that flattens team output simply isn't in the room.
+Notice the *shape* of that cost: it's **many-to-many**. It grows with the number of people who have to stay in sync with each other. A fleet of agents doesn't have it — the agents don't sit in each other's standups or wait on each other's reviews. But someone still has to point them at the work, approve every pull request, and decide what ships next. That someone is me. I approve every PR by hand and assign every ticket myself. I'm not asleep while a swarm runs the company — **I am the single coordination layer they all route through.**
 
-Notice what this argument is **not**. It is not "the model is superhuman." If the plateau were a model-capability ceiling, it would cap me too — and it plainly doesn't. I'm at 23, not 4. Whatever separates me from the million-developer-week average isn't the model. It's the org chart.
+That's the move, and it's also the catch. I traded *distributed, many-to-many* coordination for *centralized, one-to-many* coordination — and one human doing the centralized kind is far cheaper than a dozen humans doing the distributed kind. So I clear the individual-contributor plateau without much trouble. But the tax didn't vanish. Watch where my output actually lands: **almost exactly one team's worth — ~6× a single developer.** That's not a coincidence. It's my span of control. One person directing a fleet tops out at roughly one team, the same 6–9 span-of-control number that governs every org chart ever drawn. The Coordination Tax didn't disappear when I went solo. It collapsed onto one person — me — and it caps that person at one team.
+
+To go further, I'd need agents that coordinate *other* agents: a hierarchy, managers of managers. I haven't built that, because I don't yet trust an agent to run its own team of agents. So I'm the bottleneck, deliberately, for now.
+
+And notice what this argument is **not**. It is not "the model is superhuman." If the plateau were a model-capability ceiling, it would cap me too — and it plainly doesn't. I'm at 23, not 4. What separates me from the million-developer-week average isn't the model. It's that a whole team's coordination now happens inside one head.
 
 ## The economics are the funny part
 
@@ -48,7 +52,7 @@ Notice what this argument is **not**. It is not "the model is superhuman." If th
 
 Two numbers make the "virtual team" framing real:
 
-- **~6 developers' worth of merged output.** 23 PRs/week ÷ 3.9 (the Jellyfish per-dev ceiling) ≈ **5.9** — precisely the team size at which span-of-control math says you'd hire a manager. I get that team's throughput and skip both the team *and* the manager.
+- **~6 developers' worth of merged output.** 23 PRs/week ÷ 3.9 (the Jellyfish per-dev ceiling) ≈ **5.9** — precisely the team size at which span-of-control math says you'd hire a manager. I get that team's throughput, and I *am* the manager: the whole team-plus-manager collapses into one person and a fleet of agents.
 - **A payroll of about $100/month.** Tooling prices my usage at **$3,032** for the eight weeks — but that's the *API list-price equivalent*, not what I pay. I'm on a **$100/month Claude subscription**. My real out-of-pocket for the window is roughly **$180**. The subscription delivers around **17× its list value** — call it $1,700/month of usage for a $100 bill.
 
 And none of it is cheap-model filler: **98.9% of my tokens and 99.6% of the cost are Opus**, almost entirely Opus 4.8. This is premium-model work, not a haiku token count run up to look impressive. (For the curious: **97% of those tokens are cache reads**, billed at roughly a tenth of the input rate — and that discount is *already* in the $3,032. Priced without caching, the list number would be closer to $50K.)
@@ -57,7 +61,7 @@ And none of it is cheap-model filler: **98.9% of my tokens and 99.6% of the cost
 
 This is, honestly, why I moved from Cursor to Claude Code. Cursor's pricing is usage-based — and it more or less *has* to be, because it pays third-party model vendors per token. Every token you spend is a token it owes upstream, so it can't just eat your usage behind a flat fee. (Even its push into in-house models is partly an attempt to escape that pass-through.) A subscription that swallows the token cost can really only exist when the vendor also *owns* the model.
 
-That structure — not any single feature — is what makes "just let the agents run" a rational default instead of a running budget decision. Metered per-token at these volumes, I'd flinch every time I kicked off a fleet, and I'd instinctively throttle myself back down into the "interactive coding" band. The flat plan removes the meter, and removing the meter is what lets you sit on the far right of that x-axis at all. The plateau on Jellyfish's chart is largely coordination — but the reason *anyone* reaches orchestration scale is partly which pricing model they happen to be standing on.
+That structure — not any single feature — is what makes *keeping the fleet busy* a rational default instead of a running budget decision. Metered per-token at these volumes, I'd flinch every time I kicked off a run, and I'd instinctively throttle myself back down into the "interactive coding" band. The flat plan removes the meter, and removing the meter is what lets you sit on the far right of that x-axis at all. The plateau on Jellyfish's chart is largely coordination — but the reason *anyone* reaches orchestration scale is partly which pricing model they happen to be standing on.
 
 ## The honest caveats
 
@@ -65,16 +69,16 @@ I'd rather hand you these than have you find them:
 
 - **What "tokens" means.** About 97% of my volume is cache reads — agents re-reading large contexts. On a *billable-non-cache* definition, my weekly input+output is only ~0.5–6M, which would drop me to the far **left** of the chart. I read Jellyfish's axis as total throughput (their 50M starting point is unreachable otherwise), but you should know the metric is load-bearing here.
 - **PR granularity.** A big share of these PRs are authored by agents inside orchestrated flows. They're plausibly finer-grained than a human's hand-written PR, so "23 PRs" is a claim about *merged throughput*, not 23 acts of individual genius. The tickets number is the more conservative read.
-- **The tax buys something.** Coordination isn't pure waste. It buys shared context, mutual error-catching, and institutional memory. A solo-plus-agents setup skips the tax partly by skipping what it pays for — which is fine for a side project and emphatically *not* fine for a bank.
+- **The tax buys something.** Coordination isn't pure waste. It buys shared context, mutual error-catching, and institutional memory. I'm the only human in the loop, which means there's no *second* pair of human eyes on anything I approve — I'm the reviewer, the assigner, and the only check. That's fine for a side project and emphatically *not* fine for a bank.
 - **n = 1.** One person, eight weeks, one setup. This is a demonstration, not a study.
 
 ## What I take from it
 
-The plateau is real — for teams. It's a curve built from developers embedded in orgs, and it measures coordination drag at least as much as it measures the tool. Pull the coordination out, keep the tool, and the curve stops describing you.
+The plateau is real — for teams. It's a curve built from developers embedded in orgs, and it measures coordination drag at least as much as it measures the tool. Replace a team's *internal* coordination with a fleet of agents you direct yourself, and you blow straight through the individual-contributor ceiling.
 
-For a solo builder, that's a genuinely new thing: the reach of several teams, on premium models, for the price of a gym membership — as long as you remember that the same thing you deleted to get here (a second pair of human eyes) is the thing you'll miss the moment the work stops being a side project.
+But you don't escape the Coordination Tax — you inherit it. One person can be the coordination layer for about one team's worth of agents, and then you hit a new ceiling that looks a lot like the old one, one level up. Getting past *that* means letting agents coordinate other agents, and I'm not ready to trust that yet.
 
-Look what's possible after hours.
+So: the reach of a whole team, on premium models, for the price of a gym membership — run by one person who is now, unavoidably, that team's manager. Look what's possible after hours.
 
 ---
 

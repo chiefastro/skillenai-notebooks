@@ -1,6 +1,6 @@
-# Two Headwinds of AI Development. And Then There's Me.
+# The Real AI Development Barrier: The Coordination Tax
 
-*A solo, after-hours look at agent orchestration — and why the "diminishing returns" plateau is really a Coordination Tax.*
+*A solo, after-hours look at agent orchestration — how one person clears the "diminishing returns" plateau by becoming the coordination layer, and hits a new ceiling at exactly one team's worth of output.*
 
 **Date:** 2026-07-23 · **Author:** Jared Rand · **Data:** my own Claude Code token logs (ccusage), merged PRs (GitHub), completed tickets (Linear), June–July 2026.
 
@@ -38,15 +38,17 @@ This isn't one heroic week cherry-picked. It's the steady state: most weeks land
 
 Full window (Apr–Jul), the merged-PR count is **573** across those six repos. The tickets are an independent, coarser tracker of *units of work finished*, and they move with the PRs — which is the point: this isn't PR-splitting inflating a vanity metric.
 
-## Why the plateau doesn't bind me
+## Why a solo dev clears the plateau
 
-Here's the claim I'll actually defend: **the Jellyfish curve flattens because of coordination, and I don't pay for any.**
+Here's the claim I'll actually defend: **the Jellyfish curve flattens because of coordination — and I didn't escape it. I became it.**
 
-In an earlier Skillenai analysis I looked at how engineering orgs spend their marginal effort and found that coordination is nearly invariant — roughly **7–9 engineers per manager** at big tech, a bit higher at AI labs — and that most of it gets *badged* as engineering management, TPM, and product-owner headcount rather than shown as overhead. The bigger the team, the larger the share of every additional hour that goes into standups, handoffs, review queues waiting on other humans, alignment meetings, and keeping N people's mental models in sync. That's the Coordination Tax, and it's exactly the kind of cost that makes an output curve bend over: you add capacity, but capacity gets eaten by the friction of using it together.
+In an earlier Skillenai analysis I looked at how engineering orgs spend their marginal effort and found that coordination is nearly invariant — roughly **7–9 engineers per manager** at big tech, a bit higher at AI labs — and that most of it gets *badged* as engineering management, TPM, and product-owner headcount rather than shown as overhead. The bigger the team, the larger the share of every additional hour that goes into standups, handoffs, review queues waiting on other humans, and keeping N people's mental models in sync. That's the Coordination Tax, and it's exactly the kind of cost that makes an output curve bend over.
 
-A solo human plus a fleet of agents has a **span of control of zero.** The agents *are* the team, and they need no coordinating with each other. There is no standup, no PM handoff, no cross-team dependency, no PR sitting for two days waiting on a reviewer who's in a different timezone. The marginal token goes almost entirely into *work*, not into *coordinating the work*. So the thing that flattens team output simply isn't present.
+The key is the *shape* of that cost: it's **many-to-many**, growing with the number of people who must stay in sync. A fleet of agents doesn't have it — they don't sit in each other's standups or wait on each other's reviews. But someone still has to assign the work, approve every PR, and decide what ships next. That someone is me: I approve every pull request by hand and assign every ticket myself. I'm not asleep while a swarm runs the company — **I am the single coordination layer they all route through.**
 
-Note what this argument is **not**: it's not "the model is superhuman." If the plateau were a model-capability ceiling, it would bind me too — and it doesn't. I'm at 23, not 4. Whatever separates me from the Jellyfish population isn't the model; it's the org chart.
+That's the move, and the catch. I swapped *distributed, many-to-many* coordination for *centralized, one-to-many* coordination, and one human doing the centralized kind is far cheaper than a dozen doing the distributed kind — so I clear the individual-contributor plateau easily. But the tax didn't vanish: my output lands at **almost exactly one team's worth (~6× a single dev)**, which is not a coincidence — it's my span of control. One person directing a fleet tops out at roughly one team, the same 6–9 span-of-control number that governs every org chart. The Coordination Tax collapsed onto one person and caps that person at one team. Scaling past it would require agents that coordinate *other* agents (managers of managers) — which I haven't built, because I don't yet trust an agent to run its own team of agents.
+
+Note what this argument is **not**: it's not "the model is superhuman." If the plateau were a model-capability ceiling, it would bind me too — and it doesn't. I'm at 23, not 4. What separates me from the Jellyfish population isn't the model; it's that a whole team's coordination now happens inside one head.
 
 ## The economics
 
@@ -54,7 +56,7 @@ Note what this argument is **not**: it's not "the model is superhuman." If the p
 
 Two numbers make the "virtual team" framing concrete:
 
-- **~6 developers' worth of merged output.** 23 PRs/week ÷ 3.9 (the Jellyfish per-dev ceiling) ≈ **5.9**. That's precisely the team size at which span-of-control says you'd hire a manager. I get the throughput of that team and skip both the team *and* its manager.
+- **~6 developers' worth of merged output.** 23 PRs/week ÷ 3.9 (the Jellyfish per-dev ceiling) ≈ **5.9**. That's precisely the team size at which span-of-control says you'd hire a manager. I get the throughput of that team, and I *am* the manager: the whole team-plus-manager collapses into one person and a fleet of agents.
 - **A payroll of ~$100/month.** ccusage prices my usage at **$3,032** over the eight weeks — but that's the *API list-price equivalent*, not what I pay. I'm on a **$100/month Claude subscription**, so my real out-of-pocket for the window is roughly **$180**. The subscription delivers about **17× its list value**.
 
 And this is not cheap-model output: **98.9% of my tokens and 99.6% of the cost are Opus** (almost entirely Opus 4.8). It's premium-model work, not haiku/sonnet filler run up to pad a token count. (For the curious: **96.9% of tokens are cache reads**, billed at ~1/10 the input rate — that discount is already baked into the $3,032. Priced without caching, the list number would be roughly $50K.)
@@ -63,7 +65,7 @@ And this is not cheap-model output: **98.9% of my tokens and 99.6% of the cost a
 
 Over this window, $100/month buys roughly **$1,700/month of API-list-equivalent usage** — a subsidy the orchestration workflow depends on. Metered per-token, an 8-week orchestration run at these volumes would cost thousands, and I'd throttle myself into the "interactive coding" band on instinct. The flat subscription removes the meter, and removing the meter is what lets you leave a fleet of Opus agents running against large contexts without flinching.
 
-This is, honestly, why I switched from Cursor to Claude Code. Cursor's pricing is usage-based — and it more or less *has* to be, because it pays third-party model vendors per token, so every token you spend is a token it owes upstream. (Even its move toward in-house models is, in part, an attempt to escape that pass-through.) A subscription that eats the token cost can only exist when the vendor also owns the model. That pricing structure — not any single feature — is what makes "just let the agents run" a rational default instead of a budget decision. The plateau on the Jellyfish chart is partly coordination; the reason *anyone* can reach the right side of that x-axis at all is partly which pricing model they're on.
+This is, honestly, why I switched from Cursor to Claude Code. Cursor's pricing is usage-based — and it more or less *has* to be, because it pays third-party model vendors per token, so every token you spend is a token it owes upstream. (Even its move toward in-house models is, in part, an attempt to escape that pass-through.) A subscription that eats the token cost can only exist when the vendor also owns the model. That pricing structure — not any single feature — is what makes *keeping the fleet busy* a rational default instead of a budget decision. The plateau on the Jellyfish chart is partly coordination; the reason *anyone* can reach the right side of that x-axis at all is partly which pricing model they're on.
 
 ## Honest caveats
 
@@ -71,7 +73,7 @@ I'd rather state these than have you find them:
 
 - **What "tokens" means.** ~97% of my token volume is cache reads — the agents re-reading large contexts. On a *billable-non-cache* definition, my weekly input+output is only ~0.5–6M, which would put me on the far **left** of the chart, in "interactive coding." I read Jellyfish's axis as total throughput (their 50M starting point is unreachable otherwise), but the metric is doing real work in this comparison and you should know which one it is.
 - **PR granularity.** A large share of these PRs are authored by agents inside orchestrated flows. They're plausibly finer-grained than a human's hand-written PR, so "23 PRs" is a statement about *merged throughput*, not 23 acts of individual genius. The tickets number is the more conservative read.
-- **The tax buys something.** Coordination isn't pure waste. It buys shared context, mutual error-catching, and institutional memory. A solo+agents setup skips the tax partly by skipping what it pays for — which is fine for a side project and *not* fine for a bank.
+- **The tax buys something.** Coordination isn't pure waste. It buys shared context, mutual error-catching, and institutional memory. I'm the only human in the loop — the reviewer, the assigner, and the only check — so there's no *second* pair of human eyes on anything I approve. Fine for a side project, emphatically *not* fine for a bank.
 - **n = 1.** One person, eight weeks, one setup. This is a demonstration, not a study.
 
 ## Methodology & sources
@@ -85,10 +87,11 @@ I'd rather state these than have you find them:
 ## Takeaways
 
 1. **The plateau is org structure, not model capability.** A curve built from team-embedded developers measures coordination drag as much as it measures the tool.
-2. **A solo builder with agents can operate several teams' worth of surface area** — because the coordination that would normally cap that output isn't there to cap it.
-3. **The unit economics are absurd in the good direction:** ~6 developers of throughput, on premium Opus, for the price of a gym membership.
-4. **Pricing model is a capability.** A flat subscription that eats the token cost — which really only works when the vendor owns the model — is what makes "let the agents run" the default. Metered per-token, you self-throttle back down the curve.
-5. **Know what you're giving up.** Zero coordination is a feature for a side project and a liability for anything that needs a second pair of human eyes. The trick is knowing which one you're building.
+2. **A solo builder with agents clears the individual-contributor plateau by becoming the coordination layer** — and then hits a new ceiling at ~one team's worth of output, because one human's span of control is the new bottleneck.
+3. **The coordination tax isn't escaped, it's relocated.** It collapses onto the single human coordinator. Scaling past one team needs agents that coordinate other agents — a hierarchy I haven't (and wouldn't yet) hand off.
+4. **The unit economics are absurd in the good direction:** ~6 developers of throughput, on premium Opus, for the price of a gym membership.
+5. **Pricing model is a capability.** A flat subscription that eats the token cost — which really only works when the vendor owns the model — is what makes keeping the fleet busy the default. Metered per-token, you self-throttle back down the curve.
+6. **Know what you're giving up.** Being the only human in the loop means no second pair of human eyes — a feature for a side project, a liability for anything that needs review. The trick is knowing which one you're building.
 
 ---
 
