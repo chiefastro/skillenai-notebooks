@@ -15,7 +15,7 @@ Together they answer: who moves *into* the AI Engineer role, where its people go
 - **AI Engineer sits at the crossroads of software and data.** Its biggest feeders are **Software Engineer (22%), ML Engineer (14%), and Data Scientist (13%)** — together nearly half of all identifiable moves in. The rest is a genuinely long tail of 100+ other backgrounds (Research Assistant, Data Analyst, Data Engineer, founders, academics).
 - **The same roles are where AI Engineers go next** (Software Engineer 20%, Data Scientist 11%, ML Engineer 10%) — plus academia and founder/leadership. It's a two-way interchange with the rest of tech.
 - **Far more arrive than leave** — the role is young, so most who've joined are still in it.
-- **New entrants are still climbing** — AI Engineer arrivals grew **98 → 217 → 277** across 2023–25, the only adjacent role still rising in 2025 (Data Scientist peaked in 2024 and fell).
+- **New entrants are accelerating** — AI Engineer arrivals steepened every year through 2024 (…67 → 98 → 217), and even a *partial* 2025 (collection ends ~Oct) already tops its full 2024. The adjacent roles (Data Scientist, Data Engineer, ML Engineer) plateaued over the same window.
 - **It's a distinct job, not a rename** — its postings demand an LLM/agent/RAG skill stack the neighboring roles don't.
 - **Supply hasn't caught up to demand.** Putting both sides on one taxonomy: employers ask 2–8× more than workers list for the LLM-production stack (LLMs, prompt engineering, RAG, vector DBs, evaluation, guardrails), while workers over-list the legacy skills of their prior roles (SQL, Excel, TensorFlow, computer vision). The skill gap is the fingerprint of the career transition itself.
 
@@ -40,9 +40,9 @@ Arrivals — the count of people *starting* the role each year — are fully obs
 
 ![New arrivals per year by role](02_arrivals_momentum.png)
 
-- **AI Engineer** entrants grew steadily and then sharply: **98 (2023) → 217 (2024) → 277 (2025)** — the only role among its neighbors still rising in 2025.
-- **Data Scientist** grew for a decade, **peaked in 2024, and fell in 2025.**
-- **Data Engineer** and **ML Engineer** flattened.
+- **AI Engineer** arrivals **accelerated through 2024** (51 → 67 → 98 → 217 across 2021–24) — the steepest climb of the group. Its 2025 point is partial (data collection ends ~Oct 2025) yet already exceeds full 2024, so true 2025 is higher still.
+- **Data Scientist, Data Engineer, and ML Engineer plateaued** over 2022–24 — larger in absolute terms, but their year-over-year growth had flattened before the window closed.
+- **Don't read the 2025 dips as decline.** 2025 is a truncated year for *every* role (~⅓ of the year's records are missing), so all lines fall artificially at the hollow point — that's the data ending, not the market.
 
 ## 3. Supply and demand don't line up on skills
 
@@ -89,7 +89,7 @@ AI Engineer advertises like a **premium software engineer**: ~$190K median midpo
 
 - **Roles are entity-resolved.** The talent graph normalizes free-text titles to canonical role entities; the Sankey is built from the resolved **role-to-role transition matrix** (full population), so prior/next roles are named entities, not keyword buckets. The **AI Engineer** node aggregates the AI-engineer role family (AI Engineer, Generative / Applied / AI-ML / LLM Engineer, and its seniority variants); moves *within* that family are excluded so the flows show genuine cross-role movement. Synonymous destinations (e.g. "Machine Learning Engineer" / "ML Engineer") are merged for display.
 - **"N other roles"** rolls up the long tail of distinct resolved roles that each contribute only a few moves — genuine diversity, shown as one node for legibility.
-- **Arrivals** count role start-events per year (spell-level: consecutive same-role positions merged, so a company change within a role isn't a new arrival). A start date is a fully-observed past event, so the arrivals trend is censoring-immune, including 2025.
+- **Arrivals** count role start-events per year (spell-level: consecutive same-role positions merged, so a company change within a role isn't a new arrival). A start date is a fully-observed past event, so the trend doesn't depend on future events — **but** the profile collection ends ~Oct 2025, so 2025 is a **partial year** (missing Nov–Dec and thinning toward the cutoff; total role-starts across all titles fall ~⅓ from 2024). Treat 2025 as provisional (shown hollow) and read the trend through 2024.
 - **The supply–demand skill comparison** puts both sides on the same entity-resolved skill taxonomy. **Demand** = % of AI Engineer *postings* whose resolved skills include the skill (job index, ~4,300 postings). **Supply** = % of AI Engineers whose *profile* lists it (talent graph, resolved skills, n≈220 observed). Different text sources (recruiter-written postings vs self-reported profiles), same resolver — so positions are comparable but the *levels* reflect each medium. A near-zero supply reading means below the profile-extraction threshold, not literally zero; profiles under-report operational skills people may actually practice.
 - **The cross-role skill fingerprint and salary are demand-side**, from the job-postings index (skill = % of a role's postings mentioning it; salary = advertised base bands).
 - **Sample.** The talent graph is a tech-focused sample, not a census — read the composition and trends; treat absolute move-counts as sample estimates. AI Engineer is young and its transition counts are modest (hundreds of resolved moves), so the tail percentages carry real uncertainty; the top feeders/exits are the robust part.

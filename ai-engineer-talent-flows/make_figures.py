@@ -66,20 +66,25 @@ def fig_arrivals():
     rows=read_csv("arrivals_by_role.csv")
     ys=[int(r["year"]) for r in rows]
     A={k:[int(r[c]) for r in rows] for k,c in [("AIE","AI_Engineer"),("DS","Data_Scientist"),("MLE","ML_Engineer"),("DE","Data_Engineer")]}
+    solid=[y for y in ys if y<=2024]
     fig,ax=plt.subplots(figsize=(10,6))
-    ax.plot(ys,A["AIE"],color=C["AIE"],lw=3.6,marker="o",ms=5,label="AI Engineer",zorder=3)
-    for k,lab in [("DS","Data Scientist"),("DE","Data Engineer"),("MLE","ML Engineer")]:
-        ax.plot(ys,A[k],color=C[k],lw=2,marker="o",ms=3,alpha=.65,label=lab,zorder=2)
-    ax.annotate(f"AI Engineer: {A['AIE'][-3]} → {A['AIE'][-1]}\nnew entrants (2023→2025)",
-                (ys[-1],A["AIE"][-1]),color=C["AIE"],fontsize=10,fontweight="bold",
-                xytext=(2018.2,760),va="center",arrowprops=dict(arrowstyle="->",color=C["AIE"],lw=1.5))
-    ax.annotate("Data Scientist peaked 2024,\nfell in 2025",(2025,A["DS"][-1]),color=C["DS"],fontsize=9,
-                xytext=(2022.4,300),va="center")
-    ax.set_title("New entrants per year: AI Engineer is the only role still climbing",pad=12)
+    for k,lab,lw in [("AIE","AI Engineer",3.6),("DS","Data Scientist",2),("DE","Data Engineer",2),("MLE","ML Engineer",2)]:
+        vs=[A[k][ys.index(y)] for y in solid]
+        hi=(k=="AIE")
+        ax.plot(solid,vs,color=C[k],lw=lw,marker="o",ms=5 if hi else 3,alpha=1 if hi else .65,label=lab,zorder=3 if hi else 2)
+        # 2025 partial: dotted continuation + hollow marker
+        ax.plot([2024,2025],[A[k][ys.index(2024)],A[k][ys.index(2025)]],color=C[k],lw=lw,ls=":",alpha=.5,zorder=1)
+        ax.plot(2025,A[k][ys.index(2025)],"o",ms=6,mfc="white",mec=C[k],mew=1.5,alpha=.8 if hi else .5,zorder=2)
+    ax.axvspan(2024.5,2025.5,color="#f8fafc",zorder=0)
+    ax.text(2025,880,"2025 partial\ndata ends ~Oct 2025",ha="center",fontsize=8,color="#9ca3af")
+    ax.annotate("AI Engineer climbs every year through 2024 —\nand its partial 2025 already tops full 2024",
+                (2024,A["AIE"][ys.index(2024)]),color=C["AIE"],fontsize=10,fontweight="bold",
+                xytext=(2015.2,470),va="center",arrowprops=dict(arrowstyle="->",color=C["AIE"],lw=1.5))
+    ax.set_title("New entrants per year: AI Engineer is the fastest-growing role",pad=12)
     ax.set_ylabel("People starting the role each year (new arrivals)")
     ax.set_xlabel("Year"); ax.set_xticks(ys[::1]); ax.set_xticklabels(ys,rotation=45,ha="right",fontsize=9)
     ax.grid(axis="y",color=C["grid"],lw=.7); ax.legend(frameon=False,fontsize=11,loc="upper left")
-    fig.text(0.5,-0.02,"Source: Skillenai talent graph. Arrivals = role start-events per year — fully observed for past years (censoring-immune).",
+    fig.text(0.5,-0.02,"Source: Skillenai talent graph. Arrivals = role start-events per year. Data collection ends ~Oct 2025, so 2025 is partial (shown hollow) and understates every role.",
              ha="center",fontsize=8,color="#9ca3af")
     fig.tight_layout(); fig.savefig(out("02_arrivals_momentum.png"),bbox_inches="tight"); plt.close(fig)
 
