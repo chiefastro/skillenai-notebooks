@@ -1,0 +1,10 @@
+skill,AI_Engineer,ML_Engineer,Data_Scientist,Software_Engineer
+LLM,28.9,21.3,7.3,1.5
+Agents,16.5,5.9,2.1,0.7
+Prompt eng.,8.0,2.5,1.1,0.2
+LangChain,16.4,7.2,1.8,0.4
+RAG,21.7,11.4,3.0,0.6
+Fine-tuning,17.0,13.6,3.8,0.7
+PyTorch,18.5,18.5,6.1,1.1
+MLOps,11.3,10.6,2.2,0.2
+Statistics,19.2,19.6,32.3,5.4
