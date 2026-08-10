@@ -83,7 +83,43 @@ def fig_arrivals():
              ha="center",fontsize=8,color="#9ca3af")
     fig.tight_layout(); fig.savefig(out("02_arrivals_momentum.png"),bbox_inches="tight"); plt.close(fig)
 
-# ---- FIG 3: demand-side skill fingerprint ----
+# ---- FIG 3: supply vs demand skill gap (scatter) ----
+def fig_skill_gap():
+    rows=[(r["skill"],float(r["demand_pct"]),float(r["supply_pct"])) for r in read_csv("skill_supply_demand.csv")]
+    L=24
+    fig,ax=plt.subplots(figsize=(11,8.5))
+    ax.plot([0,L],[0,L],color="#9ca3af",ls="--",lw=1,zorder=1)
+    ax.fill_between([0,L],[0,L],[L,L],color="#dbeafe",alpha=.35,zorder=0)
+    ax.fill_between([0,L],[0,0],[0,L],color="#fee2e2",alpha=.35,zorder=0)
+    ax.text(1.5,22.5,"EMPLOYERS ASK FOR IT MORE than workers list it\nthe reskilling frontier",color="#1d4ed8",fontsize=10.5,fontweight="bold",va="top")
+    ax.text(15.2,2.9,"WORKERS LIST IT MORE than employers ask\nlegacy from prior roles",color="#b91c1c",fontsize=10.5,fontweight="bold",va="top")
+    LABELS={"prompt engineering":(6,2,"left"),"LLMs":(6,1,"left"),"rag":(6,-3,"left"),
+        "machine learning":(6,4,"left"),"langchain":(7,-6,"left"),"AWS":(-6,5,"right"),
+        "TypeScript":(-7,1,"right"),"vector databases":(6,5,"left"),"fine-tuning":(7,-3,"left"),
+        "pytorch":(6,0,"left"),"observability":(5,5,"left"),"langgraph":(6,-1,"left"),
+        "APIs":(5,-7,"left"),"kubernetes":(6,3,"left"),"docker":(6,-1,"left"),"sql":(-6,3,"right"),
+        "tensorflow":(6,-3,"left"),"evaluation frameworks":(6,1,"left"),"guardrails":(5,-3,"left"),
+        "JavaScript":(6,2,"left"),"computer vision":(6,-9,"left"),"NLP":(6,5,"left"),
+        "Excel":(5,5,"left"),"Tableau":(-4,10,"right")}
+    for nm,dm,sp in rows:
+        gap=dm-sp
+        c="#2563eb" if gap>3 else ("#dc2626" if gap<-3 else "#6b7280")
+        ax.scatter(sp,dm,s=42,color=c,zorder=3,alpha=.9,edgecolors="white",linewidths=.4)
+        if nm in LABELS:
+            dx,dy,ha=LABELS[nm]
+            ax.annotate(nm,(sp,dm),xytext=(dx,dy),textcoords="offset points",fontsize=8.5,color="#111827",ha=ha)
+    ax.annotate("Python sits at 47% / 48% — off-chart top-right, perfectly aligned",
+                (L,L),xytext=(-8,-10),textcoords="offset points",ha="right",va="top",fontsize=8.5,color="#6b7280",style="italic")
+    ax.set_xlim(0,L); ax.set_ylim(0,L)
+    ax.set_xlabel("SUPPLY — % of AI Engineers who list the skill (talent graph)")
+    ax.set_ylabel("DEMAND — % of AI Engineer postings that ask for it (job index)")
+    ax.set_title("Supply vs demand: where AI Engineer skills line up — and don't",pad=12)
+    ax.grid(color=C["grid"],lw=.6)
+    fig.text(0.5,-0.02,"Both entity-resolved to the same skill taxonomy. On the diagonal = aligned; above = demand runs ahead of supply; below = workers carry prior-role skills employers no longer ask for.",
+             ha="center",fontsize=8,color="#9ca3af")
+    fig.tight_layout(); fig.savefig(out("03_skill_gap.png"),bbox_inches="tight"); plt.close(fig)
+
+# ---- FIG 4: demand-side skill fingerprint ----
 def fig_skills():
     rows=read_csv("skill_prevalence.csv")
     skills=[r["skill"] for r in rows]
@@ -97,7 +133,7 @@ def fig_skills():
     ax.legend(frameon=False,ncol=4,loc="upper right"); ax.grid(axis="y",color=C["grid"],lw=.7)
     fig.text(0.5,-0.03,"Source: Skillenai job-postings index. AI Engineer owns the LLM/agent/RAG stack; ML Eng owns PyTorch; Data Scientist owns statistics.",
              ha="center",fontsize=8,color="#9ca3af")
-    fig.tight_layout(); fig.savefig(out("03_skill_fingerprint.png"),bbox_inches="tight"); plt.close(fig)
+    fig.tight_layout(); fig.savefig(out("04_skill_fingerprint.png"),bbox_inches="tight"); plt.close(fig)
 
 # ---- FIG 4: salary ----
 def fig_salary():
@@ -114,8 +150,8 @@ def fig_salary():
     ax.set_title("AI Engineer pays like a premium software engineer",pad=12)
     ax.grid(axis="x",color=C["grid"],lw=.7); ax.set_xlim(120,285)
     fig.text(0.5,-0.02,"Source: Skillenai job-postings index (advertised base bands).",ha="center",fontsize=8,color="#9ca3af")
-    fig.tight_layout(); fig.savefig(out("04_salary_band.png"),bbox_inches="tight"); plt.close(fig)
+    fig.tight_layout(); fig.savefig(out("05_salary_band.png"),bbox_inches="tight"); plt.close(fig)
 
 if __name__=="__main__":
-    fig_sankey(); fig_arrivals(); fig_skills(); fig_salary()
+    fig_sankey(); fig_arrivals(); fig_skill_gap(); fig_skills(); fig_salary()
     print("figures written to",HERE)

@@ -1,0 +1,395 @@
+skill,demand_pct,supply_pct
+python,48.3,47.1
+sql,8.1,23.1
+prompt engineering,19.6,9.5
+pytorch,11.5,17.2
+machine learning,15.5,13.1
+langchain,14.3,12.7
+AWS,14.2,11.3
+rag,15.7,8.6
+LLMs,17.4,6.8
+tensorflow,6.8,16.7
+docker,7.5,14.0
+TypeScript,13.8,5.9
+React,6.4,11.3
+JavaScript,4.8,12.7
+ci/cd,9.5,7.2
+kubernetes,7.8,8.6
+fine-tuning,11.3,4.5
+NLP,2.8,11.3
+langgraph,9.3,4.5
+computer vision,2.3,11.3
+generative AI,7.1,6.3
+deep learning,3.5,10.0
+Azure,8.5,4.5
+Java,4.8,8.1
+vector databases,11.4,1.4
+scikit-learn,4.1,8.6
+GCP,8.1,4.5
+pandas,3.1,9.0
+FastAPI,4.8,7.2
+Excel,0,10.9
+APIs,9.3,1.4
+Node.js,4.2,6.3
+observability,10.6,0
+mlops,6.7,3.6
+embeddings,7.4,2.7
+HTML,0,10.0
+llm,4.9,5.0
+Flask,1.4,8.1
+Tableau,0,9.5
+PostgreSQL,2.7,6.8
+Pinecone,3.5,5.9
+Large Language Models (LLMs),5.4,3.6
+OpenAI,5.3,3.6
+Monitoring,8.7,0
+data pipelines,6.1,2.3
+MYSQL,0.7,7.7
+opencv,0,8.1
+Power BI,0,8.1
+MongoDB,0.7,7.2
+model evaluation,5.6,2.3
+numpy,1.4,6.3
+evaluation frameworks,6.9,0.9
+REST APIs,2.8,5.0
+CSS,0,7.7
+AI agents,6.1,1.4
+agentic workflows,6.1,1.4
+ETL,0.5,6.8
+artificial intelligence,4.1,3.2
+C++,2.0,5.0
+Git,2.8,4.1
+data analysis,1.2,5.4
+llamaindex,4.7,1.8
+Evaluation,6.2,0
+Django,0.8,5.4
+testing,4.6,1.4
+feature engineering,1.4,4.5
+matplotlib,0,5.9
+BERT,0,5.9
+Gemini,1.9,3.6
+elasticsearch,0.9,4.5
+Go,4.3,0.9
+distributed systems,5.2,0
+guardrails,5.2,0
+large language models,2.9,2.3
+Transformers,1.4,3.6
+MLflow,1.4,3.6
+Agentic AI,3.2,1.8
+S3,0,5.0
+Langchain,5.0,0
+reinforcement learning,2.2,2.7
+Natural Language Processing,1.8,3.2
+hugging face,2.1,2.7
+Next.js,2.0,2.7
+MCP,3.7,0.9
+Microservices,2.8,1.8
+Agile,0.5,4.1
+Streamlit,0,4.5
+seaborn,0,4.5
+LSTM,0,4.5
+object detection,0,4.5
+vector search,2.7,1.8
+OCR,0.8,3.6
+data preprocessing,1.2,3.2
+RESTful APIs,1.7,2.7
+Weaviate,2.5,1.8
+LLM APIs,4.3,0
+aws sagemaker,0.7,3.6
+GitHub,1.1,3.2
+Llama,0.7,3.6
+semantic search,2.3,1.8
+automation,2.3,1.8
+tool use,4.1,0
+xgboost,0,4.1
+databricks,1.3,2.7
+terraform,2.7,1.4
+retrieval,4.0,0
+multi-agent systems,3.9,0
+CrewAI,3.9,0
+AWS Lambda,0.7,3.2
+FAISS,1.2,2.7
+model training,1.6,2.3
+NoSQL,2.0,1.8
+Anthropic,3.7,0
+Claude,2.3,1.4
+keras,0,3.6
+Data Visualization,0,3.6
+CNN,0,3.6
+agentic systems,2.7,0.9
+AI,1.8,1.8
+Linux,0.8,2.7
+Redis,1.3,2.3
+a/b testing,1.3,2.3
+Apache Spark,0.8,2.7
+AWS Bedrock,1.7,1.8
+CRM,1.6,1.8
+code reviews,2.5,0.9
+Google Cloud,1.1,2.3
+quantization,0.6,2.7
+spark,1.0,2.3
+spacy,0.5,2.7
+fraud detection,0.9,2.3
+Scrum,0,3.2
+sentiment analysis,0,3.2
+JSON,0,3.2
+Lambda,0,3.2
+machine learning algorithms,0,3.2
+PHP,0,3.2
+data augmentation,0,3.2
+airflow,0.9,2.3
+HuggingFace,1.7,1.4
+GPT,0.7,2.3
+natural language processing (NLP),1.6,1.4
+data modeling,2.0,0.9
+Grafana,0.6,2.3
+Retrieval-Augmented Generation,1.5,1.4
+Neo4j,0.6,2.3
+azure ml,0.5,2.3
+Data analytics,0.5,2.3
+Retrieval Augmented Generation (RAG),0.5,2.3
+Jenkins,0.5,2.3
+C#,0.9,1.8
+LoRa,0.9,1.8
+MatLab,0,2.7
+YOLOv8,0,2.7
+regression,0,2.7
+DynamoDB,0,2.7
+Sagemaker,0,2.7
+QLoRA,0,2.7
+predictive analytics,0,2.7
+XML,0,2.7
+Figma,0,2.7
+classification,0.9,1.8
+AI/ML,0.8,1.8
+Slack,0.8,1.8
+RAG systems,1.7,0.9
+vLLM,1.2,1.4
+neural networks,0.8,1.8
+Model Optimization,1.2,1.4
+GraphQL,1.1,1.4
+OpenAI APIs,0.6,1.8
+data structures,1.0,1.4
+Azure OpenAI,1.0,1.4
+ChatGPT,0.5,1.8
+qdrant,1.0,1.4
+PowerBI,0,2.3
+Azure DevOps,0,2.3
+Selenium,0,2.3
+react.js,0,2.3
+transfer learning,0,2.3
+PySpark,0,2.3
+WordPress,0,2.3
+clustering,0,2.3
+Jira,0,2.3
+logistic regression,0,2.3
+ARIMA,0,2.3
+ML pipelines,0,2.3
+data collection,0,2.3
+Android,0,2.3
+Benchmarking,1.4,0.9
+documentation,0.9,1.4
+BigQuery,0.7,1.4
+GitHub Actions,0.7,1.4
+Salesforce,1.1,0.9
+recommendation systems,0.6,1.4
+Google Cloud Platform (GCP),0.6,1.4
+Mistral,0.6,1.4
+AWS Glue,0,1.8
+linear regression,0,1.8
+machine learning models,0,1.8
+ReactJS,0,1.8
+Hyperparameter Tuning,0,1.8
+image processing,0,1.8
+Firebase,0,1.8
+topic modeling,0,1.8
+predictive modeling,0,1.8
+CNNs,0,1.8
+Jupyter,0,1.8
+yolov5,0,1.8
+Web scraping,0,1.8
+jQuery,0,1.8
+Decision Trees,0,1.8
+CUDA,0,1.8
+Bootstrap,0,1.8
+Redux,0,1.8
+RESTful API,0,1.8
+Prophet,0,1.8
+Microsoft Excel,0,1.8
+data cleaning,0,1.8
+segmentation,0,1.8
+api,0,1.8
+Llama 3,0,1.8
+intelligent automation,0.9,0.9
+dashboards,0.7,0.9
+Amazon Bedrock,0.7,0.9
+Authentication,0.6,0.9
+Spring Boot,0,1.4
+Arduino,0,1.4
+Hadoop,0,1.4
+computer science,0,1.4
+web development,0,1.4
+SSIS,0,1.4
+VBA,0,1.4
+image recognition,0,1.4
+convolutional neural network,0,1.4
+Random Forest,0,1.4
+RNN,0,1.4
+transformer architectures,0,1.4
+MS Excel,0,1.4
+EC2,0,1.4
+tokenization,0,1.4
+causal inference,0,1.4
+pytest,0,1.4
+Google Analytics,0,1.4
+Angular,0,1.4
+ServiceNow,0,1.4
+ML,0,1.4
+Apache Airflow,0,1.4
+Image Segmentation,0,1.4
+express.js,0,1.4
+collaborative filtering,0,1.4
+bash,0,1.4
+agile methodologies,0,1.4
+csv,0,1.4
+Apache Kafka,0,1.4
+exploratory data analysis,0,1.4
+DeepSeek,0,1.4
+Isolation Forest,0,1.4
+AI engineer,0,1.4
+React Native,0,1.4
+Azure Data Factory,0,1.4
+vector embeddings,0,1.4
+OLlama,0,1.4
+JS,0,1.4
+Document Classification,0,1.4
+T5,0,1.4
+graph neural networks,0,1.4
+Unity,0,1.4
+Time-series forecasting,0,1.4
+nltk,0,1.4
+Business Intelligence,0,1.4
+Flutter,0,1.4
+llama2,0,1.4
+SHAP,0,1.4
+CLIP,0,1.4
+U-Net,0,1.4
+PowerShell,0,1.4
+Microsoft Azure,0,1.4
+ETL pipelines,0,1.4
+Amazon QuickSight,0,0.9
+data preparation,0,0.9
+Urban air mobility,0,0.9
+Scratch,0,0.9
+Hive,0,0.9
+predictive maintenance,0,0.9
+Prompt Injection,0,0.9
+Redshift,0,0.9
+transformer,0,0.9
+Prometheus,0,0.9
+Explainable AI,0,0.9
+recommendation system,0,0.9
+ChromaDB,0,0.9
+Splunk,0,0.9
+LIME,0,0.9
+ONNX,0,0.9
+facial recognition,0,0.9
+kanban,0,0.9
+preprocessing,0,0.9
+video,0,0.9
+OpenAI GPT-4o,0,0.9
+Swagger,0,0.9
+scalable solutions,0,0.9
+GitLab,0,0.9
+SSRS,0,0.9
+stable diffusion,0,0.9
+tracking,0,0.9
+Falcon,0,0.9
+chatbot,0,0.9
+Dash,0,0.9
+Apache,0,0.9
+Hardware,0,0.9
+ECS,0,0.9
+Enterprise analytics,0,0.9
+sensors,0,0.9
+Diffusion models,0,0.9
+image classification,0,0.9
+OpenAI Whisper,0,0.9
+Laravel,0,0.9
+Vue.js,0,0.9
+Web,0,0.9
+MQTT,0,0.9
+PEFT,0,0.9
+AWS RDS,0,0.9
+NoSQL databases,0,0.9
+data dashboards,0,0.9
+BeautifulSoup,0,0.9
+CloudWatch,0,0.9
+LSTMs,0,0.9
+CountVectorizer,0,0.9
+MS SQL,0,0.9
+content-based filtering,0,0.9
+chain-of-thought,0,0.9
+InfluxDB,0,0.9
+predictive models,0,0.9
+predictive analysis,0,0.9
+Dropout,0,0.9
+F1 score,0,0.9
+web application,0,0.9
+Azure SQL,0,0.9
+deep learning object detection,0,0.9
+KNN,0,0.9
+microservices architecture,0,0.9
+Ansible,0,0.9
+regression analysis,0,0.9
+lightgbm,0,0.9
+ERP,0,0.9
+plotly,0,0.9
+NLP techniques,0,0.9
+virtual reality,0,0.9
+recall,0,0.9
+Pig,0,0.9
+graph neural network,0,0.9
+Spark Streaming,0,0.9
+LDA,0,0.9
+yolo,0,0.9
+coding challenges,0,0.9
+Text-to-Image,0,0.9
+geospatial analytics,0,0.9
+Slurm,0,0.9
+Cypher,0,0.9
+IAM,0,0.9
+hallucinations,0,0.9
+named entity recognition (NER),0,0.9
+Market Research,0,0.9
+Flask API,0,0.9
+MS Access,0,0.9
+GPUs,0,0.9
+Google Cloud Platform,0,0.9
+UAT,0,0.9
+data pipeline,0,0.9
+Oracle database,0,0.9
+AI system architecture,0,0.9
+SAS,0,0.9
+Paypal,0,0.9
+machine vision,0,0.9
+Customer service,0,0.9
+Whisper,0,0.9
+BitBucket,0,0.9
+vector DBs,0,0.9
+oracle,0,0.9
+R Studio,0,0.9
+data exploration,0,0.9
+machine learning engineer,0,0.9
+SFTP,0,0.9
+Android Developer,0,0.9
+transformer-based models,0,0.9
+Supabase,0,0.9
+Jupyter Notebook,0,0.9
+data scraping,0,0.9
+HTML/CSS,0,0.9
+interactive dashboards,0,0.9
+GPT-4o,0,0.9
+Neural network,0,0.9
+Metasploit,0,0.9
+Data Mining,0,0.9
