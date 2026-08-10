@@ -4,6 +4,7 @@ graph (supply) and job-postings index (demand-side salary). Reads the CSVs in th
 folder. See README.md for methodology and caveats.
 """
 import csv, os, json
+from collections import defaultdict
 import numpy as np
 import matplotlib as mpl
 import matplotlib.pyplot as plt
@@ -46,29 +47,36 @@ def fig_arrivals():
              ha="center",fontsize=8,color="#9ca3af")
     fig.tight_layout(); fig.savefig(out("01_arrivals_momentum.png"),bbox_inches="tight"); plt.close(fig)
 
-# ---- FIG 2: cross-role in:out ratio with baseline ----
-def fig_ratio():
-    rows=read_csv("inout_ratio.csv")
-    key={"AIE":"AI Engineer","MLE":"ML Engineer","DE":"Data Engineer","SWE":"Software Engineer","DS":"Data Scientist"}
-    data=[(key[r["role"]],float(r["in_out_ratio"]),r["role"]) for r in rows]
-    data.sort(key=lambda x:x[1])
-    baseline=[d[1] for d in data if d[2]=="SWE"][0]
-    labels=[d[0] for d in data]; vals=[d[1] for d in data]
-    cols=[C["AIE"] if d[2]=="AIE" else (C["DS"] if d[2]=="DS" else C["base"]) for d in data]
-    fig,ax=plt.subplots(figsize=(9,5))
-    b=ax.barh(labels,vals,color=cols,edgecolor="white")
-    ax.axvline(baseline,color=C["ink"],ls="--",lw=1.2,alpha=.7)
-    ax.annotate(f"mature-role baseline ≈ {baseline:.2f}×\n(Software Engineer)",
-                xy=(baseline,0.0),xytext=(1.72,0.55),fontsize=9,color="#6b7280",va="center",
-                arrowprops=dict(arrowstyle="->",color="#9ca3af",lw=1))
-    for bar,v in zip(b,vals):
-        ax.text(v+0.03,bar.get_y()+bar.get_height()/2,f"{v:.2f}×",va="center",fontweight="bold")
-    ax.set_title("AI Engineer sits far above the baseline; Data Scientist has fallen to it",pad=12)
-    ax.set_xlabel("New arrivals per departure, 2023–2025 (owned talent graph)")
-    ax.set_xlim(0,2.7); ax.set_ylim(-0.6,4.9); ax.grid(axis="x",color=C["grid"],lw=.7)
-    fig.text(0.5,-0.02,"A single snapshot lifts every role's ratio above 1 (recent arrivals haven't departed yet); the gap ABOVE the shared baseline is the real signal.",
+# ---- FIG 2: fixed-lookahead cohort exit rate (censoring-clean 'out' signal) ----
+def fig_cohort_exit():
+    rows=read_csv("cohort_exit_rates.csv")
+    by=defaultdict(dict)
+    for r in rows:
+        if r["exit_1yr_pct"]!="": by[r["role"]][int(r["year"])]=float(r["exit_1yr_pct"])
+    fig,ax=plt.subplots(figsize=(10,6))
+    ys=list(range(2018,2026)); solid=[y for y in ys if y<=2024]
+    for k,lab,lw in [("DS","Data Scientist",3.4),("SWE","Software Engineer",3.0),
+                     ("AIE","AI Engineer",2.4),("MLE","ML Engineer",1.6),("DE","Data Engineer",1.6)]:
+        v=[by[k].get(y) for y in solid]
+        ax.plot(solid,v,color=C[k],lw=lw,marker="o",ms=5 if k in("DS","SWE") else 3,
+                alpha=1 if k in("DS","SWE","AIE") else .55,label=lab,
+                zorder=3 if k in("DS","SWE") else 2)
+        # 2025 partial: dashed continuation, hollow marker
+        if by[k].get(2025) is not None:
+            ax.plot([2024,2025],[by[k][2024],by[k][2025]],color=C[k],lw=lw,ls=":",alpha=.45,zorder=1)
+            ax.plot(2025,by[k][2025],marker="o",ms=6,mfc="white",mec=C[k],mew=1.5,alpha=.6,zorder=2)
+    ax.axvspan(2024.5,2025.5,color="#f8fafc",zorder=0)
+    ax.text(2025,3,"2025 partial\n(reporting lag)",ha="center",fontsize=8,color="#9ca3af")
+    ax.annotate("Data Scientists leaving\nwithin a year: 30% → 45%",(2024,by["DS"][2024]),
+                color=C["DS"],fontsize=10,fontweight="bold",xytext=(2018.2,53),va="center")
+    ax.set_title("Who's leaving faster: 1-year exit rate by entry cohort",pad=12)
+    ax.set_ylabel("% of the cohort who left the role within 1 year")
+    ax.set_xlabel("Year entered the role (cohort)")
+    ax.set_xticks(ys); ax.set_ylim(0,60); ax.grid(axis="y",color=C["grid"],lw=.7)
+    ax.legend(frameon=False,fontsize=10,loc="upper left",bbox_to_anchor=(0.0,0.86))
+    fig.text(0.5,-0.02,"Source: Skillenai talent graph. Fixed 1-year lookahead per cohort (denominator = members observed a full year) — censoring-free, no future data needed.",
              ha="center",fontsize=8,color="#9ca3af")
-    fig.tight_layout(); fig.savefig(out("02_inout_ratio.png"),bbox_inches="tight"); plt.close(fig)
+    fig.tight_layout(); fig.savefig(out("02_cohort_exit_rate.png"),bbox_inches="tight"); plt.close(fig)
 
 # ---- FIG 3: supply-side skill fingerprint ----
 def fig_skills():
@@ -136,5 +144,5 @@ def fig_salary():
     fig.tight_layout(); fig.savefig(out("05_salary_band.png"),bbox_inches="tight"); plt.close(fig)
 
 if __name__=="__main__":
-    fig_arrivals(); fig_ratio(); fig_skills(); fig_sankey(); fig_salary()
+    fig_arrivals(); fig_cohort_exit(); fig_skills(); fig_sankey(); fig_salary()
     print("figures written to",HERE)

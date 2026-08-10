@@ -13,7 +13,7 @@ Together they let us watch the AI Engineer role from both sides at once: how fas
 ## TL;DR
 
 - **AI Engineer is the only role among its neighbors where new entrants are still rising** — its yearly arrivals grew 97 → 217 → 274 across 2023–25, while Data Scientist, Data Engineer, and ML Engineer arrivals all *peaked in 2024 and fell in 2025*.
-- **It's the clear net-flow outlier.** New-arrivals-per-departure sits at **2.31×**, far above the ~1.4× baseline shared by mature roles. **Data Scientist has fallen *to* that baseline (1.39×)** — its growth premium is gone.
+- **Data Scientists are also leaving faster.** The share of each Data Scientist cohort that exits the role within a year climbed from **~30% to ~45%** over 2018–24, while Software Engineering held flat at ~25%. Fewer coming in, more going out.
 - **It's a distinct job, not a rename.** On the workers themselves, AI Engineers carry an LLM/agent/RAG skill signature (LLM 29%, RAG 22%, agents 17%, LangChain 16%) that Data Scientists (statistics 32%, LLM 7%) and Software Engineers (LLM 2%) don't.
 - **It's a genuine transition.** Software Engineers are the largest identifiable feeder in; people flow back out to ML/research or up into founder/leadership roles.
 - **It pays like a premium software engineer** — ~$190K median midpoint, above Data Science, below the ML specialist.
@@ -30,18 +30,17 @@ Each role is measured by its yearly **arrivals** — how many people *start* the
 - **Data Scientist** grew for a decade, peaked in 2024, and dropped sharply in 2025 (943 → 639 new entrants).
 - **Data Engineer** and **ML Engineer** show the same 2024 peak and 2025 fade.
 
-## 2. The net-flow outlier — read against the baseline
+## 2. The other side of the flow: who's leaving faster
 
-Net flow = arrivals minus departures. In any point-in-time view, *every* role's arrivals-per-departure ratio sits above 1.0, because people who just entered a role haven't left it yet. So the number to read isn't the absolute ratio — it's the **gap above the shared baseline** that mature roles settle at.
+Arrivals are only half the story. The other half — departures — we read with a **fixed-lookahead cohort** method that sidesteps the usual snapshot bias: for each entry cohort we ask what share left the role *within one year*, counting only people who've actually had a full year to be observed. That's censoring-free and needs no future data.
 
-![Arrivals per departure by role, with baseline](02_inout_ratio.png)
+![1-year exit rate by entry cohort](02_cohort_exit_rate.png)
 
-Software Engineering — a large, mature role — anchors that baseline at **~1.41×**. Against it:
-- **AI Engineer: 2.31×** — far above baseline. Real, large excess growth.
-- **Data Scientist: 1.39×** — *at* the mature-role baseline. No excess growth left.
-- ML Engineer (1.35×) sits at baseline; Data Engineer (1.72×) modestly above.
+- **Data Scientist** cohorts leave within a year at a **rising rate — ~30% (2018) climbing to ~45% (2024).**
+- **Software Engineering** is flat at **~25%** — the stable-role reference.
+- **AI Engineer** churn is also rising as the role matures (11% → 42%), but its arrivals dwarf it.
 
-**AI Engineer has a big growth premium; Data Scientist's has evaporated.**
+Put the two sides together: **Data Scientist is the one role with fewer people arriving *and* more leaving within a year** — a genuine squeeze, visible today with no waiting. (2025 cohorts are shown faded: their first-year exits are still being reported.)
 
 ## 3. A different job, not a rename
 
@@ -76,8 +75,8 @@ AI Engineer advertises like a **premium software engineer**: ~$190K median midpo
 
 ## What this means
 
-- **Software engineers and data scientists:** AI Engineering is the highest-momentum move available — the one neighboring role still hiring hard while the rest sit at replacement. It's a genuine skill shift (LLMs, RAG, agents, prompt engineering), and for data scientists it usually comes with a pay bump.
-- **Data scientists specifically:** the classic title has stopped outgrowing the baseline. The underlying skills — statistics, experimentation — remain rare and valuable, but the *label* is no longer where the growth is.
+- **Software engineers and data scientists:** AI Engineering is the highest-momentum move available — the one neighboring role where new entrants are still climbing while the rest have flattened. It's a genuine skill shift (LLMs, RAG, agents, prompt engineering), and for data scientists it usually comes with a pay bump.
+- **Data scientists specifically:** the classic title has stopped growing and its people are leaving faster. The underlying skills — statistics, experimentation — remain rare and valuable, but the *label* is no longer where the growth is.
 - **Hiring managers:** you're recruiting AI Engineers out of the software and ML/data pools, not a graduate pipeline, in the tightest corner of the tech market.
 
 ---
@@ -85,9 +84,9 @@ AI Engineer advertises like a **premium software engineer**: ~$190K median midpo
 ## Methodology & caveats
 
 - **Two instruments.** Supply-side flows and skills come from the Skillenai talent graph (dated career histories); salary comes from the Skillenai job-postings index (advertised base bands). They measure different things and are reported separately.
-- **Net flow from dated role spells.** For each person we read role **spells** from their dated experience (consecutive positions in the same role are merged, so changing companies within a role doesn't count as leaving it). Arrivals = spell starts per year; departures = spell ends.
-- **Snapshot censoring — read the baseline, not the absolute.** A point-in-time view can't yet see the future departures of recent arrivals, so every role's arrivals-per-departure ratio is lifted above 1.0. We therefore anchor to the mature-role (Software Engineer) baseline and read the gap above it; we do not report a single role's ratio *across* time, which is dominated by how young the role is rather than by real dynamics.
-- **Arrivals are the robust signal.** Past-year arrivals are fully observed; the most recent year can carry mild reporting lag as histories update.
+- **Role spells.** For each person we read role **spells** from their dated experience (consecutive positions in the same role are merged, so changing companies within a role doesn't count as leaving it). Arrivals = spell starts per year.
+- **Arrivals are censoring-immune.** A role-start is a fully-observed past event, so the arrivals trend (Fig. 1) is the clean measure of who's moving *into* a role — including 2025.
+- **Departures via fixed-lookahead cohorts.** Naïvely dividing arrivals by same-window departures overstates growth for any recent period, because people who just arrived haven't left yet. We avoid this entirely: for each entry cohort we measure the exit rate over a **fixed horizon** (1 year), restricting the denominator to members who have actually had that full horizon to be observed before the snapshot. This is equivalent to "rewinding the clock" and reading each cohort's outcome once it has matured — fully observed and comparable across cohorts, with no future snapshot required. The 1-year horizon is reliable through the 2024 cohort; 2025 is shown partial (recent exits are still being posted to profiles).
 - **Sample.** This is a tech-focused sample of the full labor market, not a census — report trends and ratios; treat absolute counts as sample estimates. Role sample sizes (current workers): Software Engineer ~36.7K, Data Scientist ~4.6K, Data Engineer ~3.3K, AI Engineer ~665, ML Engineer ~600. Thin roles (AI Engineer, ML Engineer) carry wider uncertainty.
 - **Roles are title-resolved** with fuzzy matching (e.g. "AI Engineer" also captures "Senior/Generative/Applied AI Engineer"), then spell-merged. Education and undated entries are stripped.
 - **Skill fingerprint** counts the share of a role's workers whose profile text (`about` + role descriptions) mentions each skill — a self-reported measure, sparser than job-ad skill demand.
