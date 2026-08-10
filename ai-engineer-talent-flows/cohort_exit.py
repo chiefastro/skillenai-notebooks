@@ -1,9 +1,12 @@
 """
 Fixed-lookahead cohort exit rates from the owned talent graph — the censoring-clean
-'out' signal. For each cohort (role-start year), the K-year exit rate is the share of
-that cohort whose role-spell ended within K years. Denominator restricted to members
-who have had the full K years to be observed before the snapshot (~Jul 2026), so the
-rate is unbiased. 1-year horizon is reliable through 2024 (2025 partial: reporting lag).
+'out' signal, in 6-month cohorts. For each half-year entry cohort, the 1-year exit
+rate = share whose role-spell ended within 12 months of start. Denominator restricted
+to members observed a full year before the snapshot (~Jul 2026), so it's unbiased.
+Reliable through the 2024 cohorts; 2025-H1 is provisional (its within-year exits run
+into 2026 and are still being reported). H2-2025+ is excluded (not yet a full year old).
+Emits raw half-year counts; the figure computes a trailing-12-month (2-period) average
+to remove the strong H1/H2 seasonal sawtooth.
 """
 import json, re, csv
 from collections import Counter, defaultdict
@@ -31,9 +34,7 @@ def role(t):
     for r,p in FOCAL:
         if p.search(t or ""): return r
     return None
-arr=defaultdict(Counter)
-elig={1:defaultdict(Counter),2:defaultdict(Counter)}
-ex={1:defaultdict(Counter),2:defaultdict(Counter)}
+elig=defaultdict(Counter); ex=defaultdict(Counter)   # role -> period(year*10+half)
 with open(PATH) as f:
     for line in f:
         d=json.loads(line); exp=d.get("experience") or []
@@ -51,19 +52,18 @@ with open(PATH) as f:
             if r is None: i+=1; continue
             j=i
             while j+1<len(jobs) and jobs[j+1]["r"]==r: j+=1
-            sy=jobs[i]["s"][0]; sm=ym(jobs[i]["s"]); em=ym(jobs[j]["e"])
-            arr[r][sy]+=1
-            for K in (1,2):
-                if sm+12*K<=SNAP:
-                    elig[K][r][sy]+=1
-                    if em is not None and em-sm<=12*K: ex[K][r][sy]+=1
+            sm=ym(jobs[i]["s"]); em=ym(jobs[j]["e"])
+            per=jobs[i]["s"][0]*10+(1 if jobs[i]["s"][1]<=6 else 2)
+            if sm+12<=SNAP:
+                elig[r][per]+=1
+                if em is not None and em-sm<=12: ex[r][per]+=1
             i=j+1
+periods=[y*10+h for y in range(2018,2026) for h in (1,2) if y*10+h<=20251]
 with open(OUT,"w",newline="") as fh:
-    w=csv.writer(fh); w.writerow(["year","role","arrivals","exit_1yr_pct","n_1yr","exit_2yr_pct","n_2yr"])
-    for r in ["AIE","DS","MLE","DE","SWE"]:
-        for y in range(2016,2026):
-            e1=elig[1][r][y]; e2=elig[2][r][y]
-            w.writerow([y,r,arr[r][y],
-                        round(100*ex[1][r][y]/e1,1) if e1 else "", e1,
-                        round(100*ex[2][r][y]/e2,1) if e2 else "", e2])
+    w=csv.writer(fh); w.writerow(["x","period","role","exits","eligible","exit_1yr_pct"])
+    for per in periods:
+        x=per//10 + (0.0 if per%10==1 else 0.5)
+        for r in ["AIE","DS","MLE","DE","SWE"]:
+            n=elig[r][per]
+            w.writerow([x,f"{per//10}-H{per%10}",r,ex[r][per],n,round(100*ex[r][per]/n,1) if n else ""])
 print("wrote",OUT)

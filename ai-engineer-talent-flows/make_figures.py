@@ -47,34 +47,46 @@ def fig_arrivals():
              ha="center",fontsize=8,color="#9ca3af")
     fig.tight_layout(); fig.savefig(out("01_arrivals_momentum.png"),bbox_inches="tight"); plt.close(fig)
 
-# ---- FIG 2: fixed-lookahead cohort exit rate (censoring-clean 'out' signal) ----
+# ---- FIG 2: fixed-lookahead cohort exit rate, 6-mo cohorts, trailing-12mo avg ----
 def fig_cohort_exit():
     rows=read_csv("cohort_exit_rates.csv")
-    by=defaultdict(dict)
+    raw=defaultdict(dict)   # role -> x -> (exits, n)
     for r in rows:
-        if r["exit_1yr_pct"]!="": by[r["role"]][int(r["year"])]=float(r["exit_1yr_pct"])
+        if r["eligible"] and int(r["eligible"])>0:
+            raw[r["role"]][float(r["x"])]=(int(r["exits"]),int(r["eligible"]))
+    def rolling(role):
+        xs=sorted(raw[role]); pts=[]
+        for i,x in enumerate(xs):
+            if i==0: continue
+            e=raw[role][x][0]+raw[role][xs[i-1]][0]; n=raw[role][x][1]+raw[role][xs[i-1]][1]
+            if n>0: pts.append((x,100*e/n))
+        return pts
     fig,ax=plt.subplots(figsize=(10,6))
-    ys=list(range(2018,2026)); solid=[y for y in ys if y<=2024]
+    CUT=2025.0  # last (provisional) point = trailing-12mo ending 2025-H1
     for k,lab,lw in [("DS","Data Scientist",3.4),("SWE","Software Engineer",3.0),
-                     ("AIE","AI Engineer",2.4),("MLE","ML Engineer",1.6),("DE","Data Engineer",1.6)]:
-        v=[by[k].get(y) for y in solid]
-        ax.plot(solid,v,color=C[k],lw=lw,marker="o",ms=5 if k in("DS","SWE") else 3,
-                alpha=1 if k in("DS","SWE","AIE") else .55,label=lab,
-                zorder=3 if k in("DS","SWE") else 2)
-        # 2025 partial: dashed continuation, hollow marker
-        if by[k].get(2025) is not None:
-            ax.plot([2024,2025],[by[k][2024],by[k][2025]],color=C[k],lw=lw,ls=":",alpha=.45,zorder=1)
-            ax.plot(2025,by[k][2025],marker="o",ms=6,mfc="white",mec=C[k],mew=1.5,alpha=.6,zorder=2)
-    ax.axvspan(2024.5,2025.5,color="#f8fafc",zorder=0)
-    ax.text(2025,3,"2025 partial\n(reporting lag)",ha="center",fontsize=8,color="#9ca3af")
-    ax.annotate("Data Scientists leaving\nwithin a year: 30% → 45%",(2024,by["DS"][2024]),
-                color=C["DS"],fontsize=10,fontweight="bold",xytext=(2018.2,53),va="center")
-    ax.set_title("Who's leaving faster: 1-year exit rate by entry cohort",pad=12)
-    ax.set_ylabel("% of the cohort who left the role within 1 year")
-    ax.set_xlabel("Year entered the role (cohort)")
-    ax.set_xticks(ys); ax.set_ylim(0,60); ax.grid(axis="y",color=C["grid"],lw=.7)
-    ax.legend(frameon=False,fontsize=10,loc="upper left",bbox_to_anchor=(0.0,0.86))
-    fig.text(0.5,-0.02,"Source: Skillenai talent graph. Fixed 1-year lookahead per cohort (denominator = members observed a full year) — censoring-free, no future data needed.",
+                     ("AIE","AI Engineer",2.4),("MLE","ML Engineer",1.5),("DE","Data Engineer",1.5)]:
+        pts=[p for p in rolling(k) if p[0]>=2019.0]
+        solid=[p for p in pts if p[0]<CUT];
+        xs=[p[0] for p in solid]; ys=[p[1] for p in solid]
+        hi=k in("DS","SWE","AIE")
+        ax.plot(xs,ys,color=C[k],lw=lw,alpha=1 if hi else .5,label=lab,zorder=3 if k in("DS","SWE") else 2)
+        # provisional final segment into 2025-H1
+        prov=[p for p in pts if p[0]>=CUT-0.5]
+        if len(prov)>=2:
+            ax.plot([prov[-2][0],prov[-1][0]],[prov[-2][1],prov[-1][1]],color=C[k],lw=lw,ls=":",alpha=.5,zorder=1)
+            ax.plot(prov[-1][0],prov[-1][1],"o",ms=6,mfc="white",mec=C[k],mew=1.5,alpha=.7 if hi else .4,zorder=2)
+    ax.axvspan(2024.75,2025.25,color="#f8fafc",zorder=0)
+    ax.text(2025.0,4,"H1-2025\nprovisional",ha="center",fontsize=8,color="#9ca3af")
+    ax.annotate("Data Scientists leaving within a year:\n~34% → ~47% of each cohort",(2024.0,rolling("DS")[-3][1]),
+                color=C["DS"],fontsize=10,fontweight="bold",xytext=(2019.1,55),va="center")
+    ax.set_title("Who's leaving faster: 1-year exit rate by entry cohort (6-month steps)",pad=12)
+    ax.set_ylabel("% who left the role within 1 year (trailing-12mo avg)")
+    ax.set_xlabel("Cohort entry period")
+    ax.set_xticks([y+h for y in range(2019,2026) for h in (0,0.5) if y+h<=2025.0])
+    ax.set_xticklabels([f"{int(x)}-H{1 if x%1==0 else 2}" for x in [y+h for y in range(2019,2026) for h in (0,0.5) if y+h<=2025.0]],rotation=45,ha="right",fontsize=8)
+    ax.set_ylim(0,60); ax.grid(axis="y",color=C["grid"],lw=.7)
+    ax.legend(frameon=False,fontsize=10,loc="upper left",bbox_to_anchor=(0.0,0.87))
+    fig.text(0.5,-0.05,"Source: Skillenai talent graph. 6-month cohorts, 1-year exit rate, trailing-12mo average (removes the H1/H2 seasonal swing). Denominator = members observed a full year — censoring-free.",
              ha="center",fontsize=8,color="#9ca3af")
     fig.tight_layout(); fig.savefig(out("02_cohort_exit_rate.png"),bbox_inches="tight"); plt.close(fig)
 
