@@ -67,7 +67,7 @@ def fig_arrivals():
     ys=[int(r["year"]) for r in rows]
     A={k:[int(r[c]) for r in rows] for k,c in [("AIE","AI_Engineer"),("DS","Data_Scientist"),("MLE","ML_Engineer"),("DE","Data_Engineer")]}
     fig,ax=plt.subplots(figsize=(10,6))
-    ax.bar(ys,A["AIE"],color=C["AIE"],width=.62,label="AI Engineer",zorder=3)
+    ax.plot(ys,A["AIE"],color=C["AIE"],lw=3.6,marker="o",ms=5,label="AI Engineer",zorder=3)
     for k,lab in [("DS","Data Scientist"),("DE","Data Engineer"),("MLE","ML Engineer")]:
         ax.plot(ys,A[k],color=C[k],lw=2,marker="o",ms=3,alpha=.65,label=lab,zorder=2)
     ax.annotate(f"AI Engineer: {A['AIE'][-3]} → {A['AIE'][-1]}\nnew entrants (2023→2025)",
@@ -88,9 +88,13 @@ def fig_skill_gap():
     rows=[(r["skill"],float(r["demand_pct"]),float(r["supply_pct"])) for r in read_csv("skill_supply_demand.csv")]
     L=24
     fig,ax=plt.subplots(figsize=(11,8.5))
+    BAND=3
+    xs=np.linspace(0,L,200); lo=np.clip(xs-BAND,0,L); hi=np.clip(xs+BAND,0,L)
+    ax.fill_between(xs,hi,L,color="#dbeafe",alpha=.35,zorder=0)   # demand ahead
+    ax.fill_between(xs,0,lo,color="#fee2e2",alpha=.35,zorder=0)   # supply legacy
+    ax.fill_between(xs,lo,hi,color="#e5e7eb",alpha=.7,zorder=0)   # aligned band (±3 pts)
     ax.plot([0,L],[0,L],color="#9ca3af",ls="--",lw=1,zorder=1)
-    ax.fill_between([0,L],[0,L],[L,L],color="#dbeafe",alpha=.35,zorder=0)
-    ax.fill_between([0,L],[0,0],[0,L],color="#fee2e2",alpha=.35,zorder=0)
+    ax.text(19.5,17.6,"aligned",color="#6b7280",fontsize=9,rotation=45,ha="center",va="center")
     ax.text(1.5,22.5,"EMPLOYERS ASK FOR IT MORE than workers list it\nthe reskilling frontier",color="#1d4ed8",fontsize=10.5,fontweight="bold",va="top")
     ax.text(15.2,2.9,"WORKERS LIST IT MORE than employers ask\nlegacy from prior roles",color="#b91c1c",fontsize=10.5,fontweight="bold",va="top")
     LABELS={"prompt engineering":(6,2,"left"),"LLMs":(6,1,"left"),"rag":(6,-3,"left"),
