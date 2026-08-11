@@ -76,7 +76,7 @@ def fig_arrivals():
         ax.plot([2024,2025],[A[k][ys.index(2024)],A[k][ys.index(2025)]],color=C[k],lw=lw,ls=":",alpha=.5,zorder=1)
         ax.plot(2025,A[k][ys.index(2025)],"o",ms=6,mfc="white",mec=C[k],mew=1.5,alpha=.8 if hi else .5,zorder=2)
     ax.axvspan(2024.5,2025.5,color="#f8fafc",zorder=0)
-    ax.text(2025,880,"2025 partial\ndata ends ~Oct 2025",ha="center",fontsize=8,color="#9ca3af")
+    ax.text(2025,1075,"2025 partial\nemployment to ~Oct 2025",ha="center",fontsize=8,color="#9ca3af")
     ax.annotate("AI Engineer climbs every year through 2024 —\nand its partial 2025 already tops full 2024",
                 (2024,A["AIE"][ys.index(2024)]),color=C["AIE"],fontsize=10,fontweight="bold",
                 xytext=(2015.2,470),va="center",arrowprops=dict(arrowstyle="->",color=C["AIE"],lw=1.5))
@@ -84,7 +84,7 @@ def fig_arrivals():
     ax.set_ylabel("People starting the role each year (new arrivals)")
     ax.set_xlabel("Year"); ax.set_xticks(ys[::1]); ax.set_xticklabels(ys,rotation=45,ha="right",fontsize=9)
     ax.grid(axis="y",color=C["grid"],lw=.7); ax.legend(frameon=False,fontsize=11,loc="upper left")
-    fig.text(0.5,-0.02,"Source: Skillenai talent graph. Arrivals = role start-events per year. Data collection ends ~Oct 2025, so 2025 is partial (shown hollow) and understates every role.",
+    fig.text(0.5,-0.02,"Source: Skillenai talent graph. Arrivals = role start-events per year. Employment records are current to ~Oct 2025, so 2025 is partial (shown hollow) and understates every role.",
              ha="center",fontsize=8,color="#9ca3af")
     fig.tight_layout(); fig.savefig(out("02_arrivals_momentum.png"),bbox_inches="tight"); plt.close(fig)
 

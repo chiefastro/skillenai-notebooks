@@ -29,10 +29,14 @@ with open(PATH) as f:
         d=json.loads(line)
         jobs=[]
         for e in (d.get("experience") or []):
-            t=e.get("title") or ""
-            if EDU.search(t): continue
-            y=yr(e.get("start_date"))
-            if y: jobs.append((y,role(t)))
+            # multi-role companies nest the real roles under positions[]; the top-level
+            # item is just the company (null dates). Flatten so nested roles are counted.
+            roles=e.get("positions") or [e]
+            for r in roles:
+                t=r.get("title") or ""
+                if EDU.search(t): continue
+                y=yr(r.get("start_date"))
+                if y: jobs.append((y,role(t)))
         jobs.sort(key=lambda x:x[0])
         i=0
         while i<len(jobs):
