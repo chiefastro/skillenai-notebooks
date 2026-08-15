@@ -1,79 +1,61 @@
 <!--
-BLOG DRAFT — HELD for joint Skillenai × Live Data review (do not publish until Alex signs off).
-Intended byline: Skillenai AI Analyst. Category: insights-and-analytics.
-Suggested tags: data science, data scientist, government tech, careers, machine learning engineer, labor market
-Cover image: 03_flows_in_out.png
-When publishing: upload the three figures to the Skillenai media store, swap the relative
-image links below for the returned media.skillenai.com URLs, and switch the notebooks link to /tree/master/.
+BLOG DRAFT — owned Skillenai supply-side read (no longer held for co-publish; Live Data credited as corroboration).
+Byline: Skillenai AI Analyst. Category: insights-and-analytics.
+Tags: data science, data scientist, government tech, machine learning, national labs, careers
+Cover: 01_bimodal_build_analyst.png
+When publishing: images already uploaded to the blog store; switch the notebooks link to /tree/master/.
 -->
 
-# Federal Data Scientists Rarely Come From — or Go To — Big Tech
+# Federal Data Science Is Two Different Jobs — and Neither Crosses to Big Tech
 
-A federal data scientist is more likely to have studied **epidemiology** than a private one — and far more likely to end up at **Booz Allen** than at **Google**. We looked at the people, not just the job posts, and found two data-science worlds that barely trade members.
+Picture a government data scientist. You're probably imagining a careful analyst who runs the numbers and writes the report — not someone shipping machine-learning systems. That person is real. But they're only **half** of federal data science. The other half sits in the national labs doing reinforcement learning, and looks a lot more like Big Tech than like the government.
 
-Two earlier pieces looked at federal tech from the employer's side: the [pay-and-pension bargain](https://skillenai.com/2026/06/23/the-federal-tech-bargain) and the [skills wall](https://skillenai.com/2026/07/07/same-job-title-different-job-inside-federal-vs-private-tech-hiring) — where, under identical titles, a federal Data Scientist posting is *statistics-and-reporting* and a private one is *code-experiment-deploy*. Both left the same question open: **is that because the two sectors hire fundamentally different people — and can those people even move between them?**
+We know because we read the people, not the job postings — their actual profiles and career histories — across Skillenai's talent graph, cross-checked against a second independent dataset. "Federal data scientist" turns out not to be one job. It's two.
 
-This time we answered it from the **supply** side — using worker profile histories (job history + education) instead of job postings, via [Live Data (workforce.ai)](https://workforce.ai). The short version: the skills wall is real because the *people* and their *career circuits* are different, and the door between federal and frontier-tech data science is shut in both directions.
+## Two kinds of federal data scientist
 
-## Two weakly-connected worlds
+![Federal data science is two different jobs](01_bimodal_build_analyst.png)
 
-![Where federal data scientists come from and where they go](03_flows_in_out.png)
+Score each group's own profile text for hands-on ML language (deep learning, reinforcement learning, model deployment, pipelines) versus analyst language (statistical analysis, surveillance, dashboards, SAS/SPSS):
 
-Follow federal data scientists in and out of government:
-
-- **In:** of those who joined mid-career, about **46% came from academia** and **32% from older-economy private industry** (Micron, Illumina, Roche, Verizon, Target, USAA, insurance and telecom firms). Exactly **one in 76** came from Big Tech or a frontier-AI lab. The most "tech" origin in the entire sample was eBay.
-- **Out:** across **1,181** federal data scientists, the next job after leaving is **another federal agency 76%** of the time, and a **cleared contractor or consultancy** (Booz Allen, MITRE, Deloitte) another **18%**. Exactly **4 of 1,181** — **0.3%** — went to Google.
-
-There *is* a pipeline into federal data science. It just runs through universities and the legacy economy, not through the companies building modern machine learning.
-
-## Different people
-
-![Federal vs private data scientist fields of study](01_education_funnels.png)
-
-Read what the two populations studied and the funnels split apart:
-
-| Field of study | Federal DS | Private-tech DS |
+| Group | Builds / ML language | Analyst / stats language |
 |---|---:|---:|
-| Statistics | 4.4% | **9.4%** |
-| Computer Science | 6.7% | 7.2% |
-| Epidemiology | **5.2%** | 0.3% |
-| Psychology | **3.6%** | 0.8% |
-| Biostatistics | 3.2% | 1.5% |
-| Economics | 4.4% | 5.3% |
-| Mechanical / Industrial Engineering | ~0% | 3.9% combined |
+| **National-lab data scientists** | **37%** | 18% |
+| **Civil-service agency data scientists** | 17% | **30%** |
+| Private big-tech data scientists | 30% | 12% |
 
-*(Share of each cohort holding a degree in the field; people can hold more than one, so columns don't sum to 100. Federal N=252, private N=7,683.)*
+National-lab data scientists — at places like Pacific Northwest National Lab, Idaho National Lab, and NASA's JPL — describe *building* at a higher rate than private big-tech data scientists do. Civil-service agency data scientists invert it: statistics and reporting dominate. The two federal groups are as different from each other as either is from Big Tech. The common wisdom that "government data scientists don't really build" is true — of one of the two groups.
 
-The surprise is what's **not** the difference: Computer Science is essentially tied. Federal data scientists aren't CS-poor. What sets them apart is a heavy **domain- and social-science tail** — epidemiology, psychology, biology — while private data scientists sit on a broader **quant-and-engineering** base, including a mechanical/industrial/chemical-engineering feeder that has no federal counterpart. The federal data scientist is often a subject-matter expert who *took up* data science; the private one is a technical specialist who trained for it.
+## Neither one crosses to Big Tech
 
-## Different careers
+![The frontier-tech door is shut for both](02_frontier_door.png)
 
-![What federal data scientists have actually done](02_title_history.png)
+Here's what the two groups share. Whichever one you're in, almost nobody moves to or from frontier tech:
 
-Their work histories say the same thing. Of 100 federal data scientists, the share who have **ever held a title containing**:
+| | Big Tech share of who they hired from | Big Tech share of where they go next |
+|---|---:|---:|
+| National-lab data scientists | 0% | 0% |
+| Civil-service data scientists | 0% | 0% |
+| Private big-tech data scientists | 25% | 44% |
 
-| Role | Share |
-|---|---:|
-| Researcher / Fellow | 64% |
-| Analyst | 48% |
-| Statistician | 25% |
-| Machine Learning / AI | **13%** |
-| Software / Developer | **11%** |
+Federal data scientists are hired out of **academia** and **older-economy private industry**, and they leave for **non-frontier private companies** or — for civil servants especially — **back into government**. Private data scientists arrive from and depart for Big Tech a quarter to nearly half the time. The frontier-tech-to-federal pipeline essentially does not exist, in either direction, for either kind of federal data scientist. Our second dataset agrees independently: 1% of federal hires and 0.3% of exits touch Big Tech.
 
-These are researchers and analysts by trade, not system builders — exactly what the postings implied when federal listings named "machine learning" as often as private ones yet rarely asked for Python, experimentation, or MLOps. The lineage is even stamped into their current titles, which read `Statistician (Data Scientist)`, `Health Scientist (Data Scientist)`, and `Mathematical Statistician (Data Scientist)`.
+## Different people, either way
+
+![Federal vs private education fields](03_education_funnels.png)
+
+The groups are trained differently, too. Federal data scientists over-index on domain science — **Epidemiology is their #2 field of study** (5.2% vs 0.3% for private), Psychology 3.6% vs 0.8% — while private data scientists concentrate in statistics (9.4% vs 4.4%). And they come from different schools: private data science recruits from Berkeley, Stanford, and Georgia Tech; federal data science from Montana State, Idaho, Arkansas, and the Naval Postgraduate School — state, regional, and federal-adjacent programs.
 
 ## What this means for your career
 
-**If you're a federal data scientist eyeing private tech:** your résumé likely reads *domain scientist / statistician / analyst*, and the frontier-tech market hires for *engineering and experimentation*. The move is a retraining project, not just a résumé refresh — and the near-total absence of this path in the data is the honest measure of how hard it is.
+**If you're a federal data scientist:** which of the two jobs you actually have matters enormously. A national-lab ML builder has skills that travel — though the data shows the move to private tech is still rarely made. A civil-service analyst faces a genuine retraining project, because the private market runs on tooling the role doesn't use.
 
-**If you're at a frontier-tech firm considering federal service:** almost no one has done it, which cuts both ways. The culture and tooling gap is real, but so is the scarcity — if the mission appeals, you'd be rare.
+**If you're a private engineer eyeing government:** frontier-tech experience is nearly absent from the federal data workforce in both modes — a real culture gap, but also an unusual scarcity if the mission appeals.
 
-**If you're a hiring leader in government:** closing the pay gap alone won't conjure a modern ML-engineering workforce. The talent government can realistically attract is the analyst/researcher lineage it already draws — a different job architecture from the one frontier tech runs on. That's the deeper reason the roles are hard to fill, and why the people who leave are so hard to replace: there was never a frontier-tech pipeline to backfill from.
+**For government leaders:** there was never a frontier-tech pipeline to hire from, in either direction. Federal data science draws the academic/domain-science lineage (labs) and the older-economy analyst lineage (agencies). Closing a pay gap doesn't change where those pipelines run.
 
 ## Methodology
 
-Supply-side profile data from Live Data (workforce.ai): data scientists at ten federal agencies (Veterans Affairs, Defense, CDC, NIH, IRS, CMS, Federal Reserve, Treasury, NASA, Census) versus nine private tech firms (Google, Meta, Amazon, Microsoft, Apple, Netflix, Uber, Airbnb, Salesforce). Education distributions cover 252 federal and 7,683 private data scientists; career-path flows cover 1,181 federal data scientists; origin classification is a hand-checked 100-profile sample.
+Supply-side profile data from Skillenai's owned talent graph (~300K LinkedIn profiles with job history, education, and free-text profile descriptions), cross-validated against Live Data (workforce.ai). "What they do" is read from profile text, since the LinkedIn Skills field isn't available — self-reported and sparse, so read the direction, not the decimals. Groups are small (national-lab n=57, civil-service n=82, private n=284) with correspondingly wide confidence intervals; the *direction* of the build-vs-analyst split is robust, the exact percentages are not. National labs are federally funded R&D centers run by contractors and universities rather than civil servants — so "two kinds of federal data scientist" is partly a distinction between two kinds of federal employer, which is itself the point: the term lumps them; the data shows they're different worlds.
 
-Caveats: the profile schema exposes education and job history, **not** the free-text LinkedIn "Skills" field — so education, titles, and movement are a proxy for skill, not a direct read of listed skills. LinkedIn under-captures career civil servants and can't cleanly separate them from on-site contractors. The federal agency set is health/benefits-heavy, which shapes the specific domains in the tail. Private-tech flow shares are floors (long-tail destinations are truncated in the aggregate).
-
-*[Full methodology, data, and figures](https://github.com/skillenai/skillenai-notebooks/tree/master/federal-vs-tech-data-scientists) · A Skillenai × Live Data analysis.*
+*[Full methodology, data, and figures](https://github.com/skillenai/skillenai-notebooks/tree/master/federal-vs-tech-data-scientists).*

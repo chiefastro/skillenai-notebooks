@@ -1,178 +1,119 @@
 #!/usr/bin/env python3
 """
-Figures for "Two Data-Science Worlds" — the supply side of federal vs private
-data scientists (Skillenai x Live Data / workforce.ai).
+Figures for "Federal Data Science Is Two Different Jobs" — the bimodal supply-side
+read (Skillenai owned talent graph, cross-validated with Live Data / workforce.ai).
 
-All values are captured from the Live Data (workforce.ai) People analytics run
-described in README.md. No re-query is performed here; the script just renders.
-
-Palette: Skillenai logo gradient, cyan -> violet.
+Values captured from the owned-graph analysis (profiles.jsonl) + Live Data facets.
+Palette: Skillenai gradient. LAB=emerald, OPM=violet, PRIVATE=cyan.
 """
 import matplotlib.pyplot as plt
-from matplotlib import font_manager as fm
+from matplotlib.patches import Patch
 import numpy as np
 
-CYAN = "#06b6d4"     # private / frontier tech
-VIOLET = "#7c3aed"   # federal
-INK = "#1e293b"
-GRID = "#e2e8f0"
-MUTE = "#94a3b8"
+LAB = "#10b981"      # national-lab federal DS (builders)
+OPM = "#7c3aed"      # OPM civil-service federal DS (analysts)
+PRIV = "#06b6d4"     # private big-tech DS
+RED = "#e11d48"
+INK = "#1e293b"; GRID = "#e2e8f0"; MUTE = "#94a3b8"
 
-plt.rcParams.update({
-    "figure.dpi": 150,
-    "savefig.dpi": 150,
-    "font.size": 11,
-    "axes.edgecolor": GRID,
-    "axes.linewidth": 1.0,
-    "text.color": INK,
-    "axes.labelcolor": INK,
-    "xtick.color": INK,
-    "ytick.color": INK,
-})
-
-SRC = "Source: Skillenai analysis of Live Data (workforce.ai) People profiles, July 2026"
-
-
-def brand(fig, y=0.005):
-    fig.text(0.008, y, "Skillenai", fontsize=11, fontweight="bold", color=VIOLET)
-    fig.text(0.075, y, "× Live Data", fontsize=10, color=MUTE)
-
+plt.rcParams.update({"figure.dpi":150,"savefig.dpi":150,"font.size":11,
+    "axes.edgecolor":GRID,"axes.linewidth":1.0,"text.color":INK,"axes.labelcolor":INK,
+    "xtick.color":INK,"ytick.color":INK})
+SRC = "Source: Skillenai owned talent graph (LinkedIn profiles) + Live Data (workforce.ai), Aug 2026"
+def brand(fig,y=0.01):
+    fig.text(0.008,y,"Skillenai",fontsize=11,fontweight="bold",color=OPM)
+    fig.text(0.076,y,"talent graph",fontsize=10,color=MUTE)
 
 # ---------------------------------------------------------------------------
-# Fig 1 — Education funnels: what federal vs private data scientists studied
+# Fig 1 (COVER) — Two kinds of federal DS: labs build, agencies analyze
 # ---------------------------------------------------------------------------
-# % of the cohort holding a degree in each field (multi-degree; cols don't sum 100)
-# fed N=252, priv N=7,683.  '*' = below the field's top-25 threshold (<~1%).
-fields = [
-    "Statistics", "Computer Science", "Economics", "Data Science",
-    "Mathematics", "Biostatistics", "Epidemiology", "Psychology",
-    "Physics", "Business Analytics", "Mechanical Eng.*", "Industrial Eng.*",
-]
-fed = [4.4, 6.7, 4.4, 4.8, 4.0, 3.2, 5.2, 3.6, 2.4, 2.0, 0.0, 0.0]
-priv = [9.4, 7.2, 5.3, 4.7, 4.1, 1.5, 0.3, 0.8, 2.3, 3.8, 2.1, 1.8]
-
-order = np.argsort([f - p for f, p in zip(fed, priv)])  # federal-tilted at top
-fields = [fields[i] for i in order]
-fed = [fed[i] for i in order]
-priv = [priv[i] for i in order]
-
-y = np.arange(len(fields))
-h = 0.4
-fig, ax = plt.subplots(figsize=(10.5, 7.2))
-ax.barh(y + h/2, fed, height=h, color=VIOLET, label="Federal DS (N=252)")
-ax.barh(y - h/2, priv, height=h, color=CYAN, label="Private-tech DS (N=7,683)")
-for yi, (f, p) in enumerate(zip(fed, priv)):
-    ax.text(f + 0.12, yi + h/2, f"{f:.1f}%", va="center", fontsize=8.5, color=VIOLET)
-    ax.text(p + 0.12, yi - h/2, f"{p:.1f}%", va="center", fontsize=8.5, color=CYAN)
-ax.set_yticks(y)
-ax.set_yticklabels(fields)
-ax.set_xlabel("Share of the cohort holding a degree in this field")
-ax.set_xlim(0, 10.6)
-ax.set_title("Different people, not just different job posts\n"
-             "Federal data scientists come up through domain & social science; "
-             "private ones through statistics & engineering",
-             fontsize=13, fontweight="bold", loc="left")
-ax.legend(loc="center right", bbox_to_anchor=(1.0, 0.55), frameon=False)
-ax.grid(axis="x", color=GRID)
-ax.set_axisbelow(True)
-for s in ("top", "right"):
-    ax.spines[s].set_visible(False)
-fig.text(0.008, 0.038, "* Mechanical/Industrial Eng. fall below the federal cohort's top-25 fields (<~1%); a private-DS feeder with no federal analog.",
-         fontsize=7.5, color=MUTE)
-fig.text(0.99, 0.010, SRC, fontsize=7.5, color=MUTE, ha="right")
-brand(fig, y=0.010)
-fig.tight_layout(rect=[0, 0.055, 1, 1])
-fig.savefig("01_education_funnels.png", bbox_inches="tight")
-plt.close(fig)
-
-
-# ---------------------------------------------------------------------------
-# Fig 2 — Title role-history proxy (of 100 federal DS, ever held a title with...)
-# ---------------------------------------------------------------------------
-roles = ["Researcher / Fellow", "Analyst", "Academic (prof/postdoc/PhD)",
-         "Statistician", "Engineer (any)", "Health / clinical domain",
-         "ML / AI", "Software / Developer"]
-vals = [64, 48, 31, 25, 25, 18, 13, 11]
-# identity vs builder colouring
-builder = {"ML / AI", "Software / Developer", "Engineer (any)"}
-colors = [CYAN if r in builder else VIOLET for r in roles]
-
-order = np.argsort(vals)
-roles = [roles[i] for i in order]
-vals = [vals[i] for i in order]
-colors = [colors[i] for i in order]
-
-fig, ax = plt.subplots(figsize=(10, 5.6))
-ax.barh(roles, vals, color=colors)
-for yi, v in enumerate(vals):
-    ax.text(v + 0.7, yi, f"{v}%", va="center", fontsize=9.5, color=INK)
-ax.set_xlabel("Share of 100 federal data scientists who have EVER held a title containing this")
-ax.set_xlim(0, 72)
-ax.set_title("Federal data scientists are researchers and analysts by career — rarely builders",
-             fontsize=13, fontweight="bold", loc="left")
-ax.grid(axis="x", color=GRID)
-ax.set_axisbelow(True)
-for s in ("top", "right"):
-    ax.spines[s].set_visible(False)
-from matplotlib.patches import Patch
-ax.legend(handles=[Patch(color=VIOLET, label="Research / analyst identity"),
-                   Patch(color=CYAN, label="Hands-on builder (ML / software / eng)")],
-          loc="lower right", frameon=False)
-fig.text(0.99, 0.02, SRC + " (n=100 profiles)", fontsize=7.5, color=MUTE, ha="right")
+cohorts = ["National-lab\nfederal DS\n(n=57)", "OPM-agency\nfederal DS\n(n=82)", "Private big-tech\nDS (n=284)"]
+build   = [37, 17, 30]
+analyst = [18, 30, 12]
+x = np.arange(len(cohorts)); w = 0.36
+fig, ax = plt.subplots(figsize=(10.5, 6.2))
+b1 = ax.bar(x - w/2, build,   w, color=[LAB, OPM, PRIV], label="Builds / ML language")
+b2 = ax.bar(x + w/2, analyst, w, color=[LAB, OPM, PRIV], alpha=0.42, hatch="///",
+            edgecolor="white", label="Analyst / stats language")
+for xi, bv, av in zip(x, build, analyst):
+    ax.text(xi - w/2, bv + 0.8, f"{bv}%", ha="center", fontsize=10, fontweight="bold")
+    ax.text(xi + w/2, av + 0.8, f"{av}%", ha="center", fontsize=10, color=MUTE)
+ax.set_xticks(x); ax.set_xticklabels(cohorts, fontsize=10)
+ax.set_ylabel("Share of the cohort whose profile text uses this language")
+ax.set_ylim(0, 44)
+ax.set_title("Federal data science is two different jobs\n"
+             "National labs build ML like Big Tech; civil-service agencies do statistics-and-reporting",
+             fontsize=13.5, fontweight="bold", loc="left")
+ax.legend(handles=[Patch(facecolor=INK, label="Builds / ML language (solid)"),
+                   Patch(facecolor=INK, alpha=0.42, hatch="///", label="Analyst / stats language (hatched)")],
+          loc="upper right", frameon=False, fontsize=9.5)
+ax.grid(axis="y", color=GRID); ax.set_axisbelow(True)
+for s in ("top","right"): ax.spines[s].set_visible(False)
+fig.text(0.99, 0.012, SRC, fontsize=7.5, color=MUTE, ha="right")
 brand(fig)
-fig.tight_layout(rect=[0, 0.04, 1, 1])
-fig.savefig("02_title_history.png", bbox_inches="tight")
-plt.close(fig)
-
+fig.tight_layout(rect=[0,0.04,1,1])
+fig.savefig("01_bimodal_build_analyst.png", bbox_inches="tight"); plt.close(fig)
 
 # ---------------------------------------------------------------------------
-# Fig 3 — Two closed doors: where federal DS come from and go (COVER)
+# Fig 2 — The frontier-tech door is shut for BOTH kinds of federal DS
 # ---------------------------------------------------------------------------
-in_labels = ["Academia / research", "Non-frontier private\nindustry",
-             "Government", "Nonprofit / NGO", "Contractor", "Big Tech /\nfrontier AI"]
-in_vals = [46, 32, 8, 8, 5, 1]
-out_labels = ["Another federal\nagency", "Cleared contractor /\nconsulting",
-              "Private / other", "Big Tech /\nfrontier AI"]
-out_vals = [76, 18, 6, 0.3]
+labels = ["National-lab\nfederal DS", "OPM-agency\nfederal DS", "Private big-tech\nDS"]
+feed_bt = [0, 0, 25]   # Big Tech share of feeders
+exit_bt = [0, 0, 44]   # Big Tech share of exits
+x = np.arange(len(labels)); w = 0.36
+fig, ax = plt.subplots(figsize=(10.5, 6.0))
+ax.bar(x - w/2, feed_bt, w, color=[LAB, OPM, PRIV], label="Big Tech = share of feeders")
+ax.bar(x + w/2, exit_bt, w, color=[LAB, OPM, PRIV], alpha=0.45, hatch="///", edgecolor="white")
+for xi, fv, ev in zip(x, feed_bt, exit_bt):
+    ax.text(xi - w/2, fv + 0.8, f"{fv}%", ha="center", fontsize=11, fontweight="bold",
+            color=RED if fv == 0 else INK)
+    ax.text(xi + w/2, ev + 0.8, f"{ev}%", ha="center", fontsize=11, fontweight="bold",
+            color=RED if ev == 0 else MUTE)
+ax.set_xticks(x); ax.set_xticklabels(labels, fontsize=10.5)
+ax.set_ylabel("Big Tech / frontier-AI share")
+ax.set_ylim(0, 50)
+ax.set_title("The frontier-tech door is shut for BOTH kinds of federal data scientist\n"
+             "Big Tech feeds and takes ~0% of federal DS (either mode) — but 25–44% of private DS",
+             fontsize=13, fontweight="bold", loc="left")
+ax.legend(handles=[Patch(facecolor=INK, label="Big Tech share of feeders (solid)"),
+                   Patch(facecolor=INK, alpha=0.45, hatch="///", label="Big Tech share of exits (hatched)")],
+          loc="upper left", frameon=False, fontsize=9.5)
+ax.grid(axis="y", color=GRID); ax.set_axisbelow(True)
+for s in ("top","right"): ax.spines[s].set_visible(False)
+ax.text(0.5, 6.5, "≈ 0", fontsize=9, color=RED, ha="center", style="italic")
+fig.text(0.99, 0.012, SRC + " · Live Data corroborates: 1% of federal feeders, 0.3% of exits", fontsize=7.2, color=MUTE, ha="right")
+brand(fig)
+fig.tight_layout(rect=[0,0.04,1,1])
+fig.savefig("02_frontier_door.png", bbox_inches="tight"); plt.close(fig)
 
-fig, (axL, axR) = plt.subplots(1, 2, figsize=(12.5, 6.2))
+# ---------------------------------------------------------------------------
+# Fig 3 — Different people (Live Data education field, the OPM/health mode)
+# ---------------------------------------------------------------------------
+fields = ["Statistics","Computer Science","Economics","Data Science","Mathematics",
+          "Biostatistics","Epidemiology","Psychology","Physics","Business Analytics"]
+fed = [4.4,6.7,4.4,4.8,4.0,3.2,5.2,3.6,2.4,2.0]
+priv = [9.4,7.2,5.3,4.7,4.1,1.5,0.3,0.8,2.3,3.8]
+order = np.argsort([f-p for f,p in zip(fed,priv)])
+fields=[fields[i] for i in order]; fed=[fed[i] for i in order]; priv=[priv[i] for i in order]
+y = np.arange(len(fields)); h = 0.4
+fig, ax = plt.subplots(figsize=(10, 6.2))
+ax.barh(y+h/2, fed, h, color=OPM, label="Federal DS (Live Data, N=252)")
+ax.barh(y-h/2, priv, h, color=PRIV, label="Private-tech DS (N=7,683)")
+for yi,(f,p) in enumerate(zip(fed,priv)):
+    ax.text(f+0.12, yi+h/2, f"{f:.1f}%", va="center", fontsize=8, color=OPM)
+    ax.text(p+0.12, yi-h/2, f"{p:.1f}%", va="center", fontsize=8, color=PRIV)
+ax.set_yticks(y); ax.set_yticklabels(fields)
+ax.set_xlabel("Share holding a degree in this field")
+ax.set_xlim(0,10.6)
+ax.set_title("Different people — the health-agency mode\n"
+             "Federal DS over-index on epidemiology & psychology; private DS on statistics",
+             fontsize=12.5, fontweight="bold", loc="left")
+ax.legend(loc="center right", bbox_to_anchor=(1.0,0.5), frameon=False)
+ax.grid(axis="x", color=GRID); ax.set_axisbelow(True)
+for s in ("top","right"): ax.spines[s].set_visible(False)
+fig.text(0.99, 0.012, "Source: Live Data (workforce.ai) education facets, 2026", fontsize=7.5, color=MUTE, ha="right")
+brand(fig)
+fig.tight_layout(rect=[0,0.04,1,1])
+fig.savefig("03_education_funnels.png", bbox_inches="tight"); plt.close(fig)
 
-def flow_panel(ax, labels, vals, base_color, title, sub):
-    y = np.arange(len(labels))[::-1]
-    colors = []
-    for lab in labels:
-        colors.append("#e11d48" if lab.startswith("Big Tech") else base_color)
-    ax.barh(y, vals, color=colors)
-    for yi, v in zip(y, vals):
-        txt = f"{v:.1f}%" if v < 1 else f"{v:.0f}%"
-        ax.text(v + 1.2, yi, txt, va="center", fontsize=10, fontweight="bold",
-                color="#e11d48" if v <= 1 else INK)
-    ax.set_yticks(y)
-    ax.set_yticklabels(labels, fontsize=9.5)
-    ax.set_xlim(0, 88)
-    ax.set_title(title, fontsize=12.5, fontweight="bold", loc="left", pad=10)
-    ax.set_xlabel(sub, fontsize=9, color=MUTE)
-    ax.grid(axis="x", color=GRID)
-    ax.set_axisbelow(True)
-    for s in ("top", "right"):
-        ax.spines[s].set_visible(False)
-
-flow_panel(axL, in_labels, in_vals, VIOLET,
-           "Where federal data scientists come FROM",
-           "mid-career entrants, n=76 of 100 profiles")
-flow_panel(axR, out_labels, out_vals, CYAN,
-           "Where they GO next",
-           "identifiable next destinations, cohort N=1,181")
-
-fig.suptitle("Two weakly-connected worlds: the frontier-tech door is shut in both directions",
-             fontsize=15, fontweight="bold", x=0.01, ha="left", y=0.99)
-fig.text(0.01, 0.925, "Academia and older-economy industry feed federal data science. "
-         "Big Tech sends ~1 in 76 in — and takes 4 of 1,181 out.",
-         fontsize=10.5, color=INK)
-fig.text(0.99, 0.015, SRC, fontsize=7.5, color=MUTE, ha="right")
-brand(fig, y=0.015)
-fig.tight_layout(rect=[0, 0.03, 1, 0.9])
-fig.savefig("03_flows_in_out.png", bbox_inches="tight")
-plt.close(fig)
-
-print("wrote 01_education_funnels.png, 02_title_history.png, 03_flows_in_out.png")
+print("wrote 01_bimodal_build_analyst.png, 02_frontier_door.png, 03_education_funnels.png")

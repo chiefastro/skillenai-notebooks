@@ -1,127 +1,103 @@
-# Two Data-Science Worlds: Who Federal Data Scientists Actually Are, and Where They Come and Go
+# Federal Data Science Is Two Different Jobs — and Neither Crosses to Big Tech
 
-*Skillenai × Live Data analysis · July 2026 · supply-side profile data from [Live Data (workforce.ai)](https://workforce.ai) People. Draft for joint review — not yet published.*
+*Skillenai analysis · August 2026 · supply-side profile data from Skillenai's **owned talent graph** (LinkedIn profiles), cross-validated against [Live Data (workforce.ai)](https://workforce.ai).*
 
-Two earlier Skillenai posts looked at federal tech from the **demand** side — what employers pay and what postings ask for:
+Two earlier Skillenai posts looked at federal tech from the **demand** side (what postings pay and ask for): [the federal tech bargain](https://github.com/skillenai/skillenai-notebooks/tree/master/federal-tech-broken-bargain) and [same title, different job](https://github.com/skillenai/skillenai-notebooks/tree/master/federal-tech-skills-wall). Both concluded federal data scientists are a *statistics-and-reporting* workforce that doesn't build the way private ones do.
 
-- [The federal tech bargain](https://github.com/skillenai/skillenai-notebooks/tree/master/federal-tech-broken-bargain): lower pay, near-zero mobility, held together by a back-loaded pension.
-- [Same title, different job](https://github.com/skillenai/skillenai-notebooks/tree/master/federal-tech-skills-wall): under identical titles, federal and private postings ask for different tools — a federal Data Scientist posting is *statistics-and-reporting*, a private one is *code-experiment-deploy*.
-
-Both raised a question job postings can't answer: **is that because the two sectors hire fundamentally different people — and can those people actually move between the sectors?** This post answers it from the **supply** side, using worker profile histories from Live Data instead of job postings.
+Reading the **people** instead of the postings, that turns out to be **half the story**. "Federal data scientist" is not one job — it's two, and they barely resemble each other.
 
 **TL;DR**
-- **Different people.** Federal data scientists come up through **domain and social science** (Epidemiology is their #2 field of study at 5.2%, Psychology 3.6%) plus statistics. Private-tech data scientists come up through a concentrated **quant-and-engineering** funnel (Statistics 9.4%, plus a Mechanical/Industrial/Chemical-engineering feeder that has *no federal analog*). Computer Science is ~equally common on both sides (6.7% vs 7.2%) — federal DS aren't CS-poor; they're **domain-heavy**.
-- **Different careers.** Of 100 federal data scientists, **64% have held a "researcher/fellow" title and 48% an "analyst" title, but only 13% ever an ML/AI title and 11% a software/developer title.** Their federal job titles literally read `Statistician (Data Scientist)`, `Health Scientist (Data Scientist)`, `Mathematical Statistician (Data Scientist)` — the analyst/statistician lineage, embedded in the title.
-- **Two weakly-connected worlds.** Federal data scientists are fed by **academia (~46%) and older-economy private industry (~32%)** — but **1 of 76** mid-career entrants came from Big Tech / a frontier-AI lab. On the way out, **4 of 1,181** federal DS went to Google (0.3%); departures overwhelmingly go to **other agencies (76%)** and **cleared beltway contractors** — Booz Allen, MITRE, Deloitte (18%).
+- **Two kinds of federal data scientist.** In their own profile text, **national-lab** data scientists (PNNL, Idaho National Lab, JPL…) **build ML** — 37% use build/ML language vs 18% analyst/stats language, a profile that looks like *private* data science. **Civil-service (OPM) agency** data scientists are the mirror image — 17% build vs **30% analyst/stats** — the "government analyst" the earlier posts described. The old "federal DS don't build" finding was capturing only the OPM half.
+- **The frontier-tech door is shut for BOTH kinds.** Big Tech / frontier-AI labs supply **0%** of federal DS (either mode) and take **~0%** on exit — versus **25%** of the inflow and **44%** of the outflow for private DS. This replicates on both data sources (Live Data: 1% in, 0.3% out).
+- **Different people, two ways.** Federal DS over-index on domain science (Epidemiology is the #2 field of study at 5.2%; Psychology 3.6%) and come from **state and regional schools** (Montana State, Idaho, Arkansas, Naval Postgraduate); private DS come from statistics-heavy, elite/CS-powerhouse schools (Berkeley, Stanford, Georgia Tech).
+- **Built on two independent instruments.** Our owned LinkedIn graph and Live Data cover different slices of the federal workforce (owned skews national-lab, Live Data skews health agencies); the load-bearing finding — the frontier-tech wall — holds on both.
 
-**The one-line takeaway:** *A federal data scientist is far more likely to have studied epidemiology than a private one — and far more likely to end up at Booz Allen than at Google. The wall between federal and frontier-tech data science isn't just in the job description; it's in the résumé and the road in and out.*
+**The one-line takeaway:** *The government data scientist you're picturing — the careful analyst who reports but doesn't build — is real, but only half the story. The other half sits in the national labs doing reinforcement learning. Neither half ever touches Big Tech.*
 
 ---
 
 ## Data & method
 
-- **Source:** Live Data (workforce.ai) People — supply-side LinkedIn-derived profiles (job history + education), queried via the analytics MCP. This is the mirror image of the Skillenai job index used in the two prior (demand-side) posts.
-- **Populations.**
-  - *Federal DS:* profiles with a "Data Scientist" title at ten federal agencies — Veterans Affairs, Defense, CDC, NIH, IRS, CMS, Federal Reserve Board, Treasury, NASA, Census.
-  - *Private-tech DS:* profiles with a "Data Scientist" title at nine private tech firms — Google, Meta, Amazon, Microsoft, Apple, Netflix, Uber, Airbnb, Salesforce.
-- **Sample sizes.** Education-field distributions: **252 federal / 7,683 private** active DS. Career-path (before/after the DS role): **1,181** federal DS. Origin hand-classification: a **100-profile** federal DS sample with full job history.
-- **Measures.** Education = share of the cohort holding a degree in each field (multi-degree, so columns don't sum to 100). Title history = share of the 100 who have *ever* held a title containing a given token. Flows = the job immediately before/after the relevant role.
-
-### What this is *not*
-
-- **We do not have the LinkedIn "Skills" field.** Live Data's profile schema exposes job history and education, not the free-text skills/about sections. Everything here is an **education + title + movement proxy** for skill, not a direct read of listed skills. (Directly measuring listed skills would require the People-API profile-text surface — a natural follow-up.)
-- **LinkedIn under-captures career civil servants,** and the profile record cannot cleanly separate **civil servants from on-site contractors** — the same limitation the demand-side post flagged. Treat federal shares as indicative, not census-grade.
-- **Aggregate flows truncate the long tail** (destinations with <3 people are not itemized), so single-company private destinations are undercounted — the reported private-tech flow shares are **floors**, which only strengthens the "closed door" direction.
+- **Primary source — Skillenai's owned talent graph:** ~300K LinkedIn profiles (Bright Data snapshot, a ~10% tech-oriented sample) with dated job history, education, and free-text `about` + per-position `description`. This is what lets us read *what federal DS actually do* rather than proxy it from titles.
+- **Cross-validation — Live Data (workforce.ai):** an independent ~95M-profile panel, used for the education-field pillar (which our graph covers too sparsely) and to check the transition findings on a second sample.
+- **Cohorts.** Federal DS = a "Data Scientist"-titled position at a federal employer, split into **national-lab / FFRDC** (n=57) and **OPM civil-service agency** (n=82); private reference = "Data Scientist" at nine big-tech firms (n=284).
+- **Skill read.** Because the LinkedIn *Skills* field isn't in the data, "what they do" is measured from **profile text** (`about` + position descriptions), scored for *build/ML* vs *analyst/stats* language. This is self-reported and sparse — read the direction, not the decimals.
 
 ---
 
-## 1. Different people: the education funnels
+## Part 1 — Two kinds of federal data scientist
 
-![Federal vs private data scientist education fields](01_education_funnels.png)
+![Bimodal build vs analyst language by cohort](01_bimodal_build_analyst.png)
 
-Read the fields these two populations studied and the funnels diverge:
+Score each cohort's profile text for hands-on ML language (machine learning, deep/reinforcement learning, deployment, pipelines) versus analyst/reporting language (statistical analysis, surveillance, dashboards, SAS/SPSS):
 
-| Field of study | Federal DS | Private-tech DS |
+| Cohort | Build / ML | Analyst / stats | Looks like |
+|---|---:|---:|---|
+| **National-lab federal DS** (n=57) | **37%** | 18% | private data science |
+| **OPM-agency federal DS** (n=82) | 17% | **30%** | the "government analyst" |
+| Private big-tech DS (n=284) | 30% | 12% | (reference) |
+
+National-lab data scientists describe building — reinforcement learning, graph ML, model deployment — at a rate *higher* than private big-tech DS. OPM-agency data scientists invert it: statistics and reporting dominate. The two federal modes are as far apart from each other as either is from private tech. The earlier "federal DS describe ML but don't ship it" conclusion was true — of the OPM half only.
+
+---
+
+## Part 2 — The frontier-tech door is shut for both
+
+![Big Tech share of feeders and exits by cohort](02_frontier_door.png)
+
+Whichever mode you're in, one thing is constant: **almost nobody crosses to or from frontier tech.**
+
+| | Big Tech share of feeders | Big Tech share of exits |
 |---|---:|---:|
-| Statistics | 4.4% | **9.4%** |
-| Computer Science | 6.7% | 7.2% |
-| Epidemiology | **5.2%** | 0.3% |
-| Psychology | **3.6%** | 0.8% |
-| Biostatistics | 3.2% | 1.5% |
-| Economics | 4.4% | 5.3% |
-| Data Science | 4.8% | 4.7% |
-| Mathematics | 4.0% | 4.1% |
-| Mechanical / Industrial Eng. | ~0%\* | 3.9% combined |
+| National-lab federal DS | 0% | 0% |
+| OPM-agency federal DS | 0% | 0% |
+| Private big-tech DS | 25% | 44% |
 
-The distinguishing feature is **not** "federal = stats, private = CS" — Computer Science is essentially tied. It's that **federal data scientists carry a heavy domain- and social-science tail** (epidemiology, psychology, biology, sociology), while **private data scientists sit on a broader quant-and-engineering base** (more concentrated statistics, plus a mechanical/industrial/chemical-engineering feeder with no federal counterpart). The federal data scientist is often a *subject-matter expert who took up data science*; the private one is a *technical specialist*.
+Federal data scientists are fed by **academia** (60% of national-lab entrants) and **older-economy private industry** (74% of OPM entrants), and they exit mostly to **non-frontier private industry** (~57% for both) and — for OPM especially — **back into government** (27% of OPM exits vs 14% for labs). Private DS, by contrast, both arrive from and leave for Big Tech at 25–44%. The frontier-tech ↔ federal pipeline effectively does not exist, in either direction, for either kind of federal data scientist. **This is the finding that replicates across both data sources** (Live Data independently: 1% of federal feeders and 0.3% of exits touch Big Tech).
 
-\* *Mechanical/Industrial Engineering fall below the federal cohort's top-25 fields (<~1%).*
+---
 
-## 2. Different careers: what they've actually done
+## Part 3 — Different people
 
-![Federal data scientist title histories](02_title_history.png)
+![Federal vs private education fields](03_education_funnels.png)
 
-Of 100 federal data scientists, the share who have **ever held a title containing**:
+The two populations are trained differently. On field of study (Live Data), federal DS carry a **domain- and social-science tail** — Epidemiology is their #2 field (5.2% vs 0.3%), Psychology 3.6% vs 0.8%, Biostatistics 3.2% vs 1.5% — while private DS concentrate in statistics (9.4% vs 4.4%). Computer Science is a near-tie (6.7% vs 7.2%): federal DS aren't CS-poor, they're domain-heavy.
 
-| Role token | Share |
-|---|---:|
-| Researcher / Fellow | 64% |
-| Analyst | 48% |
-| Academic (professor / postdoc / PhD) | 31% |
-| Statistician | 25% |
-| Engineer (any) | 25% |
-| Health / clinical domain | 18% |
-| ML / AI | **13%** |
-| Software / Developer | **11%** |
+And on **where they went to school** (owned graph), the split is just as clear:
 
-These are researchers and analysts by career, not system-builders — which is exactly what the demand-side postings implied when federal DS listings named "machine learning" as often as private ones yet rarely asked for Python, experimentation, or MLOps. And the identity is stamped right into the current titles: federal data scientists are literally titled `Statistician (Data Scientist)`, `Health Scientist (Data Scientist)`, `Mathematical Statistician (Data Scientist)`, `Supervisory Health Scientist | Data Science Lead` — the occupational-series lineage worn on the badge.
+| | Top schools |
+|---|---|
+| Private big-tech DS | UC Berkeley, Stanford, Georgia Tech, UW, UT Austin |
+| Federal DS | Montana State, Idaho, Arkansas, Naval Postgraduate, NC State |
 
-## 3. Two weakly-connected worlds
+Private data science recruits from elite and CS-powerhouse programs; federal data science recruits from **state, regional (often lab-adjacent), and federal-adjacent** schools.
 
-![Where federal data scientists come from and go](03_flows_in_out.png)
+---
 
-**Where they come from** (100-profile hand-classification; shares are of the 76 who entered federal service mid-career):
+## Part 4 — Two instruments, one robust finding
 
-| Origin | Share |
-|---|---:|
-| Academia / research institute | 46% |
-| Non-frontier private industry (Micron, Illumina, Roche, Verizon, Target, USAA, insurance, telecom…) | 32% |
-| Government (other public) | 8% |
-| Nonprofit / NGO | 8% |
-| Contractor / consulting | 5% |
-| **Big Tech / frontier AI** | **1%** |
+This piece deliberately runs on two independent supply-side datasets, because they have **complementary blind spots**. Our owned LinkedIn graph is a ~10% tech-oriented sample that captures the **national labs** well; Live Data's panel covers **civil-service health agencies** (VA, CDC) far better. Neither is complete — across 17 federal agencies our graph holds ~11% of Live Data's cumulative federal-DS count in aggregate, but that ratio swings from under 5% at VA to a reversal at NIH, where our graph sees more.
 
-**Where they go next** (career-path over 1,181 federal DS; identifiable next destinations):
-
-| Destination | Share |
-|---|---:|
-| Another federal agency | 76% |
-| Cleared contractor / consulting (Booz Allen, MITRE, Deloitte) | 18% |
-| Private / other | 6% |
-| **Big Tech / frontier AI (Google)** | **0.3% (4 people)** |
-
-There *is* a real pipeline into federal data science — but it runs through **universities and the older-economy private sector**, not frontier tech. Not one of the 76 mid-career entrants came from Google, Meta, Amazon, Apple, Microsoft, OpenAI or Anthropic; the single most "tech" origin in the whole sample was eBay. And the exit almost never lands at a frontier lab. **The door between federal and frontier-tech data science is shut in both directions** — while the doors to academia and legacy industry stay open.
+That's exactly why the agreement matters: the load-bearing claim — **the frontier-tech wall** — shows up identically on both. Where the sources *diverge* (labs vs health agencies) is itself the finding: the composition of "federal data science" depends on which population your instrument sees best, and only using both reveals that it's bimodal.
 
 ---
 
 ## What it means
 
-This is the supply-side confirmation of the two demand-side posts, and it sharpens their conclusion. The "same title, different job" divergence isn't a quirk of how agencies write postings — it reflects **genuinely different people on genuinely different career circuits**. Federal data scientists are domain experts and statisticians drawn from academia and legacy industry; they do analyst and research work; and when they move, they circulate within government and its contractor belt.
+**If you're a federal data scientist thinking about the private market:** which of the two jobs you have matters enormously. If you're in a national lab doing ML, your skills travel — but the data says the path is still rarely walked. If you're an OPM-agency analyst, the private market runs on tooling your role doesn't use, and the move is a retraining project.
 
-That reframes the current federal hiring problem. The worry isn't that the government *used* to hire from private industry and suddenly can't — it hired from academia and older-economy firms all along, and still could. The worry is narrower and harder: **there was never a frontier-tech ↔ federal pipeline to begin with.** You cannot quickly rebuild a modern ML-engineering bench by poaching from Google, because that path has essentially never been walked — in either direction — and the pipelines that *do* feed federal data science (academia, legacy industry) are slower and are exactly the people most exposed to the recent turmoil.
+**If you're a private engineer eyeing government:** frontier-tech experience is essentially absent from the federal data workforce in both modes — which is both a culture gap and, if the mission appeals, an unusual scarcity.
 
-**If you're a federal data scientist eyeing private tech:** your background likely reads as *domain scientist / statistician / analyst*, and the frontier-tech market you'd be entering hires for *engineering and experimentation*. The move is a retraining project, and the near-total absence of this path in the data is the honest signal of how hard it is.
-
-**If you're at a frontier-tech firm thinking about federal service:** almost no one has made this move, which cuts two ways — the culture gap is real, but the scarcity is also the opportunity if the mission appeals.
-
-**For the government:** closing the pay gap wouldn't, by itself, make a modern ML-engineering workforce appear. The talent it can realistically attract is the analyst/researcher lineage it already draws — a different job architecture from the one frontier tech runs on.
+**For the government:** there was never a frontier-tech ↔ federal pipeline to build on, in either direction. The talent it draws is the academic/domain-science lineage (for labs) and the older-economy-industry/analyst lineage (for agencies). Closing a pay gap doesn't change where the pipelines run.
 
 ---
 
 ## Reproduce it & caveats
 
-- All figures render from `make_figures.py` using values captured from the Live Data People analytics run (education facets, career-path before/after, and a 100-profile job-history pull).
-- **Supply-side proxy, not listed skills.** Education + title + movement stand in for skill; the LinkedIn skills field is not in the profile schema used here.
-- **Federal agency mix is health/benefits-heavy** (VA, CDC, NIH, CMS), which drives the specific domains in the tail (epidemiology, biostatistics). A defense/intelligence-weighted set would shift the *domains* (toward physics/EE) but not the general pattern — a domain-expert funnel versus a technical-specialist funnel.
-- **Contractor-vs-civil-service** movement is only partially observable; much federal↔private technical mobility runs through the contractor channel, which shows up here as the Booz Allen / MITRE / Deloitte destinations.
-- **Private-tech flow shares are floors** due to long-tail truncation in the aggregate flows; the 100-profile origin split is hand-classified from actual employer names.
+Figures render from `make_figures.py` using values captured from the owned-graph analysis (`profiles.jsonl`) and Live Data facets.
+
+- **Supply-side proxy, not listed skills.** The LinkedIn *Skills* field isn't in the data; "what they do" is scored from profile text (self-reported, sparse). Read the direction.
+- **Small sub-populations → wide confidence intervals.** National-lab n=57, OPM n=82; exit-movers only 21 and 30 respectively. The build-vs-analyst *direction* is robust; the exact percentages are not.
+- **"National lab" vs "civil-service agency" is partly an employer distinction.** National labs are FFRDCs run by contractors and universities, not GS civil servants — so "two modes of federal data science" is also, honestly, "two different kinds of federal employer." That's part of the point: the colloquial term lumps them; the data shows they're different worlds.
+- **Owned graph = ~10% sample; employment history current to ~Oct 2025.** Live Data pillars carry their own fuzzy-match and coverage caveats.
+- **Complementary coverage, disclosed:** owned ≈11% of Live Data's cumulative federal DS in aggregate, but agency-by-agency uneven (VA/CDC better in Live Data, NIH better in the owned graph).
