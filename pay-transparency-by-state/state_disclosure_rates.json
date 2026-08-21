@@ -1,0 +1,382 @@
+[
+ {
+  "state": "Washington",
+  "law": "posting",
+  "effective": "2023-01-01",
+  "n": 6208,
+  "disclosed": 2915,
+  "pct": 47.0,
+  "ci95": 1.2,
+  "law_took_effect_mid_window": false
+ },
+ {
+  "state": "New York",
+  "law": "posting",
+  "effective": "2023-09-17",
+  "n": 16140,
+  "disclosed": 7520,
+  "pct": 46.6,
+  "ci95": 0.8,
+  "law_took_effect_mid_window": false
+ },
+ {
+  "state": "California",
+  "law": "posting",
+  "effective": "2023-01-01",
+  "n": 41746,
+  "disclosed": 18749,
+  "pct": 44.9,
+  "ci95": 0.5,
+  "law_took_effect_mid_window": false
+ },
+ {
+  "state": "Massachusetts",
+  "law": "posting",
+  "effective": "2025-10-29",
+  "n": 5430,
+  "disclosed": 2338,
+  "pct": 43.1,
+  "ci95": 1.3,
+  "law_took_effect_mid_window": false
+ },
+ {
+  "state": "Colorado",
+  "law": "posting",
+  "effective": "2021-01-01",
+  "n": 2626,
+  "disclosed": 1012,
+  "pct": 38.5,
+  "ci95": 1.9,
+  "law_took_effect_mid_window": false
+ },
+ {
+  "state": "Maryland",
+  "law": "posting",
+  "effective": "2024-10-01",
+  "n": 3332,
+  "disclosed": 1262,
+  "pct": 37.9,
+  "ci95": 1.6,
+  "law_took_effect_mid_window": false
+ },
+ {
+  "state": "District of Columbia",
+  "law": "posting",
+  "effective": "2024-06-30",
+  "n": 2915,
+  "disclosed": 1062,
+  "pct": 36.4,
+  "ci95": 1.7,
+  "law_took_effect_mid_window": false
+ },
+ {
+  "state": "Illinois",
+  "law": "posting",
+  "effective": "2025-01-01",
+  "n": 3119,
+  "disclosed": 1089,
+  "pct": 34.9,
+  "ci95": 1.7,
+  "law_took_effect_mid_window": false
+ },
+ {
+  "state": "Nevada",
+  "law": "request",
+  "effective": "2021-10-01",
+  "n": 433,
+  "disclosed": 131,
+  "pct": 30.3,
+  "ci95": 4.3,
+  "law_took_effect_mid_window": false
+ },
+ {
+  "state": "Alabama",
+  "law": "none",
+  "effective": null,
+  "n": 534,
+  "disclosed": 144,
+  "pct": 27.0,
+  "ci95": 3.8,
+  "law_took_effect_mid_window": false
+ },
+ {
+  "state": "Virginia",
+  "law": "posting",
+  "effective": "2026-07-01",
+  "n": 3636,
+  "disclosed": 967,
+  "pct": 26.6,
+  "ci95": 1.4,
+  "law_took_effect_mid_window": true
+ },
+ {
+  "state": "Minnesota",
+  "law": "posting",
+  "effective": "2025-01-01",
+  "n": 1439,
+  "disclosed": 353,
+  "pct": 24.5,
+  "ci95": 2.2,
+  "law_took_effect_mid_window": false
+ },
+ {
+  "state": "New Jersey",
+  "law": "posting",
+  "effective": "2025-06-01",
+  "n": 1962,
+  "disclosed": 465,
+  "pct": 23.7,
+  "ci95": 1.9,
+  "law_took_effect_mid_window": false
+ },
+ {
+  "state": "Connecticut",
+  "law": "request",
+  "effective": "2021-10-01",
+  "n": 602,
+  "disclosed": 118,
+  "pct": 19.6,
+  "ci95": 3.2,
+  "law_took_effect_mid_window": false
+ },
+ {
+  "state": "Georgia",
+  "law": "none",
+  "effective": null,
+  "n": 2745,
+  "disclosed": 523,
+  "pct": 19.1,
+  "ci95": 1.5,
+  "law_took_effect_mid_window": false
+ },
+ {
+  "state": "Ohio",
+  "law": "none",
+  "effective": null,
+  "n": 1784,
+  "disclosed": 341,
+  "pct": 19.1,
+  "ci95": 1.8,
+  "law_took_effect_mid_window": false
+ },
+ {
+  "state": "Pennsylvania",
+  "law": "none",
+  "effective": null,
+  "n": 1687,
+  "disclosed": 313,
+  "pct": 18.6,
+  "ci95": 1.9,
+  "law_took_effect_mid_window": false
+ },
+ {
+  "state": "Missouri",
+  "law": "none",
+  "effective": null,
+  "n": 697,
+  "disclosed": 128,
+  "pct": 18.4,
+  "ci95": 2.9,
+  "law_took_effect_mid_window": false
+ },
+ {
+  "state": "North Carolina",
+  "law": "none",
+  "effective": null,
+  "n": 2461,
+  "disclosed": 446,
+  "pct": 18.1,
+  "ci95": 1.5,
+  "law_took_effect_mid_window": false
+ },
+ {
+  "state": "Utah",
+  "law": "none",
+  "effective": null,
+  "n": 1131,
+  "disclosed": 199,
+  "pct": 17.6,
+  "ci95": 2.2,
+  "law_took_effect_mid_window": false
+ },
+ {
+  "state": "New Hampshire",
+  "law": "none",
+  "effective": null,
+  "n": 368,
+  "disclosed": 64,
+  "pct": 17.4,
+  "ci95": 3.9,
+  "law_took_effect_mid_window": false
+ },
+ {
+  "state": "Texas",
+  "law": "none",
+  "effective": null,
+  "n": 6761,
+  "disclosed": 1055,
+  "pct": 15.6,
+  "ci95": 0.9,
+  "law_took_effect_mid_window": false
+ },
+ {
+  "state": "Michigan",
+  "law": "none",
+  "effective": null,
+  "n": 1466,
+  "disclosed": 208,
+  "pct": 14.2,
+  "ci95": 1.8,
+  "law_took_effect_mid_window": false
+ },
+ {
+  "state": "Nebraska",
+  "law": "none",
+  "effective": null,
+  "n": 225,
+  "disclosed": 31,
+  "pct": 13.8,
+  "ci95": 4.5,
+  "law_took_effect_mid_window": false
+ },
+ {
+  "state": "Rhode Island",
+  "law": "request",
+  "effective": "2023-01-01",
+  "n": 208,
+  "disclosed": 28,
+  "pct": 13.5,
+  "ci95": 4.6,
+  "law_took_effect_mid_window": false
+ },
+ {
+  "state": "Wisconsin",
+  "law": "none",
+  "effective": null,
+  "n": 565,
+  "disclosed": 74,
+  "pct": 13.1,
+  "ci95": 2.8,
+  "law_took_effect_mid_window": false
+ },
+ {
+  "state": "Florida",
+  "law": "none",
+  "effective": null,
+  "n": 2533,
+  "disclosed": 330,
+  "pct": 13.0,
+  "ci95": 1.3,
+  "law_took_effect_mid_window": false
+ },
+ {
+  "state": "Arizona",
+  "law": "none",
+  "effective": null,
+  "n": 1367,
+  "disclosed": 178,
+  "pct": 13.0,
+  "ci95": 1.8,
+  "law_took_effect_mid_window": false
+ },
+ {
+  "state": "Tennessee",
+  "law": "none",
+  "effective": null,
+  "n": 573,
+  "disclosed": 72,
+  "pct": 12.6,
+  "ci95": 2.7,
+  "law_took_effect_mid_window": false
+ },
+ {
+  "state": "Maine",
+  "law": "posting",
+  "effective": "2026-07-28",
+  "n": 392,
+  "disclosed": 47,
+  "pct": 12.0,
+  "ci95": 3.2,
+  "law_took_effect_mid_window": true
+ },
+ {
+  "state": "Oklahoma",
+  "law": "none",
+  "effective": null,
+  "n": 261,
+  "disclosed": 30,
+  "pct": 11.5,
+  "ci95": 3.9,
+  "law_took_effect_mid_window": false
+ },
+ {
+  "state": "Iowa",
+  "law": "none",
+  "effective": null,
+  "n": 312,
+  "disclosed": 34,
+  "pct": 10.9,
+  "ci95": 3.5,
+  "law_took_effect_mid_window": false
+ },
+ {
+  "state": "South Carolina",
+  "law": "none",
+  "effective": null,
+  "n": 650,
+  "disclosed": 70,
+  "pct": 10.8,
+  "ci95": 2.4,
+  "law_took_effect_mid_window": false
+ },
+ {
+  "state": "Louisiana",
+  "law": "none",
+  "effective": null,
+  "n": 212,
+  "disclosed": 23,
+  "pct": 10.8,
+  "ci95": 4.2,
+  "law_took_effect_mid_window": false
+ },
+ {
+  "state": "Arkansas",
+  "law": "none",
+  "effective": null,
+  "n": 326,
+  "disclosed": 35,
+  "pct": 10.7,
+  "ci95": 3.4,
+  "law_took_effect_mid_window": false
+ },
+ {
+  "state": "Indiana",
+  "law": "none",
+  "effective": null,
+  "n": 900,
+  "disclosed": 93,
+  "pct": 10.3,
+  "ci95": 2.0,
+  "law_took_effect_mid_window": false
+ },
+ {
+  "state": "Oregon",
+  "law": "none",
+  "effective": null,
+  "n": 268,
+  "disclosed": 25,
+  "pct": 9.3,
+  "ci95": 3.5,
+  "law_took_effect_mid_window": false
+ },
+ {
+  "state": "Kansas",
+  "law": "none",
+  "effective": null,
+  "n": 692,
+  "disclosed": 37,
+  "pct": 5.3,
+  "ci95": 1.7,
+  "law_took_effect_mid_window": false
+ }
+]
