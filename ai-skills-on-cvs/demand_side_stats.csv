@@ -1,0 +1,15 @@
+metric,count,share_pct
+baseline_postings,336824,
+any_ai_mention,109602,32.5
+employer_self_description,54297,16.12
+candidate_requirement,6557,1.95
+generic_fluency,60578,17.99
+named_products,15767,4.68
+dept:Engineering,105857,34.1
+dept:Product,26124,32.5
+dept:Marketing,2179,45.0
+dept:Design,1565,42.5
+dept:Sales,1540,28.7
+dept:Finance,1115,36.1
+dept:Customer Success,562,62.6
+dept:Data Science,5396,64.3
