@@ -14,7 +14,9 @@ Everyone asks whether AI skills are showing up on CVs. They are — but the inte
 
 **Generative-AI skills went from 1.6% of roles started in 2022 to 7.6% in 2025, and overtook classical machine learning in 2024.** Not because GenAI grew faster than ML. Because **ML stopped growing entirely** — 2.74% in 2022, 2.75% in 2025, a 1.0x multiple over three years — and GenAI walked past a stationary target.
 
-Meanwhile employers talk about AI constantly and ask for it almost never. Across 336,824 postings, a third mention AI, but firms describe *themselves* as "AI-native" **8x more often** than they ask a candidate for AI proficiency (16.1% vs 2.0%).
+Meanwhile employers talk about AI constantly and ask for it almost never. Across 336,824 postings, a third mention AI, but firms describe *themselves* as "AI-native" **8x more often** than they ask a candidate for AI proficiency (16.1% vs 1.9%).
+
+![Generative AI overtook classical machine learning on US tech CVs in 2024, while machine learning itself stayed flat](01_genai_vs_ml_crossover.png)
 
 The shift is real. It is a **substitution, not an expansion** — and on the demand side it is still a tiebreaker, not a filter.
 
@@ -38,6 +40,8 @@ Share of US tech CV position descriptions, by the year the role started.
 `AI agents` is the standout: 16.2x, and most of it arrived in the last window (0.87% → 2.21% between 2024 and 2025).
 
 **MCP is the fastest-growing skill in the entire corpus at 49.5x**, which fits — Model Context Protocol only launched in late 2024. We keep it out of the headline: n=56 in 2025, and bare "MCP" collides with the Microsoft Certified Professional credential. The 2025-only spike argues the signal is genuine (a stale certification would be flat or declining), but the base is too thin to quote.
+
+![Change in skill prevalence on US tech CVs 2022 to 2025: every generative-AI skill grew while the classical ML stack stayed flat](02_emerging_skills.png)
 
 ## 2. The classical ML stack is flat
 
@@ -75,9 +79,11 @@ Note this table's "classical ML" is a broader regex than the family in §2 (it i
 |---|---:|---:|
 | Mention AI at all | 109,602 | **32.5%** |
 | Employer describes *itself* ("AI-native", "AI-first", "AI-powered", "leverage AI") | 54,297 | **16.1%** |
-| Employer asks *candidate* for AI proficiency | 6,557 | **2.0%** |
+| Employer asks *candidate* for AI proficiency | 6,557 | **1.9%** |
 | Generic fluency ("AI tools", "AI-assisted") | 60,578 | 18.0% |
 | Named products (ChatGPT, GitHub Copilot, LangChain, …) | 15,767 | 4.7% |
+
+![How AI appears in US tech job postings: a third mention AI, 16.1% describe themselves as AI-native, but only 1.9% ask the candidate for AI proficiency](03_demand_side.png)
 
 **Self-description outweighs candidate requirement 8:1.** When employers do ask, they want generic fluency over named products roughly **4:1** — AI fluency is being screened as a way of working, not a tool checkbox.
 
@@ -106,6 +112,7 @@ python 01_discover_skill_vocab.py                       # -> skills_vocab.json
 python 02_skill_families_by_year.py profiles.jsonl      # -> skill_families_by_year.csv
 python 03_genai_vs_ml_trend.py     profiles.jsonl       # -> genai_vs_ml_by_year.csv
 python 04_demand_side_postings.py                       # -> demand_side_stats.csv
+python 05_make_figures.py                               # -> 01..03 .png
 ```
 
 `profiles.jsonl` is the Bright Data LinkedIn snapshot. **It is not in this repo and must not be** — it is personal data, held in `s3://skillenai-linkedin-pii-prod/raw/`. Only aggregates are committed here.
