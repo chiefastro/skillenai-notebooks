@@ -1,0 +1,1602 @@
+[
+ {
+  "name": "Python",
+  "n": 94012
+ },
+ {
+  "name": "SQL",
+  "n": 50310
+ },
+ {
+  "name": "AWS",
+  "n": 44975
+ },
+ {
+  "name": "CI/CD",
+  "n": 41053
+ },
+ {
+  "name": "Kubernetes",
+  "n": 35671
+ },
+ {
+  "name": "Java",
+  "n": 33191
+ },
+ {
+  "name": "TypeScript",
+  "n": 30710
+ },
+ {
+  "name": "React",
+  "n": 26721
+ },
+ {
+  "name": "Docker",
+  "n": 25377
+ },
+ {
+  "name": "JavaScript",
+  "n": 24376
+ },
+ {
+  "name": "machine learning",
+  "n": 22026
+ },
+ {
+  "name": "Distributed systems",
+  "n": 20734
+ },
+ {
+  "name": "observability",
+  "n": 20272
+ },
+ {
+  "name": "Azure",
+  "n": 20117
+ },
+ {
+  "name": "Terraform",
+  "n": 20107
+ },
+ {
+  "name": "Git",
+  "n": 18252
+ },
+ {
+  "name": "Go",
+  "n": 18011
+ },
+ {
+  "name": "C++",
+  "n": 17131
+ },
+ {
+  "name": "GCP",
+  "n": 17096
+ },
+ {
+  "name": "Linux",
+  "n": 16408
+ },
+ {
+  "name": "testing",
+  "n": 14437
+ },
+ {
+  "name": "Data analysis",
+  "n": 14436
+ },
+ {
+  "name": "monitoring",
+  "n": 14362
+ },
+ {
+  "name": "Agile",
+  "n": 14105
+ },
+ {
+  "name": "PostgreSQL",
+  "n": 14072
+ },
+ {
+  "name": "automation",
+  "n": 14067
+ },
+ {
+  "name": "data pipelines",
+  "n": 13656
+ },
+ {
+  "name": "APIs",
+  "n": 13642
+ },
+ {
+  "name": "data modeling",
+  "n": 13136
+ },
+ {
+  "name": "DevOps",
+  "n": 12967
+ },
+ {
+  "name": "microservices",
+  "n": 12558
+ },
+ {
+  "name": "Node.js",
+  "n": 12437
+ },
+ {
+  "name": "Kafka",
+  "n": 10739
+ },
+ {
+  "name": "LLMs",
+  "n": 10542
+ },
+ {
+  "name": "debugging",
+  "n": 10517
+ },
+ {
+  "name": "Tableau",
+  "n": 10259
+ },
+ {
+  "name": "C#",
+  "n": 10258
+ },
+ {
+  "name": "code reviews",
+  "n": 9748
+ },
+ {
+  "name": "JIRA",
+  "n": 9727
+ },
+ {
+  "name": "data visualization",
+  "n": 9083
+ },
+ {
+  "name": "ETL",
+  "n": 9053
+ },
+ {
+  "name": "unit testing",
+  "n": 8815
+ },
+ {
+  "name": "Jenkins",
+  "n": 8810
+ },
+ {
+  "name": "PyTorch",
+  "n": 8806
+ },
+ {
+  "name": "Snowflake",
+  "n": 8720
+ },
+ {
+  "name": "A/B testing",
+  "n": 8681
+ },
+ {
+  "name": "REST APIs",
+  "n": 8235
+ },
+ {
+  "name": "prompt engineering",
+  "n": 8218
+ },
+ {
+  "name": "MySQL",
+  "n": 8180
+ },
+ {
+  "name": "incident response",
+  "n": 8125
+ },
+ {
+  "name": "Power BI",
+  "n": 8069
+ },
+ {
+  "name": "Product Management",
+  "n": 7949
+ },
+ {
+  "name": "GitHub Actions",
+  "n": 7823
+ },
+ {
+  "name": "data governance",
+  "n": 7519
+ },
+ {
+  "name": "security",
+  "n": 7267
+ },
+ {
+  "name": "Rust",
+  "n": 7189
+ },
+ {
+  "name": "GitHub",
+  "n": 7110
+ },
+ {
+  "name": "CSS",
+  "n": 7085
+ },
+ {
+  "name": "Generative AI",
+  "n": 7072
+ },
+ {
+  "name": "Angular",
+  "n": 6988
+ },
+ {
+  "name": "Bash",
+  "n": 6844
+ },
+ {
+  "name": "performance optimization",
+  "n": 6790
+ },
+ {
+  "name": "NoSQL",
+  "n": 6698
+ },
+ {
+  "name": "GraphQL",
+  "n": 6672
+ },
+ {
+  "name": "HTML",
+  "n": 6649
+ },
+ {
+  "name": "Databricks",
+  "n": 6638
+ },
+ {
+  "name": "Grafana",
+  "n": 6618
+ },
+ {
+  "name": "dashboards",
+  "n": 6602
+ },
+ {
+  "name": "Kotlin",
+  "n": 6569
+ },
+ {
+  "name": "prototyping",
+  "n": 6463
+ },
+ {
+  "name": "Ansible",
+  "n": 6444
+ },
+ {
+  "name": "RESTful APIs",
+  "n": 6403
+ },
+ {
+  "name": "DBT",
+  "n": 6382
+ },
+ {
+  "name": "infrastructure as code",
+  "n": 6372
+ },
+ {
+  "name": "REST",
+  "n": 6344
+ },
+ {
+  "name": "Redis",
+  "n": 6343
+ },
+ {
+  "name": "C",
+  "n": 6310
+ },
+ {
+  "name": "networking",
+  "n": 6269
+ },
+ {
+  "name": "System design",
+  "n": 6242
+ },
+ {
+  "name": "integration testing",
+  "n": 6238
+ },
+ {
+  "name": "Automated testing",
+  "n": 6214
+ },
+ {
+  "name": "API design",
+  "n": 6148
+ },
+ {
+  "name": "Excel",
+  "n": 6101
+ },
+ {
+  "name": "project management",
+  "n": 6081
+ },
+ {
+  "name": "R",
+  "n": 6035
+ },
+ {
+  "name": "documentation",
+  "n": 6032
+ },
+ {
+  "name": "experimentation",
+  "n": 6016
+ },
+ {
+  "name": "MongoDB",
+  "n": 5979
+ },
+ {
+  "name": "Scrum",
+  "n": 5972
+ },
+ {
+  "name": "Figma",
+  "n": 5904
+ },
+ {
+  "name": "data quality",
+  "n": 5816
+ },
+ {
+  "name": "test automation",
+  "n": 5746
+ },
+ {
+  "name": "Relational databases",
+  "n": 5714
+ },
+ {
+  "name": "AI",
+  "n": 5669
+ },
+ {
+  "name": "Postgres",
+  "n": 5566
+ },
+ {
+  "name": "Prometheus",
+  "n": 5510
+ },
+ {
+  "name": "software engineering",
+  "n": 5508
+ },
+ {
+  "name": "Risk Management",
+  "n": 5500
+ },
+ {
+  "name": "TensorFlow",
+  "n": 5454
+ },
+ {
+  "name": "design systems",
+  "n": 5446
+ },
+ {
+  "name": "Spring Boot",
+  "n": 5425
+ },
+ {
+  "name": "analytics",
+  "n": 5415
+ },
+ {
+  "name": "Spark",
+  "n": 5350
+ },
+ {
+  "name": "Looker",
+  "n": 5298
+ },
+ {
+  "name": "Salesforce",
+  "n": 5283
+ },
+ {
+  "name": "scalability",
+  "n": 5270
+ },
+ {
+  "name": "Scala",
+  "n": 5199
+ },
+ {
+  "name": "Cursor",
+  "n": 5118
+ },
+ {
+  "name": "Golang",
+  "n": 5036
+ },
+ {
+  "name": "Claude Code",
+  "n": 5021
+ },
+ {
+  "name": "BigQuery",
+  "n": 4982
+ },
+ {
+  "name": "Root cause analysis",
+  "n": 4978
+ },
+ {
+  "name": "Airflow",
+  "n": 4973
+ },
+ {
+  "name": "alerting",
+  "n": 4951
+ },
+ {
+  "name": "logging",
+  "n": 4875
+ },
+ {
+  "name": "containerization",
+  "n": 4634
+ },
+ {
+  "name": "Next.js",
+  "n": 4589
+ },
+ {
+  "name": "stakeholder management",
+  "n": 4559
+ },
+ {
+  "name": "RAG",
+  "n": 4534
+ },
+ {
+  "name": ".NET",
+  "n": 4528
+ },
+ {
+  "name": "Code review",
+  "n": 4516
+ },
+ {
+  "name": "authentication",
+  "n": 4479
+ },
+ {
+  "name": "AI tools",
+  "n": 4451
+ },
+ {
+  "name": "deployment",
+  "n": 4403
+ },
+ {
+  "name": "Claude",
+  "n": 4394
+ },
+ {
+  "name": "data structures",
+  "n": 4371
+ },
+ {
+  "name": "CI/CD pipelines",
+  "n": 4359
+ },
+ {
+  "name": "Version control",
+  "n": 4358
+ },
+ {
+  "name": "data analytics",
+  "n": 4343
+ },
+ {
+  "name": "Datadog",
+  "n": 4332
+ },
+ {
+  "name": "AI agents",
+  "n": 4297
+ },
+ {
+  "name": "MLOps",
+  "n": 4297
+ },
+ {
+  "name": "Ruby",
+  "n": 4292
+ },
+ {
+  "name": "data science",
+  "n": 4272
+ },
+ {
+  "name": "deep learning",
+  "n": 4265
+ },
+ {
+  "name": "metrics",
+  "n": 4209
+ },
+ {
+  "name": "user research",
+  "n": 4208
+ },
+ {
+  "name": "cloud infrastructure",
+  "n": 4197
+ },
+ {
+  "name": "LangChain",
+  "n": 4077
+ },
+ {
+  "name": "IAM",
+  "n": 4045
+ },
+ {
+  "name": "GitLab",
+  "n": 4000
+ },
+ {
+  "name": "Data engineering",
+  "n": 3948
+ },
+ {
+  "name": "Confluence",
+  "n": 3930
+ },
+ {
+  "name": "infrastructure-as-code",
+  "n": 3907
+ },
+ {
+  "name": "Infrastructure as Code (IaC)",
+  "n": 3896
+ },
+ {
+  "name": "algorithms",
+  "n": 3837
+ },
+ {
+  "name": "Elasticsearch",
+  "n": 3821
+ },
+ {
+  "name": "FastAPI",
+  "n": 3816
+ },
+ {
+  "name": "pandas",
+  "n": 3816
+ },
+ {
+  "name": "Continuous integration",
+  "n": 3732
+ },
+ {
+  "name": "computer vision",
+  "n": 3732
+ },
+ {
+  "name": "forecasting",
+  "n": 3726
+ },
+ {
+  "name": "product design",
+  "n": 3712
+ },
+ {
+  "name": "reporting",
+  "n": 3691
+ },
+ {
+  "name": "DevSecOps",
+  "n": 3688
+ },
+ {
+  "name": "data validation",
+  "n": 3674
+ },
+ {
+  "name": "scripting",
+  "n": 3666
+ },
+ {
+  "name": "Azure DevOps",
+  "n": 3643
+ },
+ {
+  "name": "Playwright",
+  "n": 3613
+ },
+ {
+  "name": "program management",
+  "n": 3576
+ },
+ {
+  "name": "PowerShell",
+  "n": 3562
+ },
+ {
+  "name": "Ruby on Rails",
+  "n": 3553
+ },
+ {
+  "name": "SQL Server",
+  "n": 3544
+ },
+ {
+  "name": "fine-tuning",
+  "n": 3542
+ },
+ {
+  "name": "ELT",
+  "n": 3532
+ },
+ {
+  "name": "Oracle",
+  "n": 3517
+ },
+ {
+  "name": "Android",
+  "n": 3461
+ },
+ {
+  "name": "Apache Spark",
+  "n": 3423
+ },
+ {
+  "name": "reliability engineering",
+  "n": 3421
+ },
+ {
+  "name": "compliance",
+  "n": 3378
+ },
+ {
+  "name": "software architecture",
+  "n": 3377
+ },
+ {
+  "name": "Product roadmap",
+  "n": 3358
+ },
+ {
+  "name": "model evaluation",
+  "n": 3339
+ },
+ {
+  "name": "product strategy",
+  "n": 3336
+ },
+ {
+  "name": "quality assurance",
+  "n": 3300
+ },
+ {
+  "name": "data integration",
+  "n": 3294
+ },
+ {
+  "name": "Swift",
+  "n": 3287
+ },
+ {
+  "name": "Helm",
+  "n": 3280
+ },
+ {
+  "name": "software development",
+  "n": 3238
+ },
+ {
+  "name": "SaaS",
+  "n": 3235
+ },
+ {
+  "name": "vector databases",
+  "n": 3230
+ },
+ {
+  "name": "S3",
+  "n": 3229
+ },
+ {
+  "name": "JSON",
+  "n": 3159
+ },
+ {
+  "name": "systems engineering",
+  "n": 3093
+ },
+ {
+  "name": "Django",
+  "n": 3092
+ },
+ {
+  "name": "accessibility",
+  "n": 3055
+ },
+ {
+  "name": "AWS Lambda",
+  "n": 3054
+ },
+ {
+  "name": "Troubleshooting",
+  "n": 3039
+ },
+ {
+  "name": "databases",
+  "n": 3008
+ },
+ {
+  "name": "Windows",
+  "n": 3007
+ },
+ {
+  "name": "C/C++",
+  "n": 3002
+ },
+ {
+  "name": "gRPC",
+  "n": 2988
+ },
+ {
+  "name": "React Native",
+  "n": 2972
+ },
+ {
+  "name": "orchestration",
+  "n": 2968
+ },
+ {
+  "name": "CloudFormation",
+  "n": 2933
+ },
+ {
+  "name": "workflow automation",
+  "n": 2929
+ },
+ {
+  "name": "Change Management",
+  "n": 2919
+ },
+ {
+  "name": "scikit-learn",
+  "n": 2906
+ },
+ {
+  "name": "data warehousing",
+  "n": 2902
+ },
+ {
+  "name": "threat modeling",
+  "n": 2893
+ },
+ {
+  "name": "System architecture",
+  "n": 2874
+ },
+ {
+  "name": "LLM",
+  "n": 2873
+ },
+ {
+  "name": "Performance tuning",
+  "n": 2871
+ },
+ {
+  "name": "Large language models (LLMs)",
+  "n": 2864
+ },
+ {
+  "name": "Artificial Intelligence",
+  "n": 2840
+ },
+ {
+  "name": "Object-oriented programming",
+  "n": 2799
+ },
+ {
+  "name": "microservices architecture",
+  "n": 2781
+ },
+ {
+  "name": "API integration",
+  "n": 2776
+ },
+ {
+  "name": "data architecture",
+  "n": 2775
+ },
+ {
+  "name": "Google Cloud",
+  "n": 2772
+ },
+ {
+  "name": "Interaction Design",
+  "n": 2765
+ },
+ {
+  "name": "Selenium",
+  "n": 2755
+ },
+ {
+  "name": "GitHub Copilot",
+  "n": 2750
+ },
+ {
+  "name": "AI/ML",
+  "n": 2730
+ },
+ {
+  "name": "agentic AI",
+  "n": 2714
+ },
+ {
+  "name": "TCP/IP",
+  "n": 2700
+ },
+ {
+  "name": "vulnerability management",
+  "n": 2696
+ },
+ {
+  "name": "Microsoft Azure",
+  "n": 2691
+ },
+ {
+  "name": "DynamoDB",
+  "n": 2663
+ },
+ {
+  "name": "DNS",
+  "n": 2659
+ },
+ {
+  "name": "Reinforcement learning",
+  "n": 2659
+ },
+ {
+  "name": "event-driven architecture",
+  "n": 2641
+ },
+ {
+  "name": "iOS",
+  "n": 2641
+ },
+ {
+  "name": "backend development",
+  "n": 2639
+ },
+ {
+  "name": "incident management",
+  "n": 2621
+ },
+ {
+  "name": "data processing",
+  "n": 2613
+ },
+ {
+  "name": "reliability",
+  "n": 2592
+ },
+ {
+  "name": "GitOps",
+  "n": 2591
+ },
+ {
+  "name": "configuration management",
+  "n": 2585
+ },
+ {
+  "name": "RabbitMQ",
+  "n": 2578
+ },
+ {
+  "name": "CRM",
+  "n": 2569
+ },
+ {
+  "name": "Statistical analysis",
+  "n": 2563
+ },
+ {
+  "name": "regression testing",
+  "n": 2550
+ },
+ {
+  "name": "design patterns",
+  "n": 2540
+ },
+ {
+  "name": "NumPy",
+  "n": 2524
+ },
+ {
+  "name": "PHP",
+  "n": 2518
+ },
+ {
+  "name": "SDLC",
+  "n": 2514
+ },
+ {
+  "name": "cybersecurity",
+  "n": 2510
+ },
+ {
+  "name": "statistics",
+  "n": 2504
+ },
+ {
+  "name": "MATLAB",
+  "n": 2485
+ },
+ {
+  "name": "PySpark",
+  "n": 2467
+ },
+ {
+  "name": "Gitlab CI",
+  "n": 2426
+ },
+ {
+  "name": "LangGraph",
+  "n": 2402
+ },
+ {
+  "name": "EKS",
+  "n": 2397
+ },
+ {
+  "name": "embeddings",
+  "n": 2396
+ },
+ {
+  "name": "SIEM",
+  "n": 2389
+ },
+ {
+  "name": "Integrations",
+  "n": 2342
+ },
+ {
+  "name": "Vue",
+  "n": 2339
+ },
+ {
+  "name": "technical documentation",
+  "n": 2319
+ },
+ {
+  "name": "authorization",
+  "n": 2317
+ },
+ {
+  "name": "Google Cloud Platform (GCP)",
+  "n": 2308
+ },
+ {
+  "name": "Cypress",
+  "n": 2272
+ },
+ {
+  "name": "API development",
+  "n": 2265
+ },
+ {
+  "name": "Vue.js",
+  "n": 2261
+ },
+ {
+  "name": "event-driven architectures",
+  "n": 2251
+ },
+ {
+  "name": "caching",
+  "n": 2245
+ },
+ {
+  "name": "architecture",
+  "n": 2242
+ },
+ {
+  "name": "Performance testing",
+  "n": 2238
+ },
+ {
+  "name": "Retrieval-Augmented Generation (RAG)",
+  "n": 2232
+ },
+ {
+  "name": "OAuth",
+  "n": 2231
+ },
+ {
+  "name": "Containers",
+  "n": 2222
+ },
+ {
+  "name": "Data transformation",
+  "n": 2221
+ },
+ {
+  "name": "Integration",
+  "n": 2221
+ },
+ {
+  "name": "optimization",
+  "n": 2204
+ },
+ {
+  "name": "HTML5",
+  "n": 2195
+ },
+ {
+  "name": "data ingestion",
+  "n": 2195
+ },
+ {
+  "name": "anomaly detection",
+  "n": 2194
+ },
+ {
+  "name": "model deployment",
+  "n": 2185
+ },
+ {
+  "name": "EC2",
+  "n": 2184
+ },
+ {
+  "name": "cloud platforms",
+  "n": 2182
+ },
+ {
+  "name": "Postman",
+  "n": 2150
+ },
+ {
+  "name": "Spring",
+  "n": 2148
+ },
+ {
+  "name": "ArgoCD",
+  "n": 2114
+ },
+ {
+  "name": "API testing",
+  "n": 2104
+ },
+ {
+  "name": "Cloud Security",
+  "n": 2097
+ },
+ {
+  "name": "Telemetry",
+  "n": 2094
+ },
+ {
+  "name": "Encryption",
+  "n": 2092
+ },
+ {
+  "name": "Agile methodologies",
+  "n": 2090
+ },
+ {
+  "name": "evaluation frameworks",
+  "n": 2089
+ },
+ {
+  "name": "MLflow",
+  "n": 2088
+ },
+ {
+  "name": "evaluation",
+  "n": 2079
+ },
+ {
+  "name": "Software Testing",
+  "n": 2056
+ },
+ {
+  "name": "RBAC",
+  "n": 2049
+ },
+ {
+  "name": "Lambda",
+  "n": 2042
+ },
+ {
+  "name": "model training",
+  "n": 2036
+ },
+ {
+  "name": "Data integrity",
+  "n": 2033
+ },
+ {
+  "name": "SLOs",
+  "n": 2030
+ },
+ {
+  "name": "acceptance criteria",
+  "n": 2027
+ },
+ {
+  "name": "feature engineering",
+  "n": 2025
+ },
+ {
+  "name": "full-stack development",
+  "n": 2023
+ },
+ {
+  "name": "usability testing",
+  "n": 2019
+ },
+ {
+  "name": "Hadoop",
+  "n": 2009
+ },
+ {
+  "name": "causal inference",
+  "n": 2009
+ },
+ {
+  "name": "governance",
+  "n": 2009
+ },
+ {
+  "name": "Jest",
+  "n": 2008
+ },
+ {
+  "name": "OpenAI",
+  "n": 2005
+ },
+ {
+  "name": "Cross-functional collaboration",
+  "n": 1999
+ },
+ {
+  "name": "Amazon S3",
+  "n": 1998
+ },
+ {
+  "name": "routing",
+  "n": 1997
+ },
+ {
+  "name": "OpenTelemetry",
+  "n": 1993
+ },
+ {
+  "name": "NLP",
+  "n": 1992
+ },
+ {
+  "name": "continuous delivery",
+  "n": 1967
+ },
+ {
+  "name": "Simulation",
+  "n": 1951
+ },
+ {
+  "name": "data models",
+  "n": 1949
+ },
+ {
+  "name": "troubleshooting",
+  "n": 1941
+ },
+ {
+  "name": "predictive modeling",
+  "n": 1932
+ },
+ {
+  "name": "Backend services",
+  "n": 1929
+ },
+ {
+  "name": "data lineage",
+  "n": 1923
+ },
+ {
+  "name": "dashboarding",
+  "n": 1907
+ },
+ {
+  "name": "container orchestration",
+  "n": 1901
+ },
+ {
+  "name": "Splunk",
+  "n": 1899
+ },
+ {
+  "name": "GenAI",
+  "n": 1885
+ },
+ {
+  "name": "platform engineering",
+  "n": 1875
+ },
+ {
+  "name": "Site Reliability Engineering (SRE)",
+  "n": 1874
+ },
+ {
+  "name": "cloud computing",
+  "n": 1869
+ },
+ {
+  "name": "end-to-end testing",
+  "n": 1869
+ },
+ {
+  "name": "Flask",
+  "n": 1866
+ },
+ {
+  "name": "Statistical modeling",
+  "n": 1864
+ },
+ {
+  "name": "Clickhouse",
+  "n": 1862
+ },
+ {
+  "name": "large language models",
+  "n": 1859
+ },
+ {
+  "name": "mentoring",
+  "n": 1852
+ },
+ {
+  "name": "HTTP",
+  "n": 1851
+ },
+ {
+  "name": "Application security",
+  "n": 1849
+ },
+ {
+  "name": "penetration testing",
+  "n": 1842
+ },
+ {
+  "name": "performance engineering",
+  "n": 1830
+ },
+ {
+  "name": "Microsoft Excel",
+  "n": 1826
+ },
+ {
+  "name": "state management",
+  "n": 1825
+ },
+ {
+  "name": "NodeJS",
+  "n": 1817
+ },
+ {
+  "name": "ERP",
+  "n": 1815
+ },
+ {
+  "name": "User stories",
+  "n": 1815
+ },
+ {
+  "name": "XML",
+  "n": 1811
+ },
+ {
+  "name": "benchmarking",
+  "n": 1804
+ },
+ {
+  "name": "functional testing",
+  "n": 1803
+ },
+ {
+  "name": "robotics",
+  "n": 1802
+ },
+ {
+  "name": "Redux",
+  "n": 1796
+ },
+ {
+  "name": "cloud",
+  "n": 1793
+ },
+ {
+  "name": "ChatGPT",
+  "n": 1792
+ },
+ {
+  "name": "instrumentation",
+  "n": 1792
+ },
+ {
+  "name": "Code quality",
+  "n": 1783
+ },
+ {
+  "name": "Delta Lake",
+  "n": 1768
+ },
+ {
+  "name": "network security",
+  "n": 1761
+ },
+ {
+  "name": "tracing",
+  "n": 1757
+ },
+ {
+  "name": "SAML",
+  "n": 1747
+ },
+ {
+  "name": "test plans",
+  "n": 1745
+ },
+ {
+  "name": "Data-driven decision making",
+  "n": 1744
+ },
+ {
+  "name": "embedded systems",
+  "n": 1741
+ },
+ {
+  "name": "Google Sheets",
+  "n": 1728
+ },
+ {
+  "name": "ECS",
+  "n": 1718
+ },
+ {
+  "name": "MCP",
+  "n": 1714
+ },
+ {
+  "name": "process improvement",
+  "n": 1714
+ },
+ {
+  "name": "SSO",
+  "n": 1713
+ },
+ {
+  "name": "regulatory compliance",
+  "n": 1709
+ },
+ {
+  "name": "secrets management",
+  "n": 1703
+ },
+ {
+  "name": "shell scripting",
+  "n": 1698
+ },
+ {
+  "name": "Kanban",
+  "n": 1694
+ },
+ {
+  "name": "RDS",
+  "n": 1692
+ },
+ {
+  "name": "API integrations",
+  "n": 1689
+ },
+ {
+  "name": "disaster recovery",
+  "n": 1686
+ },
+ {
+  "name": "agile development",
+  "n": 1675
+ },
+ {
+  "name": "query optimization",
+  "n": 1675
+ },
+ {
+  "name": "Google Cloud Platform",
+  "n": 1647
+ },
+ {
+  "name": "business intelligence",
+  "n": 1639
+ },
+ {
+  "name": "validation",
+  "n": 1637
+ },
+ {
+  "name": "VPC",
+  "n": 1635
+ },
+ {
+  "name": "solution architecture",
+  "n": 1634
+ },
+ {
+  "name": "workflow orchestration",
+  "n": 1632
+ },
+ {
+  "name": "UX Design",
+  "n": 1624
+ },
+ {
+  "name": "SOAP",
+  "n": 1620
+ },
+ {
+  "name": "schema design",
+  "n": 1609
+ },
+ {
+  "name": "data management",
+  "n": 1607
+ },
+ {
+  "name": "profiling",
+  "n": 1604
+ },
+ {
+  "name": "Roadmap planning",
+  "n": 1601
+ },
+ {
+  "name": "GDPR",
+  "n": 1599
+ },
+ {
+  "name": "enterprise architecture",
+  "n": 1599
+ },
+ {
+  "name": "ServiceNow",
+  "n": 1595
+ },
+ {
+  "name": "Agents",
+  "n": 1593
+ },
+ {
+  "name": "CSS3",
+  "n": 1591
+ },
+ {
+  "name": "UNIX",
+  "n": 1571
+ },
+ {
+  "name": "firewalls",
+  "n": 1571
+ },
+ {
+  "name": "ISO 27001",
+  "n": 1565
+ },
+ {
+  "name": "Slack",
+  "n": 1564
+ },
+ {
+  "name": "agentic workflows",
+  "n": 1562
+ },
+ {
+  "name": "JAX",
+  "n": 1538
+ },
+ {
+  "name": "CUDA",
+  "n": 1535
+ },
+ {
+  "name": "System integration",
+  "n": 1525
+ },
+ {
+  "name": "SOC 2",
+  "n": 1512
+ },
+ {
+  "name": "TDD",
+  "n": 1505
+ },
+ {
+  "name": "model monitoring",
+  "n": 1505
+ },
+ {
+  "name": "Market research",
+  "n": 1495
+ },
+ {
+  "name": "KPIs",
+  "n": 1494
+ },
+ {
+  "name": "Apache Airflow",
+  "n": 1493
+ },
+ {
+  "name": "Sprint planning",
+  "n": 1487
+ },
+ {
+  "name": "HIPAA",
+  "n": 1481
+ },
+ {
+  "name": "business analysis",
+  "n": 1473
+ },
+ {
+  "name": "Webhooks",
+  "n": 1469
+ },
+ {
+  "name": "Technical Program Management",
+  "n": 1461
+ },
+ {
+  "name": "visual design",
+  "n": 1460
+ },
+ {
+  "name": "PowerPoint",
+  "n": 1459
+ },
+ {
+  "name": ".NET Core",
+  "n": 1456
+ },
+ {
+  "name": "SAST",
+  "n": 1456
+ }
+]

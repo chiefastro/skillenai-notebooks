@@ -1,0 +1,18 @@
+term,hits,pre_2020_hits,pre_2020_pct,corpus_baseline_pct
+LLM/large language model,1838,115,6.3,57.5
+generative ai,1324,120,9.1,57.5
+FINE-TUN (ambiguous),997,301,30.2,57.5
+openai,740,48,6.5,57.5
+agentic/ai agents,632,27,4.3,57.5
+RAG bare (ambiguous),620,30,4.8,57.5
+chatgpt/gpt-N,538,38,7.1,57.5
+copilot bare (ambiguous),532,66,12.4,57.5
+langchain/llamaindex,313,12,3.8,57.5
+prompt engineering,303,16,5.3,57.5
+retrieval-augmented,249,4,1.6,57.5
+EMBEDDINGS (ambiguous),203,22,10.8,57.5
+diffusion/midjourney/HF,165,15,9.1,57.5
+PROMPTING (ambiguous),130,36,27.7,57.5
+github copilot,107,13,12.1,57.5
+vector database,93,6,6.5,57.5
+anthropic,30,3,10.0,57.5

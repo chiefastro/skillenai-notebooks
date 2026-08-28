@@ -1,0 +1,7 @@
+metric,count,share_pct
+cohort_postings,182470,
+mentions_ai_in_text,80969,44.37
+requires_ai_skill,18694,10.24
+both,17348,9.51
+talks_but_does_not_require,63621,34.87
+ai_skill_entities_found,19,
