@@ -43,7 +43,8 @@ def titles(fig, title, subtitle):
 
 
 def footer(fig, text):
-    fig.text(0.012, 0.02, text, fontsize=8, color=INK_2)
+    fig.text(0.012, 0.055 if "\n" in text else 0.02, text,
+             fontsize=8, color=INK_2, va="top" if "\n" in text else "baseline")
 
 
 SOURCE_SUPPLY = ("Source: Skillenai — 300,000 US tech worker LinkedIn profiles. "
@@ -51,13 +52,14 @@ SOURCE_SUPPLY = ("Source: Skillenai — 300,000 US tech worker LinkedIn profiles
 def _demand_baseline(path="demand_side_stats.csv"):
     """Read the denominator from the CSV so the caption can never go stale."""
     for r in csv.DictReader(open(path)):
-        if r["metric"] == "baseline_postings":
+        if r["metric"] == "cohort_postings":
             return int(r["count"])
-    raise KeyError("baseline_postings missing from demand_side_stats.csv")
+    raise KeyError("cohort_postings missing from demand_side_stats.csv")
 
 
-SOURCE_DEMAND = (f"Source: Skillenai jobs index — {_demand_baseline():,} US tech job "
-                 "postings, 2026. Within-window shares.")
+SOURCE_DEMAND = (f"Source: Skillenai jobs index — {_demand_baseline():,} US tech postings titled "
+                 "as non-AI tech roles, 2026.\nAI-titled roles are excluded: their presence in "
+                 "the corpus depends on AI content, which would bias the rate.")
 
 
 def read_genai_vs_ml(path="genai_vs_ml_by_year.csv"):
@@ -202,22 +204,22 @@ def fig_demand():
     ax.set_yticks(range(len(vals)))
     ax.set_yticklabels(labels, fontsize=9.5, color=INK)
     ax.invert_yaxis()
-    ax.set_xlim(0, 37)
-    ax.set_xticks([0, 10, 20, 30])
-    ax.set_xticklabels(["0", "10%", "20%", "30%"])
-    ax.set_xlabel("Share of job postings", fontsize=10, color=INK_2)
+    ax.set_xlim(0, 29)
+    ax.set_xticks([0, 10, 20])
+    ax.set_xticklabels(["0", "10%", "20%"])
+    ax.set_xlabel("Share of postings in the cohort", fontsize=10, color=INK_2)
 
     ratio = d["generic_fluency"][1] / d["named_products"][1]
-    ax.annotate(f"{ratio:.1f}x", xy=(20.4, 2.55), fontsize=15, color=INK,
+    ax.annotate(f"{ratio:.1f}x", xy=(16.2, 2.55), fontsize=15, color=INK,
                 weight="bold", ha="center")
     ax.annotate("generic AI vocabulary is used far\nmore than any named product",
-                xy=(22.0, 2.55), fontsize=9, color=INK_2, va="center")
+                xy=(17.5, 2.55), fontsize=9, color=INK_2, va="center")
 
-    titles(fig, "Employers ask how you work, not which tool you use",
-           "How AI appears in US tech job postings. All four bars are the same measure: "
-           "does the phrase appear anywhere in the posting?")
+    titles(fig, "A quarter of ordinary tech jobs now talk about AI",
+           "AI language in tech postings that are NOT AI roles. All four bars are the same "
+           "measure: does the phrase appear anywhere in the posting?")
     footer(fig, SOURCE_DEMAND)
-    fig.subplots_adjust(left=0.30, right=0.965, top=0.815, bottom=0.155)
+    fig.subplots_adjust(left=0.30, right=0.965, top=0.815, bottom=0.185)
     fig.savefig("03_demand_side.png", dpi=150, facecolor=SURFACE)
     plt.close(fig)
 

@@ -1,39 +1,55 @@
 #!/usr/bin/env python3
-"""Step 4 — the demand side: how employers actually write about AI in postings.
+"""Step 4 — the demand side: how employers write about AI in NON-AI tech roles.
 
-MEASUREMENT WARNING — read before comparing any two numbers here.
-------------------------------------------------------------------
-Two different kinds of measurement live in this file, and they are NOT
-interchangeable:
+SELECTION WARNING — why this file does not measure the whole corpus.
+--------------------------------------------------------------------
+The jobs index decides inclusion by keyword (lambdas/jobs_scraper/normalize.py,
+`is_rnd_relevant`). A posting is admitted if EITHER:
 
-  (a) TOPIC MENTION  — does a phrase appear anywhere in the posting text?
-      Broad, and fairly complete: if a posting is about generative AI, some
-      phrase in the set will catch it.
+  1. its title matches an R&D title keyword -- and that list includes "ai",
+     "llm", "generative", "machine learning", "data scientist"; OR
+  2. its description mentions >= 3 RND_SKILLS -- and ~35 of those are
+     AI-specific ("llm", "rag", "langchain", "pytorch", "embeddings",
+     "fine-tuning", "generative ai", ...).
 
-  (b) REQUIREMENT PHRASING — does the posting contain an explicit construction
-      directed at the candidate ("experience with LLMs", "proficiency with AI")?
-      Narrow, and badly INCOMPLETE: requirements are also written as bullet
-      points ("3+ years ML experience") and structured skill tags, which no
-      phrase list catches.
+So a posting naming LLM + RAG + LangChain and nothing else is admitted purely
+on AI content. Measuring "what share of the corpus mentions AI" therefore
+conditions on the numerator: 23.5% of the corpus is AI-titled and is
+guaranteed to mention AI.
 
-An earlier version of this analysis compared (a) against (b) and reported an
-"8:1" gap between employers describing themselves as AI-native and asking
-candidates for AI proficiency. That ratio was mostly an artifact of the two
-phrase sets having very different breadth. Expanding the requirement set from
-5 phrases to 21 more than tripled it (1.95% -> 6.44%), collapsing the ratio
-from 8.3:1 to 2.5:1 -- and 6.44% is still only a FLOOR.
+THE FIX. Restrict to postings that qualify via a NON-AI title keyword
+("software engineer", "devops", "security engineer", "product manager", ...)
+and whose title contains no AI term at all. Those postings were admitted under
+path 1 regardless of whether the description ever says "AI", so within that
+cohort the AI-mention rate is unbiased with respect to this selection.
 
-Rules that follow from this:
-  * Only compare topic-mention measures with other topic-mention measures.
-  * Always report the requirement rate as a floor ("at least X%"), never as a
-    point estimate, and never as the denominator of a headline ratio.
+Effect on the headline: 32.6% across the whole corpus -> 24.1% in the cohort.
+The whole-corpus figure was 1.35x overstated. The cohort figure is also the
+more interesting one: it is AI language appearing in ordinary engineering jobs
+rather than in jobs that are already about AI.
 
-Corpus caveat: the jobs index only starts 2026-03-10, so there is no YoY series
-here. Every figure is a within-window share, robust to crawler coverage bias in
-a way absolute volumes are not.
+MEASUREMENT WARNING — two kinds of measure live here, do not mix them.
+---------------------------------------------------------------------
+  (a) TOPIC MENTION      — does a phrase appear anywhere? Broad, fairly complete.
+  (b) REQUIREMENT PHRASING — an explicit construction aimed at the candidate.
+      Narrow and badly INCOMPLETE: requirements also appear as bullet points
+      ("3+ years ML experience") and structured skill tags.
 
-Spam filter: Speechify carpet-bombs the same ~10 roles across hundreds of
-cities and is excluded from every denominator.
+An earlier version compared (a) with (b) and reported an "8:1" gap between
+employers describing themselves as AI-native and asking candidates for AI
+proficiency. That was an artifact of phrase-set breadth: expanding the
+requirement set from 5 phrases to 21 more than tripled it. Only compare
+topic-mention measures with each other; always report the requirement rate as
+a floor, never as the denominator of a headline ratio.
+
+NO DEPARTMENT BREAKDOWN. Same selection problem, worse. Non-tech departments
+survive in the corpus only when the posting matched tech/AI criteria, so their
+AI-mention rate is pure selection. An earlier version reported "AI language is
+densest outside engineering" (Marketing 45.1% vs Engineering 34.1%) on exactly
+that artifact. Do not reintroduce it.
+
+Corpus caveat: the index starts 2026-03-10, so there is no YoY series here.
+Spam filter: Speechify carpet-bombs the same ~10 roles across hundreds of cities.
 
 Output: demand_side_stats.csv
 
@@ -44,7 +60,6 @@ Usage:
 import csv
 import json
 import os
-import time
 import urllib.request
 
 API_URL = os.environ.get("API_URL", "https://api.skillenai.com")
@@ -53,10 +68,34 @@ API_KEY = os.environ["SKILLENAI_INSIGHTS_API_KEY"]
 WINDOW = {"range": {"postedAt": {"gte": "2026-03-01"}}}
 SPAM = {"terms": {"companyCanonicalName.keyword": ["Speechify"]}}
 
+# --- the unbiased cohort ------------------------------------------------------
+# Non-AI R&D title keywords: inclusion under path 1 is independent of AI content.
+NON_AI_TITLES = [
+    "software engineer", "software developer", "backend engineer", "frontend engineer",
+    "fullstack engineer", "full stack engineer", "web developer", "web engineer",
+    "mobile engineer", "ios engineer", "android engineer", "platform engineer",
+    "infrastructure engineer", "systems engineer", "embedded engineer",
+    "engineering manager", "devops", "site reliability", "cloud engineer",
+    "cloud architect", "solutions architect", "security engineer", "security analyst",
+    "cybersecurity", "application security", "information security", "penetration tester",
+    "qa engineer", "quality assurance", "test engineer", "sdet", "automation engineer",
+    "business analyst", "business intelligence", "database administrator", "etl developer",
+    "product manager", "product owner", "program manager", "product designer",
+    "ux designer", "ui designer", "ux researcher", "technical lead", "tech lead",
+    "vp of engineering", "head of engineering", "director of engineering",
+]
+# Any of these in the title means AI could have driven inclusion -> excluded.
+AI_TITLES = [
+    "ai", "artificial intelligence", "machine learning", "ml", "deep learning", "llm",
+    "generative", "prompt engineer", "nlp", "computer vision", "data scientist",
+    "data science", "ml engineer", "mlops", "applied scientist", "research scientist",
+    "research engineer", "data engineer", "analytics engineer", "data analyst",
+    "quantitative",
+]
+
 # --- (a) TOPIC MENTION sets — mutually comparable ----------------------------
-# Deliberately excluded despite scoring high: "Claude" (a common French given
-# name), "Cursor" (UI and database cursors), "Gemini" (zodiac sign, unrelated
-# product lines). Entity-name collisions, not AI mentions.
+# Excluded despite scoring high: "Claude" (a common French given name), "Cursor"
+# (UI/database cursors), "Gemini" (zodiac sign). Entity-name collisions.
 AI_TERMS = [
     "generative AI", "artificial intelligence", "machine learning", "prompt engineering",
     "AI tools", "AI-assisted", "AI agents", "ChatGPT", "GitHub Copilot", "LangChain",
@@ -68,10 +107,8 @@ NAMED_PRODUCTS = ["ChatGPT", "GitHub Copilot", "LangChain", "Midjourney", "Huggi
 
 # --- (b) REQUIREMENT PHRASING — a FLOOR, not comparable with the above -------
 CANDIDATE_REQUIREMENT = [
-    # the original narrow set
     "proficiency with AI", "experience with AI tools", "familiarity with AI",
     "comfortable using AI", "hands-on with AI",
-    # phrasings the narrow set missed — these alone are 2.4x the original
     "experience with LLMs", "experience with large language models",
     "experience with machine learning", "experience building AI",
     "experience with generative AI", "familiarity with LLMs", "proficiency in AI",
@@ -79,18 +116,6 @@ CANDIDATE_REQUIREMENT = [
     "experience with AI/ML", "hands-on experience with AI", "strong AI skills",
     "experience with AI agents", "experience with RAG", "background in machine learning",
 ]
-
-# NO DEPARTMENT BREAKDOWN — deliberately removed.
-# The jobs index filters for tech and AI roles and excludes everything else.
-# Non-tech departments therefore survive in the corpus only when they matched
-# tech/AI criteria, so a "Marketing" posting in this index is far more likely to
-# mention AI than a Marketing posting in the wild. Sampled titles bear this out:
-# "Senior Generative AI Designer", "Marketing Data & Agentic AI Transformation
-# Lead", "Junior Marketing Specialist - Content, Growth & AI".
-# Measuring AI-mention rate by department is therefore conditioning on the
-# outcome. An earlier version of this analysis reported "AI language is densest
-# outside engineering" (Marketing 45.1% vs Engineering 34.1%) on exactly this
-# artifact. Do not reintroduce it.
 
 
 def search(body: dict) -> dict:
@@ -102,45 +127,68 @@ def search(body: dict) -> dict:
     return json.load(urllib.request.urlopen(req))
 
 
-def count(must: list) -> int:
+def phrases(field: str, terms: list[str]) -> list[dict]:
+    return [{"match_phrase": {field: t}} for t in terms]
+
+
+def any_of(field: str, terms: list[str]) -> dict:
+    return {"bool": {"should": phrases(field, terms), "minimum_should_match": 1}}
+
+
+def count(must: list, must_not: list | None = None) -> int:
     return search({
         "size": 0, "track_total_hits": True,
-        "query": {"bool": {"must": [WINDOW] + must, "must_not": [SPAM]}},
+        "query": {"bool": {"must": [WINDOW] + must,
+                           "must_not": [SPAM] + (must_not or [])}},
     })["total"]
 
 
-def any_of(terms: list[str]) -> dict:
-    return {"bool": {"should": [{"match_phrase": {"extractedText": t}} for t in terms],
-                     "minimum_should_match": 1}}
+TITLE_OK = any_of("title", NON_AI_TITLES)
+TITLE_AI = any_of("title", AI_TITLES)
 
 
 def main() -> None:
     rows = []
-    base = count([])
-    rows.append(["baseline_postings", "denominator", base, ""])
 
-    # -- topic-mention family (comparable with each other) --
+    # whole corpus — reported ONLY as the contaminated contrast
+    whole = count([])
+    whole_ai = count([any_of("extractedText", AI_TERMS)])
+    ai_titled = count([TITLE_AI])
+
+    # the cohort everything else is measured on
+    cohort = count([TITLE_OK], [TITLE_AI])
+    rows.append(["cohort_postings", "denominator", cohort, ""])
+    rows.append(["whole_corpus_postings", "contaminated_contrast", whole, ""])
+    rows.append(["whole_corpus_any_ai_mention", "contaminated_contrast", whole_ai,
+                 round(100 * whole_ai / whole, 2)])
+    rows.append(["whole_corpus_ai_titled", "contaminated_contrast", ai_titled,
+                 round(100 * ai_titled / whole, 2)])
+
     for key, terms in [("any_ai_mention", AI_TERMS),
                        ("generic_fluency", GENERIC_FLUENCY),
                        ("employer_self_description", SELF_DESCRIPTION),
                        ("named_products", NAMED_PRODUCTS)]:
-        n = count([any_of(terms)])
-        rows.append([key, "topic_mention", n, round(100 * n / base, 2)])
+        n = count([TITLE_OK, any_of("extractedText", terms)], [TITLE_AI])
+        rows.append([key, "topic_mention", n, round(100 * n / cohort, 2)])
 
-    # -- requirement floor (NOT comparable with the above) --
-    req = count([any_of(CANDIDATE_REQUIREMENT)])
+    req = count([TITLE_OK, any_of("extractedText", CANDIDATE_REQUIREMENT)], [TITLE_AI])
     rows.append(["candidate_requirement_floor", "requirement_floor", req,
-                 round(100 * req / base, 2)])
+                 round(100 * req / cohort, 2)])
 
-    lookup = {r[0]: r for r in rows}
-    print(f"baseline (Speechify excluded)      {base:,}")
+    look = {r[0]: r for r in rows}
+    print("CONTAMINATED (whole corpus — for contrast only)")
+    print(f"  postings {whole:,}   mention AI {whole_ai:,} = {100 * whole_ai / whole:.1f}%")
+    print(f"  of which AI-titled: {ai_titled:,} = {100 * ai_titled / whole:.1f}% "
+          f"(auto-included on an AI title)\n")
+    print(f"UNBIASED COHORT — non-AI tech title, no AI term in title: {cohort:,} postings")
     for k in ("any_ai_mention", "generic_fluency", "employer_self_description", "named_products"):
-        print(f"{k:<34} {lookup[k][2]:>8,}  {lookup[k][3]:>6.2f}%   [topic mention]")
-    print(f"{'candidate_requirement_floor':<34} {req:>8,}  {100 * req / base:>6.2f}%   [FLOOR — undercounts]")
-    print(f"\ngeneric : named products = "
-          f"{lookup['generic_fluency'][2] / lookup['named_products'][2]:.1f} : 1  "
-          f"(both topic mentions — a fair comparison)")
-
+        print(f"  {k:<30}{look[k][2]:>8,}  {look[k][3]:>6.2f}%   [topic mention]")
+    print(f"  {'candidate_requirement_floor':<30}{req:>8,}  "
+          f"{100 * req / cohort:>6.2f}%   [FLOOR — undercounts]")
+    print(f"\n  generic : named products = "
+          f"{look['generic_fluency'][2] / look['named_products'][2]:.1f} : 1")
+    print(f"  headline inflation avoided: {100 * whole_ai / whole:.1f}% -> "
+          f"{look['any_ai_mention'][3]:.1f}%")
 
     with open("demand_side_stats.csv", "w", newline="") as fh:
         w = csv.writer(fh)

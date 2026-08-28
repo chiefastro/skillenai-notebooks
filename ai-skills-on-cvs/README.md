@@ -4,7 +4,7 @@
 **Author:** Skillenai AI Analyst
 **Sources:**
 - **Supply** — Bright Data LinkedIn snapshot, 300,000 US tech worker profiles (`bd_20260724`), position descriptions dated by role start year, 2012–2025.
-- **Demand** — Skillenai jobs index (`prod-enriched-jobs`), 342,805 US tech job postings, 2026-03-01 onward.
+- **Demand** — Skillenai jobs index (`prod-enriched-jobs`), 2026-03-01 onward. Headline figures use a **182,347-posting cohort** titled as non-AI tech roles; the full 342,815-posting corpus selects on AI and is reported only as a contrast.
 
 ---
 
@@ -14,7 +14,7 @@ Everyone asks whether AI skills are showing up on CVs. They are — but the inte
 
 **Generative-AI skills went from 1.6% of roles started in 2022 to 7.6% in 2025, and overtook classical machine learning in 2024.** Not because GenAI grew faster than ML. Because **ML stopped growing entirely** — 2.74% in 2022, 2.75% in 2025, a 1.0x multiple over three years — and GenAI walked past a stationary target.
 
-On the demand side, a third of postings mention AI (32.6%), and when employers write about it they reach for generic vocabulary — "AI tools", "AI-assisted" — nearly **4x more often** than any named product like ChatGPT or Copilot. AI fluency is being described as a way of working, not a tool checkbox.
+On the demand side, **24.1% of US tech postings that are not themselves AI roles now mention AI** — and when employers write about it they reach for generic vocabulary ("AI tools", "AI-assisted") **5x more often** than any named product like ChatGPT or Copilot. AI fluency is being described as a way of working, not a tool checkbox.
 
 ![Generative AI overtook classical machine learning on US tech CVs in 2024, while machine learning itself stayed flat](01_genai_vs_ml_crossover.png)
 
@@ -71,32 +71,32 @@ The crossover lands in 2024 under both the strict and loose definitions.
 
 Note this table's "classical ML" is a broader regex than the family in §2 (it includes TensorFlow, PyTorch, scikit-learn, computer vision and NLP), which is why its levels are higher. The trend is the same: it peaks in 2023 and turns down.
 
-## 4. Demand side: how employers write about AI
+## 4. Demand side: AI language in jobs that are *not* AI jobs
 
-342,805 postings, 2026-03-01 onward, Speechify excluded.
+Measured on **182,347 postings whose title is a non-AI tech role** — software engineer, devops, security engineer, product manager and similar — with any AI-titled role excluded. This restriction is essential and explained under "the corpus selects on AI" below: the whole-corpus figure is inflated by construction.
 
 **These four rows are all the same measure** — does the phrase appear anywhere in the posting? — so they can be compared with each other.
 
 | Topic mention | Postings | Share |
 |---|---:|---:|
-| Mention AI at all | 111,782 | **32.6%** |
-| Generic AI vocabulary ("AI tools", "AI-assisted") | 61,880 | **18.1%** |
-| Describe the company as AI-native ("AI-first", "AI-powered") | 55,223 | 16.1% |
-| Name a specific product (ChatGPT, Copilot, LangChain, …) | 16,079 | 4.7% |
+| Mention AI at all | 43,917 | **24.1%** |
+| Describe the company as AI-native ("AI-first", "AI-powered") | 26,541 | 14.6% |
+| Generic AI vocabulary ("AI tools", "AI-assisted") | 26,120 | **14.3%** |
+| Name a specific product (ChatGPT, Copilot, LangChain, …) | 5,208 | 2.9% |
 
-![How AI appears in US tech job postings: a third mention AI, generic AI vocabulary is used 3.8x more than any named product](03_demand_side.png)
+![A quarter of ordinary tech jobs now talk about AI: 24.1% mention AI, and generic AI vocabulary is used 5x more than any named product](03_demand_side.png)
 
-Generic vocabulary beats named products **3.8:1**. When AI comes up, employers are describing a way of working rather than a tool to tick off.
+**A quarter of ordinary tech jobs now talk about AI** — jobs that are not themselves AI roles. And generic vocabulary beats named products **5.0:1**: employers are describing a way of working, not a tool to tick off.
 
 ### Explicit requirement language — a floor, not a rate
 
-Separately, **6.4%** of postings (22,076) contain an explicit requirement construction aimed at the candidate — "experience with LLMs", "proficiency with AI", "hands-on experience with AI" and 18 similar phrasings.
+**4.8%** of the cohort (8,678 postings) contains an explicit requirement construction aimed at the candidate — "experience with LLMs", "proficiency with AI", "hands-on experience with AI" and 18 similar phrasings.
 
-**Treat that as a floor, not a measurement.** Requirements are also written as bullet points ("3+ years ML experience") and structured skill tags, which no phrase list catches. It is not comparable with the topic-mention rows above, and it must not be used as the denominator of a ratio — see the correction note below.
+**Treat that as a floor, not a measurement.** Requirements are also written as bullet points ("3+ years ML experience") and structured skill tags, which no phrase list catches. It is not comparable with the topic-mention rows above, and must not be used as the denominator of a ratio — see the correction notes.
 
 ### Why there is no department breakdown
 
-An earlier version of this analysis reported that "AI language is densest outside engineering" — Marketing at 45.1% against Engineering's 34.1%. **That finding was withdrawn**; see the correction note below.
+An earlier version reported that "AI language is densest outside engineering" — Marketing at 45.1% against Engineering's 34.1%. **That finding was withdrawn**; see the correction notes.
 
 ---
 
@@ -144,7 +144,20 @@ The original figure captured only **30%** of even this larger set, and 21 phrase
 
 **The claim has been withdrawn.** Figure 3 now plots only topic-mention measures, the requirement rate is published as a floor, and `04_demand_side_postings.py` carries a measurement warning at the top of the file. The supply-side findings (the crossover, flat ML, the top-3 skills) come from a different dataset and method and are unaffected.
 
-**Never break this corpus down by department — the population is filtered.** The jobs index deliberately targets tech and AI roles and excludes everything else. A non-tech department therefore appears in the corpus *only* when a posting matched tech/AI criteria in the first place. Measuring the AI-mention rate of those survivors conditions on the outcome.
+**The corpus selects on AI, so the denominator must be chosen with care.** Inclusion is decided by keyword in [`lambdas/jobs_scraper/normalize.py`](https://github.com/skillenai/skillenai-ds) (`is_rnd_relevant`). A posting is admitted if **either** its title matches an R&D title keyword — a list that includes `"ai"`, `"llm"`, `"generative"`, `"machine learning"` — **or** its description names ≥3 `RND_SKILLS`, of which roughly 35 are AI-specific (`llm`, `rag`, `langchain`, `pytorch`, `embeddings`, `fine-tuning`…).
+
+A posting naming LLM + RAG + LangChain and nothing else is therefore admitted purely on AI content. Measuring "what share of the corpus mentions AI" conditions on the numerator — and indeed **23.5% of the corpus is AI-titled**, guaranteed to mention AI.
+
+**The fix** is to restrict to postings admitted via a *non-AI* title keyword, with no AI term in the title at all. Those were admitted regardless of AI content, so within that cohort the rate is unbiased with respect to this selection:
+
+| Denominator | Postings | Mention AI |
+|---|---:|---:|
+| Whole corpus (contaminated) | 342,815 | **32.6%** |
+| Non-AI-titled cohort (used here) | 182,347 | **24.1%** |
+
+The whole-corpus headline was **1.35x overstated**. The cohort figure is also the more interesting one — it is AI language appearing in ordinary engineering jobs rather than in jobs already about AI. Note the generic-versus-named-product ratio moves the *other* way once AI roles are removed, from 3.8:1 to 5.0:1: AI-titled postings are the ones naming specific products.
+
+**Never break this corpus down by department — the same problem, worse.** The jobs index deliberately targets tech and AI roles and excludes everything else. A non-tech department therefore appears in the corpus *only* when a posting matched tech/AI criteria in the first place. Measuring the AI-mention rate of those survivors conditions on the outcome.
 
 A sample of postings tagged `department=Marketing` shows the problem directly:
 

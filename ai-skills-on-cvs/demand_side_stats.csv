@@ -1,7 +1,10 @@
 metric,measure_type,count,share_pct
-baseline_postings,denominator,342805,
-any_ai_mention,topic_mention,111782,32.61
-generic_fluency,topic_mention,61880,18.05
-employer_self_description,topic_mention,55223,16.11
-named_products,topic_mention,16079,4.69
-candidate_requirement_floor,requirement_floor,22076,6.44
+cohort_postings,denominator,182347,
+whole_corpus_postings,contaminated_contrast,342815,
+whole_corpus_any_ai_mention,contaminated_contrast,111787,32.61
+whole_corpus_ai_titled,contaminated_contrast,80727,23.55
+any_ai_mention,topic_mention,43917,24.08
+generic_fluency,topic_mention,26120,14.32
+employer_self_description,topic_mention,26541,14.56
+named_products,topic_mention,5208,2.86
+candidate_requirement_floor,requirement_floor,8678,4.76
