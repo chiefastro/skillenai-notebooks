@@ -3,7 +3,7 @@
 **Date:** 2026-08-27
 **Author:** Skillenai AI Analyst
 **Sources:**
-- **Supply** — Bright Data LinkedIn snapshot, 300,000 US tech worker profiles (`bd_20260724`), position descriptions dated by role start year, 2012–2025.
+- **Supply** — Bright Data LinkedIn snapshot, 300,000 US tech worker profiles (`bd_20260724`), position descriptions dated by role start year, 2012–2025. **Positions with an AI job title are excluded** — they are the panel's selection channel.
 - **Demand** — Skillenai jobs index (`prod-enriched-jobs`), 2026-03-01 onward. Headline figures use a **182,347-posting cohort** titled as non-AI tech roles; the full 342,815-posting corpus selects on AI and is reported only as a contrast.
 
 ---
@@ -12,7 +12,9 @@
 
 Everyone asks whether AI skills are showing up on CVs. They are — but the interesting part is what happened to the skills they replaced.
 
-**Generative-AI skills went from 1.6% of roles started in 2022 to 7.6% in 2025, and overtook classical machine learning in 2024.** Not because GenAI grew faster than ML. Because **ML stopped growing entirely** — 2.74% in 2022, 2.75% in 2025, a 1.0x multiple over three years — and GenAI walked past a stationary target.
+**Generative-AI skills went from 1.1% of roles started in 2022 to 4.3% in 2025, and overtook classical machine learning in 2024.** Not because GenAI grew faster than ML. Because **ML stopped growing entirely** — 2.72% in 2022, 2.60% in 2025, a 1.0x multiple over three years — and GenAI walked past a stationary target.
+
+All supply-side figures **exclude positions with an AI job title**. Those roles are the panel's selection channel, and including them inflates the recent end of every trend — see the correction notes.
 
 On the demand side, **24.1% of US tech postings that are not themselves AI roles now mention AI** — and when employers write about it they reach for generic vocabulary ("AI tools", "AI-assisted") **5x more often** than any named product like ChatGPT or Copilot. AI fluency is being described as a way of working, not a tool checkbox.
 
@@ -26,46 +28,48 @@ The shift is real. It is a **substitution, not an expansion** — and on the dem
 
 Share of US tech CV position descriptions, by the year the role started.
 
+Positions with an AI job title are excluded throughout.
+
 | # | Skill | 2022 | 2023 | 2024 | 2025 | Change | Multiple |
 |---|---|---:|---:|---:|---:|---:|---:|
-| 1 | **LLMs** | 0.71% | 1.72% | 3.19% | **3.65%** | +2.9pp | 5.1x |
-| 2 | **AI agents / agentic** | 0.14% | 0.19% | 0.87% | **2.21%** | +2.1pp | **16.2x** |
-| 3 | **RAG** | 0.24% | 0.60% | 1.52% | **1.67%** | +1.4pp | 6.9x |
-| 4 | Generative AI | 0.59% | 1.11% | 1.55% | 1.72% | +1.1pp | 2.9x |
-| 5 | LangChain | 0.12% | 0.42% | 0.75% | 0.82% | +0.7pp | 6.6x |
-| 6 | AI tools | 0.11% | 0.20% | 0.41% | 0.70% | +0.6pp | 6.7x |
-| 7 | prompt engineering | 0.09% | 0.32% | 0.47% | 0.66% | +0.6pp | 7.4x |
-| 8 | MCP | 0.01% | 0.03% | 0.06% | 0.47% | +0.5pp | **49.5x** |
+| =1 | **AI agents / agentic** | 0.09% | 0.09% | 0.53% | **1.36%** | +1.26pp | **14.5x** |
+| =1 | **LLMs** | 0.40% | 0.85% | 1.44% | **1.65%** | +1.25pp | 4.1x |
+| 3 | **Generative AI** | 0.39% | 0.69% | 0.85% | **0.94%** | +0.55pp | 2.4x |
+| 4 | RAG | 0.10% | 0.27% | 0.61% | 0.59% | +0.49pp | 5.9x |
+| 5 | AI tools | 0.10% | 0.15% | 0.32% | 0.51% | +0.41pp | 5.1x |
+| 6 | MCP | 0.01% | 0.02% | 0.05% | 0.28% | +0.27pp | **27.5x** |
+| 7 | prompt engineering | 0.04% | 0.16% | 0.17% | 0.26% | +0.22pp | 6.4x |
+| 8 | LangChain | 0.07% | 0.19% | 0.21% | 0.25% | +0.18pp | 3.7x |
 
-`AI agents` is the standout: 16.2x, and most of it arrived in the last window (0.87% → 2.21% between 2024 and 2025).
+**AI agents and LLMs are a statistical tie** at the top — 1.26pp against 1.25pp is well inside the noise, so treat them as joint first rather than ranked. What separates them is shape: LLMs grew steadily from a higher base, while AI agents was flat until 2023 and then went almost vertical (0.09% → 0.53% → 1.36%). Most of the agent story is the last eighteen months.
 
-**MCP is the fastest-growing skill in the entire corpus at 49.5x**, which fits — Model Context Protocol only launched in late 2024. We keep it out of the headline: n=56 in 2025, and bare "MCP" collides with the Microsoft Certified Professional credential. The 2025-only spike argues the signal is genuine (a stale certification would be flat or declining), but the base is too thin to quote.
+**MCP is the fastest-growing skill in the corpus at 27.5x**, which fits — Model Context Protocol only launched in late 2024. We keep it out of the headline: n=29 in 2025, and bare "MCP" collides with the Microsoft Certified Professional credential. The 2025-only spike argues the signal is genuine (a stale certification would be flat or declining), but the base is too thin to quote.
 
-![Change in skill prevalence on US tech CVs 2022 to 2025: every generative-AI skill grew while the classical ML stack stayed flat](02_emerging_skills.png)
+![Change in skill prevalence on US tech CVs 2022 to 2025: every generative-AI skill grew while machine learning shrank](02_emerging_skills.png)
 
-## 2. The classical ML stack is flat
+## 2. The classical ML stack is flat — or shrinking
 
 This is the finding that reframes the rest.
 
 | Skill | 2022 | 2025 | Multiple |
 |---|---:|---:|---:|
-| machine learning | 2.74% | 2.75% | **1.0x** |
-| deep learning | 0.47% | 0.43% | 0.9x |
-| NLP | 0.85% | 1.11% | 1.3x |
-| MLOps | 0.19% | 0.25% | 1.3x |
+| machine learning | 1.74% | 1.42% | **0.8x** |
+| NLP | 0.38% | 0.50% | 1.3x |
+| deep learning | 0.20% | 0.23% | 1.1x |
+| MLOps | 0.07% | 0.08% | 1.1x |
 
-Every classical family is flat or declining. All net growth in AI skills on CVs since 2022 is GenAI-native.
+Once AI-titled roles are removed, "machine learning" does not merely flatten — it **declines**, from 1.74% to 1.42%. In ordinary tech roles the term is being used less than it was three years ago. The other classical families are flat. All net growth in AI skills on CVs since 2022 is GenAI-native.
 
 ## 3. GenAI overtook ML in 2024
 
 | Year | Positions | GenAI (strict) | GenAI (loose) | Classical ML |
 |---|---:|---:|---:|---:|
-| 2020 | 25,962 | 0.56% | 0.83% | 4.39% |
-| 2021 | 30,840 | 0.87% | 1.16% | 4.23% |
-| 2022 | 31,422 | 1.59% | 2.06% | 4.60% |
-| 2023 | 25,705 | 3.51% | 4.01% | 5.47% |
-| 2024 | 23,155 | **6.18%** | 6.95% | **5.85%** |
-| 2025 | 11,849 | 7.64% | 8.43% | 5.06% |
+| 2020 | 24,987 | 0.34% | 0.53% | 2.61% |
+| 2021 | 29,578 | 0.55% | 0.76% | 2.49% |
+| 2022 | 29,946 | 1.06% | 1.39% | 2.72% |
+| 2023 | 24,126 | 2.11% | 2.47% | 3.18% |
+| 2024 | 21,198 | **3.50%** | 4.07% | **3.35%** |
+| 2025 | 10,534 | 4.28% | 4.69% | 2.60% |
 
 The crossover lands in 2024 under both the strict and loose definitions.
 
@@ -144,7 +148,31 @@ The original figure captured only **30%** of even this larger set, and 21 phrase
 
 **The claim has been withdrawn.** Figure 3 now plots only topic-mention measures, the requirement rate is published as a floor, and `04_demand_side_postings.py` carries a measurement warning at the top of the file. The supply-side findings (the crossover, flat ML, the top-3 skills) come from a different dataset and method and are unaffected.
 
-**The corpus selects on AI, so the denominator must be chosen with care.** Inclusion is decided by keyword in [`lambdas/jobs_scraper/normalize.py`](https://github.com/skillenai/skillenai-ds) (`is_rnd_relevant`). A posting is admitted if **either** its title matches an R&D title keyword — a list that includes `"ai"`, `"llm"`, `"generative"`, `"machine learning"` — **or** its description names ≥3 `RND_SKILLS`, of which roughly 35 are AI-specific (`llm`, `rag`, `langchain`, `pytorch`, `embeddings`, `fine-tuning`…).
+**The profile panel also selects on AI — exclude AI-titled positions.** Profiles are pulled with a job-title keyword list of ~80 R&D titles, and that list includes AI titles. A person enters the panel *because* they hold an AI-titled role — and AI titles are overwhelmingly recent, while their earlier positions carry ordinary titles. The bias therefore lands specifically on the recent end of any trend, which is the exact shape of the headline finding.
+
+It is measurable. AI-titled positions grow as a share of dated positions:
+
+| Year | Positions | AI-titled | Share |
+|---|---:|---:|---:|
+| 2018 | 27,657 | 620 | 2.2% |
+| 2020 | 25,962 | 975 | 3.8% |
+| 2022 | 31,422 | 1,476 | 4.7% |
+| 2024 | 23,155 | 1,957 | 8.5% |
+| 2025 | 11,849 | 1,315 | **11.1%** |
+
+The selection channel itself grows 5x across the window. Excluding those positions:
+
+| Measure | All positions | AI-titled excluded |
+|---|---:|---:|
+| GenAI 2022 | 1.59% | 1.06% |
+| GenAI 2025 | 7.64% | **4.28%** |
+| Growth | 4.8x | **4.0x** |
+| Classical ML 2022 → 2025 | 4.60% → 5.06% | 2.72% → 2.60% |
+| Crossover year | 2024 | **2024** |
+
+The uncorrected recent end was **~1.8x overstated**. Every headline survives the correction — 4.0x growth, flat ML, crossover still 2024 — but the levels are materially lower, and the corrected top-3 ordering changes: RAG drops from third to fourth and Generative AI takes its place.
+
+**The corpus selects on AI, so the demand-side denominator must be chosen with care too.** Inclusion is decided by keyword in [`lambdas/jobs_scraper/normalize.py`](https://github.com/skillenai/skillenai-ds) (`is_rnd_relevant`). A posting is admitted if **either** its title matches an R&D title keyword — a list that includes `"ai"`, `"llm"`, `"generative"`, `"machine learning"` — **or** its description names ≥3 `RND_SKILLS`, of which roughly 35 are AI-specific (`llm`, `rag`, `langchain`, `pytorch`, `embeddings`, `fine-tuning`…).
 
 A posting naming LLM + RAG + LangChain and nothing else is therefore admitted purely on AI content. Measuring "what share of the corpus mentions AI" conditions on the numerator — and indeed **23.5% of the corpus is AI-titled**, guaranteed to mention AI.
 

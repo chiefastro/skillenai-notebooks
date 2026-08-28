@@ -1,18 +1,18 @@
 term,hits,pre_2020_hits,pre_2020_pct,corpus_baseline_pct
-LLM/large language model,2145,122,5.7,56.4
-generative ai,1298,118,9.1,56.4
-FINE-TUN (ambiguous),1069,210,19.6,56.4
-RAG bare (ambiguous),857,40,4.7,56.4
-openai,677,39,5.8,56.4
-agentic/ai agents,610,28,4.6,56.4
-langchain/llamaindex,491,24,4.9,56.4
-chatgpt/gpt-N,464,27,5.8,56.4
-retrieval-augmented,354,9,2.5,56.4
-prompt engineering,336,12,3.6,56.4
-copilot bare (ambiguous),333,33,9.9,56.4
-EMBEDDINGS (ambiguous),309,37,12.0,56.4
-diffusion/midjourney/HF,267,22,8.2,56.4
-vector database,147,10,6.8,56.4
-PROMPTING (ambiguous),103,11,10.7,56.4
-github copilot,63,5,7.9,56.4
-anthropic,34,2,5.9,56.4
+LLM/large language model,963,60,6.2,57.5
+generative ai,727,75,10.3,57.5
+FINE-TUN (ambiguous),544,165,30.3,57.5
+openai,415,23,5.5,57.5
+agentic/ai agents,341,17,5.0,57.5
+RAG bare (ambiguous),318,15,4.7,57.5
+copilot bare (ambiguous),279,30,10.8,57.5
+chatgpt/gpt-N,276,20,7.2,57.5
+langchain/llamaindex,168,7,4.2,57.5
+prompt engineering,133,8,6.0,57.5
+retrieval-augmented,127,3,2.4,57.5
+EMBEDDINGS (ambiguous),104,12,11.5,57.5
+diffusion/midjourney/HF,80,6,7.5,57.5
+PROMPTING (ambiguous),55,10,18.2,57.5
+github copilot,51,4,7.8,57.5
+vector database,48,4,8.3,57.5
+anthropic,18,1,5.6,57.5

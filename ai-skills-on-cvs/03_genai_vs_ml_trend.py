@@ -76,6 +76,27 @@ CLASSIC = re.compile(
     re.I,
 )
 
+# --- SELECTION CORRECTION -----------------------------------------------------
+# Profiles are pulled with a job-title keyword list (~80 R&D titles), and that
+# list includes AI titles. A person therefore enters the panel BECAUSE they hold
+# an AI-titled role -- and AI titles are overwhelmingly recent. Their pre-2022
+# positions carry ordinary titles. The effect is to inflate the recent end of any
+# trend specifically: AI-titled positions rise from 2.2% of dated positions in
+# 2018 to 11.1% in 2025, a 5x growth in the selection channel itself.
+#
+# Measured on all positions, generative-AI mentions run 1.59% (2022) -> 7.64%
+# (2025). Excluding AI-titled positions -- which were never the selection reason
+# for the roles that remain -- gives 1.06% -> 4.28%. The uncorrected recent end
+# was ~1.8x overstated.
+#
+# The headline findings survive the correction: growth is still 4.0x, classical
+# ML is still flat (1.0x), and the crossover is still 2024.
+AI_TITLE = re.compile(
+    r"(?<![a-z])(ai|a\.i\.|artificial intelligence|machine learning|ml|deep learning|"
+    r"llm|genai|generative|prompt engineer|nlp|computer vision|data scientist|"
+    r"data science|mlops|applied scientist|research scientist|ml engineer)(?![a-z])", re.I)
+
+
 COMPILED_AUDIT = {k: re.compile(v, re.I) for k, v in AUDIT_TERMS.items()}
 YEAR_MIN, YEAR_MAX = 2012, 2025
 
@@ -103,8 +124,11 @@ def main(path: str) -> None:
                     desc = pos.get("description") or ""
                     if not desc:
                         continue
-                    if EDU.search(company) or EDU.search(pos.get("title") or ""):
+                    title = pos.get("title") or ""
+                    if EDU.search(company) or EDU.search(title):
                         continue
+                    if AI_TITLE.search(title):
+                        continue  # selection channel — see SELECTION CORRECTION
                     yr = year_of(pos.get("start_date"))
                     if not yr or yr < YEAR_MIN or yr > YEAR_MAX:
                         continue

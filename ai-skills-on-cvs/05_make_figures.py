@@ -47,8 +47,9 @@ def footer(fig, text):
              fontsize=8, color=INK_2, va="top" if "\n" in text else "baseline")
 
 
-SOURCE_SUPPLY = ("Source: Skillenai — 300,000 US tech worker LinkedIn profiles. "
-                 "Share of position descriptions, by year the role started. 2025 partial (to ~Oct).")
+SOURCE_SUPPLY = ("Source: Skillenai — 300,000 US tech worker LinkedIn profiles. Positions with an AI job title "
+                 "are excluded:\nthey are the panel's selection channel. Share of role descriptions by start year; "
+                 "2025 partial (to ~Oct).")
 def _demand_baseline(path="demand_side_stats.csv"):
     """Read the denominator from the CSV so the caption can never go stale."""
     for r in csv.DictReader(open(path)):
@@ -103,21 +104,21 @@ def fig_crossover():
     # the crossover
     ax.axvline(2024, color=GRID, lw=1, zorder=1)
     ax.annotate("2024: generative AI overtakes\nclassical machine learning",
-                xy=(2024, 6.0), xytext=(2020.15, 6.9), fontsize=9, color=INK_2,
+                xy=(2024, 3.42), xytext=(2019.9, 1.55), fontsize=9, color=INK_2,
                 arrowprops=dict(arrowstyle="->", color=INK_2, lw=0.9))
 
     ax.set_xlim(2017.8, 2026.5)
-    ax.set_ylim(0, 8.6)
+    ax.set_ylim(0, 5.2)
     ax.set_xticks(years)
-    ax.set_yticks([0, 2, 4, 6, 8])
-    ax.set_yticklabels(["0", "2%", "4%", "6%", "8%"])
+    ax.set_yticks([0, 1, 2, 3, 4, 5])
+    ax.set_yticklabels(["0", "1%", "2%", "3%", "4%", "5%"])
     ax.set_ylabel("Share of CV role descriptions", fontsize=10, color=INK_2)
     ax.legend(frameon=False, fontsize=9.5, labelcolor=INK_2, loc="upper left")
 
     titles(fig, "Machine learning didn't lose. It stopped moving.",
-           "Generative AI overtook classical ML on US tech CVs in 2024 — while ML itself stayed flat.")
+           "Generative AI overtook classical ML in 2024 — while ML itself stayed flat. Roles with an AI job title are excluded.")
     footer(fig, SOURCE_SUPPLY)
-    fig.subplots_adjust(left=0.075, right=0.83, top=0.855, bottom=0.13)
+    fig.subplots_adjust(left=0.075, right=0.83, top=0.855, bottom=0.165)
     fig.savefig("01_genai_vs_ml_crossover.png", dpi=150, facecolor=SURFACE)
     plt.close(fig)
 
@@ -125,8 +126,8 @@ def fig_crossover():
 # --- figure 2: what grew, what didn't ---------------------------------------
 def fig_emerging():
     fam = read_families()
-    genai_rows = ["LLMs", "AI agents", "RAG", "Generative AI",
-                  "LangChain", "AI tools", "prompt engineering", "MCP"]
+    genai_rows = ["AI agents", "LLMs", "Generative AI", "RAG",
+                  "AI tools", "MCP", "prompt engineering", "LangChain"]
     ml_rows = ["machine learning", "NLP", "deep learning", "MLOps"]
     rows = genai_rows + ml_rows
 
@@ -143,17 +144,17 @@ def fig_emerging():
         # 2px surface gap between the paired bars
         ax.barh(i + h / 2 + 0.01, a, height=h, color=GRID, zorder=2)
         ax.barh(i - h / 2 - 0.01, b, height=h, color=col, zorder=2)
-        ax.text(b + 0.06, i - h / 2 - 0.01, f"{b:.2f}%", va="center",
+        ax.text(b + 0.03, i - h / 2 - 0.01, f"{b:.2f}%", va="center",
                 fontsize=8.5, color=INK)
-        ax.text(a + 0.06, i + h / 2 + 0.01, f"{a:.2f}%", va="center",
+        ax.text(a + 0.03, i + h / 2 + 0.01, f"{a:.2f}%", va="center",
                 fontsize=8.5, color=INK_2)
 
     ax.set_yticks(list(ys))
     ax.set_yticklabels(rows, fontsize=9.5, color=INK)
     ax.invert_yaxis()
-    ax.set_xlim(0, 4.6)
-    ax.set_xticks([0, 1, 2, 3, 4])
-    ax.set_xticklabels(["0", "1%", "2%", "3%", "4%"])
+    ax.set_xlim(0, 2.15)
+    ax.set_xticks([0, 0.5, 1.0, 1.5, 2.0])
+    ax.set_xticklabels(["0", "0.5%", "1%", "1.5%", "2%"])
     ax.set_xlabel("Share of CV role descriptions", fontsize=10, color=INK_2)
 
     handles = [plt.Rectangle((0, 0), 1, 1, color=GRID),
@@ -166,9 +167,9 @@ def fig_emerging():
     ax.axhline(len(genai_rows) - 0.5, color=GRID, lw=1)
 
     titles(fig, "Everything that grew was generative AI",
-           "Change in skill prevalence on US tech CVs, 2022 to 2025. The classical stack is flat.")
+           "Change in skill prevalence on US tech CVs, 2022 to 2025, excluding AI-titled roles.")
     footer(fig, SOURCE_SUPPLY)
-    fig.subplots_adjust(left=0.19, right=0.965, top=0.855, bottom=0.10)
+    fig.subplots_adjust(left=0.19, right=0.965, top=0.855, bottom=0.135)
     fig.savefig("02_emerging_skills.png", dpi=150, facecolor=SURFACE)
     plt.close(fig)
 
