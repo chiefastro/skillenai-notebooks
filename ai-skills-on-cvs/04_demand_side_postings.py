@@ -97,6 +97,9 @@ AI_TITLES = [
 # Excluded despite scoring high: "Claude" (a common French given name), "Cursor"
 # (UI/database cursors), "Gemini" (zodiac sign). Entity-name collisions.
 AI_TERMS = [
+    # bare "AI" is the single most common AI token in postings; an earlier
+    # version omitted it and understated the mention rate by roughly half.
+    "AI",
     "generative AI", "artificial intelligence", "machine learning", "prompt engineering",
     "AI tools", "AI-assisted", "AI agents", "ChatGPT", "GitHub Copilot", "LangChain",
     "large language model", "AI fluency", "AI literacy",

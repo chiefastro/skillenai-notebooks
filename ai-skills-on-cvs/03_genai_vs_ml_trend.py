@@ -101,23 +101,36 @@ COMPILED_AUDIT = {k: re.compile(v, re.I) for k, v in AUDIT_TERMS.items()}
 YEAR_MIN, YEAR_MAX = 2012, 2025
 
 
+# The corpus is the UNION of the Bright Data snapshots, deduped by linkedin_id.
+# July and August are each 300,000 profiles with 31,337 overlapping -> 568,663
+# unique. Newest file first so the fresher row wins on collision.
+def iter_profiles(paths):
+    seen = set()
+    for path in paths:
+        with open(path) as fh:
+            for line in fh:
+                try:
+                    doc = json.loads(line)
+                except ValueError:
+                    continue
+                lid = doc.get("linkedin_id") or doc.get("id")
+                if not lid or lid in seen:
+                    continue
+                seen.add(lid)
+                yield doc
+
+
 def year_of(raw):
     m = re.search(r"(19|20)\d{2}", raw or "")
     return int(m.group(0)) if m else None
 
 
-def main(path: str) -> None:
+def main(paths: list[str]) -> None:
     by_year = collections.defaultdict(lambda: {"n": 0, "strict": 0, "loose": 0, "ml": 0})
     hits, pre2020 = collections.Counter(), collections.Counter()
 
-    with open(path) as fh:
-        for line in fh:
-            try:
-                doc = json.loads(line)
-            except ValueError:
-                continue
-            if doc.get("country_code") != "US":
-                continue
+    for doc in iter_profiles(paths):
+        if doc.get("country_code") == "US":
             for exp in doc.get("experience") or []:
                 company = exp.get("company") or ""
                 for pos in exp.get("positions") or [exp]:
@@ -185,4 +198,4 @@ def main(path: str) -> None:
 
 
 if __name__ == "__main__":
-    main(sys.argv[1] if len(sys.argv) > 1 else "profiles.jsonl")
+    main(sys.argv[1:] or ["profiles.jsonl"])

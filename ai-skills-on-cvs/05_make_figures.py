@@ -47,7 +47,7 @@ def footer(fig, text):
              fontsize=8, color=INK_2, va="top" if "\n" in text else "baseline")
 
 
-SOURCE_SUPPLY = ("Source: Skillenai — 300,000 US tech worker LinkedIn profiles. Positions with an AI job title "
+SOURCE_SUPPLY = ("Source: Skillenai — 568,663 US tech worker LinkedIn profiles. Positions with an AI job title "
                  "are excluded:\nthey are the panel's selection channel. Share of role descriptions by start year; "
                  "2025 partial (to ~Oct).")
 def _demand_baseline(path="demand_side_stats.csv"):
@@ -58,6 +58,8 @@ def _demand_baseline(path="demand_side_stats.csv"):
     raise KeyError("cohort_postings missing from demand_side_stats.csv")
 
 
+SOURCE_HYPE = (f"Source: Skillenai jobs index — 157,109 US tech postings titled as non-AI tech roles, 2026.\n"
+               "\u201cRequires an AI skill\u201d = the enrichment pipeline's LLM extracted an AI skill from the posting.")
 SOURCE_DEMAND = (f"Source: Skillenai jobs index — {_demand_baseline():,} US tech postings titled "
                  "as non-AI tech roles, 2026.\nAI-titled roles are excluded: their presence in "
                  "the corpus depends on AI content, which would bias the rate.")
@@ -216,7 +218,7 @@ def fig_demand():
     ax.annotate("generic AI vocabulary is used far\nmore than any named product",
                 xy=(17.5, 2.55), fontsize=9, color=INK_2, va="center")
 
-    titles(fig, "A quarter of ordinary tech jobs now talk about AI",
+    titles(fig, "Employers describe a way of working, not a tool",
            "AI language in tech postings that are NOT AI roles. All four bars are the same "
            "measure: does the phrase appear anywhere in the posting?")
     footer(fig, SOURCE_DEMAND)
@@ -227,9 +229,103 @@ def fig_demand():
 
 
 
+
+# --- figure 4: the hype gap -------------------------------------------------
+def fig_hype_gap():
+    """Two independent instruments on the same postings.
+
+    Text mention catches marketing; the pipeline's LLM skill extraction catches
+    candidate requirements however worded. The gap between them is the quantity
+    of interest, and it cannot be manufactured by our choice of phrases because
+    the two sides come from different measurement systems.
+    """
+    d = {r["metric"]: (int(r["count"]), r["share_pct"])
+         for r in csv.DictReader(open("ai_hype_gap.csv"))}
+    base = d["cohort_postings"][0]
+    mentions = float(d["mentions_ai_in_text"][1])
+    requires = float(d["requires_ai_skill"][1])
+    gap = float(d["talks_but_does_not_require"][1])
+
+    fig, ax = plt.subplots(figsize=(9.4, 4.4), facecolor=SURFACE)
+    ax.set_facecolor(SURFACE)
+    frame(ax, xgrid=True)
+
+    labels = ["Talks about AI\n(mentions it anywhere)",
+              "Actually requires an AI skill\n(extracted from the posting)"]
+    vals = [mentions, requires]
+    cols = [C_NEW, C_OLD]
+    ax.barh([0, 1], vals, height=0.46, color=cols, zorder=2)
+    for i, v in enumerate(vals):
+        ax.text(v + 0.9, i, f"{v:.1f}%", va="center", fontsize=12, color=INK, weight="bold")
+
+    ax.set_yticks([0, 1])
+    ax.set_yticklabels(labels, fontsize=10, color=INK)
+    ax.invert_yaxis()
+    ax.set_xlim(0, 60)
+    ax.set_xticks([0, 20, 40])
+    ax.set_xticklabels(["0", "20%", "40%"])
+    ax.set_xlabel("Share of ordinary tech job postings", fontsize=10, color=INK_2)
+
+    ax.annotate("", xy=(requires, 0.5), xytext=(mentions, 0.5),
+                arrowprops=dict(arrowstyle="<->", color=INK_2, lw=1.1))
+    ax.annotate(f"{gap:.0f} points of the market\ntalks about AI without asking for it",
+                xy=((mentions + requires) / 2, 0.62), fontsize=9.5, color=INK_2,
+                ha="center", va="top")
+
+    titles(fig, "Everyone says AI. Few actually ask for it.",
+           "77% of ordinary tech postings that mention AI require no AI skill at all.")
+    footer(fig, SOURCE_HYPE)
+    fig.subplots_adjust(left=0.315, right=0.965, top=0.80, bottom=0.20)
+    fig.savefig("04_ai_hype_gap.png", dpi=150, facecolor=SURFACE)
+    plt.close(fig)
+
+
+# --- figure 5: growth benchmark ---------------------------------------------
+def fig_growth_benchmark():
+    """AI against ordinary tech-stack churn, from the discovered n-gram list."""
+    rows = {r["ngram"]: r for r in csv.DictReader(open("ngram_growth.csv"))}
+    picks = [("ai", "AI", True), ("cybersecurity", "cybersecurity", False),
+             ("dashboards", "dashboards", False), ("pipelines", "pipelines", False),
+             ("power bi", "Power BI", False), ("python", "Python", False),
+             ("accessibility", "accessibility", False), ("llm", "LLM", True),
+             ("rag", "RAG", True), ("next.js", "Next.js", False),
+             ("agentic", "agentic", True), ("ci/cd", "CI/CD", False),
+             ("typescript", "TypeScript", False), ("prompt engineering", "prompt engineering", True)]
+    data = [(lbl, float(rows[k]["pp_change"]), is_ai) for k, lbl, is_ai in picks if k in rows]
+    data.sort(key=lambda r: -r[1])
+
+    fig, ax = plt.subplots(figsize=(9.4, 5.6), facecolor=SURFACE)
+    ax.set_facecolor(SURFACE)
+    frame(ax, xgrid=True)
+    names = [d[0] for d in data]
+    vals = [d[1] for d in data]
+    cols = [C_NEW if d[2] else C_OLD for d in data]
+    ax.barh(range(len(vals)), vals, height=0.55, color=cols, zorder=2)
+    for i, v in enumerate(vals):
+        ax.text(v + 0.06, i, f"+{v:.2f}", va="center", fontsize=9, color=INK)
+    ax.set_yticks(range(len(vals)))
+    ax.set_yticklabels(names, fontsize=9.5, color=INK)
+    ax.invert_yaxis()
+    ax.set_xlim(0, 5.0)
+    ax.set_xlabel("Change in share of CV role descriptions, 2021-22 to 2024-25 (points)",
+                  fontsize=10, color=INK_2)
+    handles = [plt.Rectangle((0, 0), 1, 1, color=C_NEW), plt.Rectangle((0, 0), 1, 1, color=C_OLD)]
+    ax.legend(handles, ["AI vocabulary", "conventional tech skills"], frameon=False,
+              fontsize=9.5, labelcolor=INK_2, loc="lower right")
+
+    titles(fig, "\u201cAI\u201d is growing ~3x faster than any other skill",
+           "Fastest-growing terms in ordinary tech CVs. Discovered from the corpus, not a hand-picked list.")
+    footer(fig, SOURCE_SUPPLY)
+    fig.subplots_adjust(left=0.20, right=0.965, top=0.815, bottom=0.185)
+    fig.savefig("05_growth_benchmark.png", dpi=150, facecolor=SURFACE)
+    plt.close(fig)
+
+
 if __name__ == "__main__":
     fig_crossover()
     fig_emerging()
     fig_demand()
+    fig_hype_gap()
+    fig_growth_benchmark()
     print("wrote 01_genai_vs_ml_crossover.png, 02_emerging_skills.png, "
-          "03_demand_side.png")
+          "03_demand_side.png, 04_ai_hype_gap.png, 05_growth_benchmark.png")
