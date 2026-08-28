@@ -58,8 +58,16 @@ def _demand_baseline(path="demand_side_stats.csv"):
     raise KeyError("cohort_postings missing from demand_side_stats.csv")
 
 
-SOURCE_HYPE = (f"Source: Skillenai jobs index — 157,109 US tech postings titled as non-AI tech roles, 2026.\n"
-               "\u201cRequires an AI skill\u201d = the enrichment pipeline's LLM extracted an AI skill from the posting.")
+def _hype(path="ai_hype_gap.csv"):
+    d = {r["metric"]: int(r["count"]) for r in csv.DictReader(open(path))}
+    d["pct_talk_only_of_mentions"] = round(100 * d["talks_but_does_not_require"] / d["mentions_ai_in_text"])
+    return d
+
+
+HYPE = _hype()
+SOURCE_HYPE = (f"Source: Skillenai jobs index — {HYPE['cohort_postings']:,} US tech postings titled as "
+               "non-AI tech roles, 2026.\n\u201cRequires an AI skill\u201d = the enrichment pipeline's "
+               "LLM extracted an AI skill from the posting.")
 SOURCE_DEMAND = (f"Source: Skillenai jobs index — {_demand_baseline():,} US tech postings titled "
                  "as non-AI tech roles, 2026.\nAI-titled roles are excluded: their presence in "
                  "the corpus depends on AI content, which would bias the rate.")
@@ -244,7 +252,7 @@ def fig_hype_gap():
     base = d["cohort_postings"][0]
     mentions = float(d["mentions_ai_in_text"][1])
     requires = float(d["requires_ai_skill"][1])
-    gap = float(d["talks_but_does_not_require"][1])
+    pct = HYPE["pct_talk_only_of_mentions"]
 
     fig, ax = plt.subplots(figsize=(9.4, 4.4), facecolor=SURFACE)
     ax.set_facecolor(SURFACE)
@@ -266,14 +274,16 @@ def fig_hype_gap():
     ax.set_xticklabels(["0", "20%", "40%"])
     ax.set_xlabel("Share of ordinary tech job postings", fontsize=10, color=INK_2)
 
-    ax.annotate("", xy=(requires, 0.5), xytext=(mentions, 0.5),
-                arrowprops=dict(arrowstyle="<->", color=INK_2, lw=1.1))
-    ax.annotate(f"{gap:.0f} points of the market\ntalks about AI without asking for it",
-                xy=((mentions + requires) / 2, 0.62), fontsize=9.5, color=INK_2,
-                ha="center", va="top")
+    # NB: label the RATIO, not a bar-to-bar subtraction. The two measures
+    # overlap without nesting (1,346 postings require an AI skill without ever
+    # writing the token "AI"), so mentions - requires is not a meaningful cell.
+    ax.annotate(f"{pct}%", xy=(27.5, 0.52), fontsize=17, color=INK, weight="bold", ha="center")
+    ax.annotate("of the postings that mention AI\nrequire no AI skill at all",
+                xy=(31.0, 0.52), fontsize=9.5, color=INK_2, va="center")
 
     titles(fig, "Everyone says AI. Few actually ask for it.",
-           "77% of ordinary tech postings that mention AI require no AI skill at all.")
+           f"{HYPE['pct_talk_only_of_mentions']}% of ordinary tech postings that mention AI "
+           "require no AI skill at all.")
     footer(fig, SOURCE_HYPE)
     fig.subplots_adjust(left=0.315, right=0.965, top=0.80, bottom=0.20)
     fig.savefig("04_ai_hype_gap.png", dpi=150, facecolor=SURFACE)

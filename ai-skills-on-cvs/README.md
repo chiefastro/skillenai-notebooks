@@ -135,15 +135,21 @@ This is the sharpest result in the analysis, and it uses **two independent instr
 
 ![44% of ordinary tech postings talk about AI but only 10% require an AI skill](04_ai_hype_gap.png)
 
-| | Postings | Share |
-|---|---:|---:|
-| Mentions AI anywhere in the text | 80,969 | **44.4%** |
-| Actually requires an AI skill | 18,694 | **10.2%** |
-| Talks about AI, requires no AI skill | 63,621 | **34.9%** |
+The two measures **overlap without nesting**, so the full cross-tabulation is the honest presentation:
+
+| | Requires an AI skill | Does not | Total |
+|---|---:|---:|---:|
+| **Mentions "AI" in text** | 17,348 | 63,621 | **80,969** (44.4%) |
+| **Does not mention it** | 1,346 | 99,155 | 100,501 |
+| **Total** | **18,694** (10.2%) | 163,776 | 182,470 |
+
+Read the cells, not the margins. `Talks but requires nothing` = 63,621 is *mentions AND NOT requires*, which is 80,969 − 17,348. It is **not** 80,969 − 18,694; that subtraction would assume every AI-requiring posting also contains the literal token "AI".
+
+**1,346 postings require an AI skill but never write the word "AI"** — 7.2% of all AI-requiring postings. They say "experience with machine learning", "LLMs", "PyTorch", "prompt engineering". Worth knowing on its own: a keyword search for "AI" misses one in fourteen of the roles that actually want AI skills.
 
 (The talk row uses the bare token "AI"; §4's 46.4% uses a wider term set. Either way the story is the same.)
 
-**Of the postings that mention AI, 79% ask for no AI skill at all.** The talk-to-ask ratio is **4.3 : 1**, and 35 points of the market — more than a third of all ordinary tech postings — discuss AI without wanting any from the candidate.
+**Of the postings that mention AI, 79% ask for no AI skill at all** (63,621 of 80,969). The talk-to-ask ratio is **4.3 : 1**, and 63,621 postings — more than a third of the ordinary tech market — discuss AI without wanting any from the candidate.
 
 This is market positioning showing up in the hiring data. Claiming to be an AI company is close to free; requiring AI skills of your engineers is a real constraint on your hiring funnel. The 36-point gap is the size of the difference between the two.
 
