@@ -1,15 +1,7 @@
 metric,measure_type,count,share_pct
-baseline_postings,denominator,342776,
-any_ai_mention,topic_mention,111767,32.61
-generic_fluency,topic_mention,61869,18.05
-employer_self_description,topic_mention,55217,16.11
-named_products,topic_mention,16075,4.69
-candidate_requirement_floor,requirement_floor,22071,6.44
-dept:Engineering,topic_mention,107566,34.09
-dept:Product,topic_mention,26765,32.32
-dept:Marketing,topic_mention,2204,45.05
-dept:Design,topic_mention,1594,42.35
-dept:Sales,topic_mention,1557,28.64
-dept:Finance,topic_mention,1130,36.11
-dept:Customer Success,topic_mention,571,63.05
-dept:Data Science,topic_mention,5466,64.58
+baseline_postings,denominator,342805,
+any_ai_mention,topic_mention,111782,32.61
+generic_fluency,topic_mention,61880,18.05
+employer_self_description,topic_mention,55223,16.11
+named_products,topic_mention,16079,4.69
+candidate_requirement_floor,requirement_floor,22076,6.44

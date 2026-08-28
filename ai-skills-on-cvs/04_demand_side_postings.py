@@ -80,10 +80,17 @@ CANDIDATE_REQUIREMENT = [
     "experience with AI agents", "experience with RAG", "background in machine learning",
 ]
 
-DEPARTMENTS = [
-    "Engineering", "Product", "Marketing", "Design", "Sales", "Finance",
-    "Customer Success", "Data Science",
-]
+# NO DEPARTMENT BREAKDOWN — deliberately removed.
+# The jobs index filters for tech and AI roles and excludes everything else.
+# Non-tech departments therefore survive in the corpus only when they matched
+# tech/AI criteria, so a "Marketing" posting in this index is far more likely to
+# mention AI than a Marketing posting in the wild. Sampled titles bear this out:
+# "Senior Generative AI Designer", "Marketing Data & Agentic AI Transformation
+# Lead", "Junior Marketing Specialist - Content, Growth & AI".
+# Measuring AI-mention rate by department is therefore conditioning on the
+# outcome. An earlier version of this analysis reported "AI language is densest
+# outside engineering" (Marketing 45.1% vs Engineering 34.1%) on exactly this
+# artifact. Do not reintroduce it.
 
 
 def search(body: dict) -> dict:
@@ -134,15 +141,6 @@ def main() -> None:
           f"{lookup['generic_fluency'][2] / lookup['named_products'][2]:.1f} : 1  "
           f"(both topic mentions — a fair comparison)")
 
-    print(f"\n{'department':<20}{'postings':>10}{'AI rate':>10}")
-    print("-" * 42)
-    for dept in DEPARTMENTS:
-        f = {"term": {"department": dept}}
-        n = count([f])
-        a = count([f, any_of(AI_TERMS)])
-        rows.append([f"dept:{dept}", "topic_mention", n, round(100 * a / n, 2)])
-        print(f"{dept:<20}{n:>10,}{100 * a / n:>9.1f}%")
-        time.sleep(0.2)
 
     with open("demand_side_stats.csv", "w", newline="") as fh:
         w = csv.writer(fh)

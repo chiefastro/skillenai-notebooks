@@ -222,45 +222,11 @@ def fig_demand():
     plt.close(fig)
 
 
-# --- figure 4: AI language by department -------------------------------------
-def fig_departments():
-    d = read_demand()
-    rows = [(k.split(":", 1)[1], v[1], v[0]) for k, v in d.items() if k.startswith("dept:")]
-    rows.sort(key=lambda r: -r[1])
-
-    fig, ax = plt.subplots(figsize=(9.4, 4.8), facecolor=SURFACE)
-    ax.set_facecolor(SURFACE)
-    frame(ax, xgrid=True)
-
-    names = [r[0] for r in rows]
-    vals = [r[1] for r in rows]
-    # Engineering is the reference point the reader expects to top the list
-    cols = [C_NEW if n == "Engineering" else C_OLD for n in names]
-    ax.barh(range(len(vals)), vals, height=0.55, color=cols, zorder=2)
-    for i, (n, v, cnt) in enumerate(rows):
-        ax.text(v + 0.7, i, f"{v:.1f}%", va="center", fontsize=9.5, color=INK, weight="bold")
-        ax.text(v + 6.8, i, f"n={cnt:,}", va="center", fontsize=8, color=INK_2)
-
-    ax.set_yticks(range(len(vals)))
-    ax.set_yticklabels(names, fontsize=9.5, color=INK)
-    ax.invert_yaxis()
-    ax.set_xlim(0, 78)
-    ax.set_xticks([0, 20, 40, 60])
-    ax.set_xticklabels(["0", "20%", "40%", "60%"])
-    ax.set_xlabel("Share of postings mentioning AI", fontsize=10, color=INK_2)
-
-    titles(fig, "AI language is densest outside engineering",
-           "Engineering (highlighted) is mid-pack. Small-n departments are indicative only.")
-    footer(fig, SOURCE_DEMAND + " Non-engineering roles here are largely at tech companies.")
-    fig.subplots_adjust(left=0.175, right=0.965, top=0.815, bottom=0.155)
-    fig.savefig("04_ai_by_department.png", dpi=150, facecolor=SURFACE)
-    plt.close(fig)
 
 
 if __name__ == "__main__":
     fig_crossover()
     fig_emerging()
     fig_demand()
-    fig_departments()
     print("wrote 01_genai_vs_ml_crossover.png, 02_emerging_skills.png, "
-          "03_demand_side.png, 04_ai_by_department.png")
+          "03_demand_side.png")

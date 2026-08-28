@@ -4,7 +4,7 @@
 **Author:** Skillenai AI Analyst
 **Sources:**
 - **Supply** — Bright Data LinkedIn snapshot, 300,000 US tech worker profiles (`bd_20260724`), position descriptions dated by role start year, 2012–2025.
-- **Demand** — Skillenai jobs index (`prod-enriched-jobs`), 342,776 US tech job postings, 2026-03-01 onward.
+- **Demand** — Skillenai jobs index (`prod-enriched-jobs`), 342,805 US tech job postings, 2026-03-01 onward.
 
 ---
 
@@ -73,16 +73,16 @@ Note this table's "classical ML" is a broader regex than the family in §2 (it i
 
 ## 4. Demand side: how employers write about AI
 
-342,776 postings, 2026-03-01 onward, Speechify excluded.
+342,805 postings, 2026-03-01 onward, Speechify excluded.
 
 **These four rows are all the same measure** — does the phrase appear anywhere in the posting? — so they can be compared with each other.
 
 | Topic mention | Postings | Share |
 |---|---:|---:|
-| Mention AI at all | 111,767 | **32.6%** |
-| Generic AI vocabulary ("AI tools", "AI-assisted") | 61,869 | **18.1%** |
-| Describe the company as AI-native ("AI-first", "AI-powered") | 55,217 | 16.1% |
-| Name a specific product (ChatGPT, Copilot, LangChain, …) | 16,075 | 4.7% |
+| Mention AI at all | 111,782 | **32.6%** |
+| Generic AI vocabulary ("AI tools", "AI-assisted") | 61,880 | **18.1%** |
+| Describe the company as AI-native ("AI-first", "AI-powered") | 55,223 | 16.1% |
+| Name a specific product (ChatGPT, Copilot, LangChain, …) | 16,079 | 4.7% |
 
 ![How AI appears in US tech job postings: a third mention AI, generic AI vocabulary is used 3.8x more than any named product](03_demand_side.png)
 
@@ -90,26 +90,13 @@ Generic vocabulary beats named products **3.8:1**. When AI comes up, employers a
 
 ### Explicit requirement language — a floor, not a rate
 
-Separately, **6.4%** of postings (22,071) contain an explicit requirement construction aimed at the candidate — "experience with LLMs", "proficiency with AI", "hands-on experience with AI" and 18 similar phrasings.
+Separately, **6.4%** of postings (22,076) contain an explicit requirement construction aimed at the candidate — "experience with LLMs", "proficiency with AI", "hands-on experience with AI" and 18 similar phrasings.
 
 **Treat that as a floor, not a measurement.** Requirements are also written as bullet points ("3+ years ML experience") and structured skill tags, which no phrase list catches. It is not comparable with the topic-mention rows above, and it must not be used as the denominator of a ratio — see the correction note below.
 
-### AI language is densest outside engineering
+### Why there is no department breakdown
 
-| Department | Postings | AI mention rate |
-|---|---:|---:|
-| Data Science | 5,466 | 64.6% |
-| Customer Success | 571 | 63.1% |
-| Marketing | 2,204 | 45.1% |
-| Design | 1,594 | 42.4% |
-| Finance | 1,130 | 36.1% |
-| **Engineering** | 107,566 | **34.1%** |
-| Product | 26,765 | 32.3% |
-| Sales | 1,557 | 28.6% |
-
-![AI mention rate by department: Data Science 64.6%, Customer Success 63.1%, Marketing 45.1%, Design 42.4%, with Engineering mid-pack at 34.1%](04_ai_by_department.png)
-
-Engineering is mid-pack. This comparison is internally consistent — the same phrase set applied across every department. Treat the small-n departments as indicative only, and note these are non-engineering roles *at tech companies*, not a claim about marketing hiring economy-wide.
+An earlier version of this analysis reported that "AI language is densest outside engineering" — Marketing at 45.1% against Engineering's 34.1%. **That finding was withdrawn**; see the correction note below.
 
 ---
 
@@ -156,6 +143,23 @@ Expanding the requirement set from 5 phrases to 21 obvious alternatives — `"ex
 The original figure captured only **30%** of even this larger set, and 21 phrases is still not exhaustive. The 8.3:1 ratio becomes 2.5:1 at 6.4% — and since requirement detection remains incomplete while topic-mention detection is fairly complete, even 2.5:1 is an upper bound.
 
 **The claim has been withdrawn.** Figure 3 now plots only topic-mention measures, the requirement rate is published as a floor, and `04_demand_side_postings.py` carries a measurement warning at the top of the file. The supply-side findings (the crossover, flat ML, the top-3 skills) come from a different dataset and method and are unaffected.
+
+**Never break this corpus down by department — the population is filtered.** The jobs index deliberately targets tech and AI roles and excludes everything else. A non-tech department therefore appears in the corpus *only* when a posting matched tech/AI criteria in the first place. Measuring the AI-mention rate of those survivors conditions on the outcome.
+
+A sample of postings tagged `department=Marketing` shows the problem directly:
+
+```
+Senior Generative AI Designer / Artist
+Marketing Data & Agentic AI Transformation Lead
+Junior Marketing Specialist – Content, Growth & AI
+CMO/VP Marketing (Retail Vertical AI Company)
+Forward Deployed AI Accelerator, Marketing
+Marketing AI - Content Manager
+```
+
+Several carry AI in the job title. These are not representative marketing postings; they are the marketing postings that look like tech postings. The withdrawn claim (Marketing 45.1% vs Engineering 34.1%) measured the filter, not the labour market. The department queries have been removed from `04_demand_side_postings.py` with a comment explaining why, so the finding cannot be casually reintroduced.
+
+The same caution applies to any future cut of this corpus by industry, function or seniority where the filter might correlate with the thing being measured.
 
 **Named-entity collisions removed.** `Claude` (a common French given name), `Cursor` (UI and database cursors) and `Gemini` (zodiac sign, unrelated product lines) all scored highly on the demand side and were discarded as entity-name collisions rather than AI mentions.
 
