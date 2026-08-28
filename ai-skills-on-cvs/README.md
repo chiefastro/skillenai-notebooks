@@ -4,7 +4,7 @@
 **Author:** Skillenai AI Analyst
 **Sources:**
 - **Supply** — Bright Data LinkedIn snapshot, 300,000 US tech worker profiles (`bd_20260724`), position descriptions dated by role start year, 2012–2025.
-- **Demand** — Skillenai jobs index (`prod-enriched-jobs`), 336,824 US tech job postings, 2026-03-01 onward.
+- **Demand** — Skillenai jobs index (`prod-enriched-jobs`), 342,776 US tech job postings, 2026-03-01 onward.
 
 ---
 
@@ -14,7 +14,7 @@ Everyone asks whether AI skills are showing up on CVs. They are — but the inte
 
 **Generative-AI skills went from 1.6% of roles started in 2022 to 7.6% in 2025, and overtook classical machine learning in 2024.** Not because GenAI grew faster than ML. Because **ML stopped growing entirely** — 2.74% in 2022, 2.75% in 2025, a 1.0x multiple over three years — and GenAI walked past a stationary target.
 
-Meanwhile employers talk about AI constantly and ask for it almost never. Across 336,824 postings, a third mention AI, but firms describe *themselves* as "AI-native" **8x more often** than they ask a candidate for AI proficiency (16.1% vs 1.9%).
+On the demand side, a third of postings mention AI (32.6%), and when employers write about it they reach for generic vocabulary — "AI tools", "AI-assisted" — nearly **4x more often** than any named product like ChatGPT or Copilot. AI fluency is being described as a way of working, not a tool checkbox.
 
 ![Generative AI overtook classical machine learning on US tech CVs in 2024, while machine learning itself stayed flat](01_genai_vs_ml_crossover.png)
 
@@ -71,36 +71,45 @@ The crossover lands in 2024 under both the strict and loose definitions.
 
 Note this table's "classical ML" is a broader regex than the family in §2 (it includes TensorFlow, PyTorch, scikit-learn, computer vision and NLP), which is why its levels are higher. The trend is the same: it peaks in 2023 and turns down.
 
-## 4. Demand side: everyone talks about AI, nobody requires it
+## 4. Demand side: how employers write about AI
 
-336,824 postings, 2026-03-01 onward, Speechify excluded.
+342,776 postings, 2026-03-01 onward, Speechify excluded.
 
-| Measure | Postings | Share |
+**These four rows are all the same measure** — does the phrase appear anywhere in the posting? — so they can be compared with each other.
+
+| Topic mention | Postings | Share |
 |---|---:|---:|
-| Mention AI at all | 109,602 | **32.5%** |
-| Employer describes *itself* ("AI-native", "AI-first", "AI-powered", "leverage AI") | 54,297 | **16.1%** |
-| Employer asks *candidate* for AI proficiency | 6,557 | **1.9%** |
-| Generic fluency ("AI tools", "AI-assisted") | 60,578 | 18.0% |
-| Named products (ChatGPT, GitHub Copilot, LangChain, …) | 15,767 | 4.7% |
+| Mention AI at all | 111,767 | **32.6%** |
+| Generic AI vocabulary ("AI tools", "AI-assisted") | 61,869 | **18.1%** |
+| Describe the company as AI-native ("AI-first", "AI-powered") | 55,217 | 16.1% |
+| Name a specific product (ChatGPT, Copilot, LangChain, …) | 16,075 | 4.7% |
 
-![How AI appears in US tech job postings: a third mention AI, 16.1% describe themselves as AI-native, but only 1.9% ask the candidate for AI proficiency](03_demand_side.png)
+![How AI appears in US tech job postings: a third mention AI, generic AI vocabulary is used 3.8x more than any named product](03_demand_side.png)
 
-**Self-description outweighs candidate requirement 8:1.** When employers do ask, they want generic fluency over named products roughly **4:1** — AI fluency is being screened as a way of working, not a tool checkbox.
+Generic vocabulary beats named products **3.8:1**. When AI comes up, employers are describing a way of working rather than a tool to tick off.
+
+### Explicit requirement language — a floor, not a rate
+
+Separately, **6.4%** of postings (22,071) contain an explicit requirement construction aimed at the candidate — "experience with LLMs", "proficiency with AI", "hands-on experience with AI" and 18 similar phrasings.
+
+**Treat that as a floor, not a measurement.** Requirements are also written as bullet points ("3+ years ML experience") and structured skill tags, which no phrase list catches. It is not comparable with the topic-mention rows above, and it must not be used as the denominator of a ratio — see the correction note below.
 
 ### AI language is densest outside engineering
 
 | Department | Postings | AI mention rate |
 |---|---:|---:|
-| Data Science | 5,396 | 64.3% |
-| Customer Success | 562 | 62.6% |
-| Marketing | 2,179 | 45.0% |
-| Design | 1,565 | 42.5% |
-| Finance | 1,115 | 36.1% |
-| **Engineering** | 105,857 | **34.1%** |
-| Product | 26,124 | 32.5% |
-| Sales | 1,540 | 28.7% |
+| Data Science | 5,466 | 64.6% |
+| Customer Success | 571 | 63.1% |
+| Marketing | 2,204 | 45.1% |
+| Design | 1,594 | 42.4% |
+| Finance | 1,130 | 36.1% |
+| **Engineering** | 107,566 | **34.1%** |
+| Product | 26,765 | 32.3% |
+| Sales | 1,557 | 28.6% |
 
-Engineering is mid-pack. Treat the small-n departments as indicative only, and note these are non-engineering roles *at tech companies* — not a claim about marketing hiring economy-wide.
+![AI mention rate by department: Data Science 64.6%, Customer Success 63.1%, Marketing 45.1%, Design 42.4%, with Engineering mid-pack at 34.1%](04_ai_by_department.png)
+
+Engineering is mid-pack. This comparison is internally consistent — the same phrase set applied across every department. Treat the small-n departments as indicative only, and note these are non-engineering roles *at tech companies*, not a claim about marketing hiring economy-wide.
 
 ---
 
@@ -133,6 +142,20 @@ python 05_make_figures.py                               # -> 01..03 .png
 | "fine-tuning" | 1,069 | 20% | mostly genuine |
 
 The headline trend still uses the **strict** pattern (ambiguous terms dropped) because it is what survives a challenge; the loose column is published alongside so the gap is visible rather than hidden.
+
+**Never compare a topic-mention measure with a requirement-phrasing measure.** This one cost us a headline. An earlier draft of this analysis reported that employers describe themselves as AI-native **"8x more often than they ask candidates for AI proficiency" (16.1% vs 1.9%)**. That ratio was an artifact of the two phrase sets having very different breadth: the self-description set was four broad phrases matched anywhere in the text, while the requirement set was five narrow exact constructions.
+
+Expanding the requirement set from 5 phrases to 21 obvious alternatives — `"experience with LLMs"`, `"experience using AI"`, `"hands-on experience with AI"` and similar — more than tripled it:
+
+| Requirement phrase set | Postings | Share |
+|---|---:|---:|
+| Original 5 phrases | 6,688 | 1.95% |
+| 16 phrasings that set missed | 16,237 | 4.74% |
+| Union of all 21 | 22,065 | **6.44%** |
+
+The original figure captured only **30%** of even this larger set, and 21 phrases is still not exhaustive. The 8.3:1 ratio becomes 2.5:1 at 6.4% — and since requirement detection remains incomplete while topic-mention detection is fairly complete, even 2.5:1 is an upper bound.
+
+**The claim has been withdrawn.** Figure 3 now plots only topic-mention measures, the requirement rate is published as a floor, and `04_demand_side_postings.py` carries a measurement warning at the top of the file. The supply-side findings (the crossover, flat ML, the top-3 skills) come from a different dataset and method and are unaffected.
 
 **Named-entity collisions removed.** `Claude` (a common French given name), `Cursor` (UI and database cursors) and `Gemini` (zodiac sign, unrelated product lines) all scored highly on the demand side and were discarded as entity-name collisions rather than AI mentions.
 

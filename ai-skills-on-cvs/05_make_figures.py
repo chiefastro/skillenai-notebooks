@@ -48,8 +48,16 @@ def footer(fig, text):
 
 SOURCE_SUPPLY = ("Source: Skillenai — 300,000 US tech worker LinkedIn profiles. "
                  "Share of position descriptions, by year the role started. 2025 partial (to ~Oct).")
-SOURCE_DEMAND = ("Source: Skillenai jobs index — 336,824 US tech job postings, 2026. "
-                 "Within-window shares.")
+def _demand_baseline(path="demand_side_stats.csv"):
+    """Read the denominator from the CSV so the caption can never go stale."""
+    for r in csv.DictReader(open(path)):
+        if r["metric"] == "baseline_postings":
+            return int(r["count"])
+    raise KeyError("baseline_postings missing from demand_side_stats.csv")
+
+
+SOURCE_DEMAND = (f"Source: Skillenai jobs index — {_demand_baseline():,} US tech job "
+                 "postings, 2026. Within-window shares.")
 
 
 def read_genai_vs_ml(path="genai_vs_ml_by_year.csv"):
@@ -67,7 +75,8 @@ def read_families(path="skill_families_by_year.csv"):
 
 
 def read_demand(path="demand_side_stats.csv"):
-    return {r["metric"]: (int(r["count"]), float(r["share_pct"]) if r["share_pct"] else None)
+    return {r["metric"]: (int(r["count"]), float(r["share_pct"]) if r["share_pct"] else None,
+                          r.get("measure_type", ""))
             for r in csv.DictReader(open(path))}
 
 
@@ -162,25 +171,31 @@ def fig_emerging():
     plt.close(fig)
 
 
-# --- figure 3: demand side ---------------------------------------------------
+# --- figure 3: demand-side vocabulary ----------------------------------------
 def fig_demand():
+    """Only TOPIC-MENTION measures appear here.
+
+    The requirement-phrasing measure is deliberately NOT plotted alongside
+    these: it is a different kind of measurement (narrow exact constructions,
+    known to undercount) and putting it on the same axis invites exactly the
+    false comparison that produced the retracted "8:1" claim.
+    """
     d = read_demand()
     items = [
         ("Mention AI at all", d["any_ai_mention"][1]),
-        ("Ask for generic AI fluency\n(“AI tools”, “AI-assisted”)", d["generic_fluency"][1]),
-        ("Describe themselves as AI-native\n(“AI-first”, “AI-powered”)", d["employer_self_description"][1]),
+        ("Generic AI vocabulary\n(“AI tools”, “AI-assisted”)", d["generic_fluency"][1]),
+        ("Describe the company as AI-native\n(“AI-first”, “AI-powered”)", d["employer_self_description"][1]),
         ("Name a specific product\n(ChatGPT, Copilot, LangChain)", d["named_products"][1]),
-        ("Ask the candidate for AI proficiency", d["candidate_requirement"][1]),
     ]
     labels = [k for k, _ in items]
     vals = [v for _, v in items]
 
-    fig, ax = plt.subplots(figsize=(9.4, 5.2), facecolor=SURFACE)
+    fig, ax = plt.subplots(figsize=(9.4, 4.8), facecolor=SURFACE)
     ax.set_facecolor(SURFACE)
     frame(ax, xgrid=True)
 
     # single series, magnitude only -> one hue, no legend needed
-    ax.barh(range(len(vals)), vals, height=0.52, color=C_OLD, zorder=2)
+    ax.barh(range(len(vals)), vals, height=0.5, color=C_OLD, zorder=2)
     for i, v in enumerate(vals):
         ax.text(v + 0.4, i, f"{v:.1f}%", va="center", fontsize=10, color=INK, weight="bold")
 
@@ -192,16 +207,53 @@ def fig_demand():
     ax.set_xticklabels(["0", "10%", "20%", "30%"])
     ax.set_xlabel("Share of job postings", fontsize=10, color=INK_2)
 
-    ax.annotate("8x", xy=(9.5, 3.5), fontsize=15, color=INK, weight="bold", ha="center")
-    ax.annotate("employers describe themselves as AI-native\n"
-                "8x more often than they ask a candidate for it",
-                xy=(11.2, 3.5), fontsize=9, color=INK_2, va="center")
+    ratio = d["generic_fluency"][1] / d["named_products"][1]
+    ax.annotate(f"{ratio:.1f}x", xy=(20.4, 2.55), fontsize=15, color=INK,
+                weight="bold", ha="center")
+    ax.annotate("generic AI vocabulary is used far\nmore than any named product",
+                xy=(22.0, 2.55), fontsize=9, color=INK_2, va="center")
 
-    titles(fig, "Everyone talks about AI. Almost nobody requires it.",
-           "How AI actually appears in US tech job postings.")
+    titles(fig, "Employers ask how you work, not which tool you use",
+           "How AI appears in US tech job postings. All four bars are the same measure: "
+           "does the phrase appear anywhere in the posting?")
     footer(fig, SOURCE_DEMAND)
-    fig.subplots_adjust(left=0.30, right=0.965, top=0.835, bottom=0.145)
+    fig.subplots_adjust(left=0.30, right=0.965, top=0.815, bottom=0.155)
     fig.savefig("03_demand_side.png", dpi=150, facecolor=SURFACE)
+    plt.close(fig)
+
+
+# --- figure 4: AI language by department -------------------------------------
+def fig_departments():
+    d = read_demand()
+    rows = [(k.split(":", 1)[1], v[1], v[0]) for k, v in d.items() if k.startswith("dept:")]
+    rows.sort(key=lambda r: -r[1])
+
+    fig, ax = plt.subplots(figsize=(9.4, 4.8), facecolor=SURFACE)
+    ax.set_facecolor(SURFACE)
+    frame(ax, xgrid=True)
+
+    names = [r[0] for r in rows]
+    vals = [r[1] for r in rows]
+    # Engineering is the reference point the reader expects to top the list
+    cols = [C_NEW if n == "Engineering" else C_OLD for n in names]
+    ax.barh(range(len(vals)), vals, height=0.55, color=cols, zorder=2)
+    for i, (n, v, cnt) in enumerate(rows):
+        ax.text(v + 0.7, i, f"{v:.1f}%", va="center", fontsize=9.5, color=INK, weight="bold")
+        ax.text(v + 6.8, i, f"n={cnt:,}", va="center", fontsize=8, color=INK_2)
+
+    ax.set_yticks(range(len(vals)))
+    ax.set_yticklabels(names, fontsize=9.5, color=INK)
+    ax.invert_yaxis()
+    ax.set_xlim(0, 78)
+    ax.set_xticks([0, 20, 40, 60])
+    ax.set_xticklabels(["0", "20%", "40%", "60%"])
+    ax.set_xlabel("Share of postings mentioning AI", fontsize=10, color=INK_2)
+
+    titles(fig, "AI language is densest outside engineering",
+           "Engineering (highlighted) is mid-pack. Small-n departments are indicative only.")
+    footer(fig, SOURCE_DEMAND + " Non-engineering roles here are largely at tech companies.")
+    fig.subplots_adjust(left=0.175, right=0.965, top=0.815, bottom=0.155)
+    fig.savefig("04_ai_by_department.png", dpi=150, facecolor=SURFACE)
     plt.close(fig)
 
 
@@ -209,4 +261,6 @@ if __name__ == "__main__":
     fig_crossover()
     fig_emerging()
     fig_demand()
-    print("wrote 01_genai_vs_ml_crossover.png, 02_emerging_skills.png, 03_demand_side.png")
+    fig_departments()
+    print("wrote 01_genai_vs_ml_crossover.png, 02_emerging_skills.png, "
+          "03_demand_side.png, 04_ai_by_department.png")
