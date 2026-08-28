@@ -281,7 +281,7 @@ def fig_hype_gap():
     ax.annotate("of the postings that mention AI\nrequire no AI skill at all",
                 xy=(31.0, 0.52), fontsize=9.5, color=INK_2, va="center")
 
-    titles(fig, "Everyone says AI. Few actually ask for it.",
+    titles(fig, "Tech employers mention AI 4x more than they require it",
            f"{HYPE['pct_talk_only_of_mentions']}% of ordinary tech postings that mention AI "
            "require no AI skill at all.")
     footer(fig, SOURCE_HYPE)

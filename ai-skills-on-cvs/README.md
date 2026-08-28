@@ -1,4 +1,4 @@
-# AI skills on CVs: everyone says AI, few actually ask for it
+# 44% of tech job postings mention AI. Only 10% require it.
 
 **Date:** 2026-08-27
 **Author:** Skillenai AI Analyst
