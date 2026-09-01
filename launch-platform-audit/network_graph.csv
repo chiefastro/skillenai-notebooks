@@ -1,0 +1,42 @@
+domain_a,domain_b,shared_signal,signal_value,confidence
+affonso.io,auraplusplus.com,shared_ip,216.150.16.1,low
+affonso.io,uno.directory,shared_ip,216.150.16.1,low
+auraplusplus.com,uno.directory,shared_ip,216.150.16.1,low
+earlyhunt.com,indiehunt.io,shared_ip,216.150.16.193,low
+earlyhunt.com,postingdude.com,shared_ip,216.150.16.193,medium
+foundrlist.com,launchpanda.dev,shared_ip,216.150.1.1,low
+foundrlist.com,makerhunt.io,shared_ip,216.150.1.1,low
+foundrlist.com,scrolllaunch.com,shared_ip,216.150.1.1,low
+foundrlist.com,startupa.ge,shared_ip,216.150.1.1,low
+foundrlist.com,tinylaunch.com,shared_ip,216.150.1.1,low
+foundrlist.com,toolfolio.io,shared_ip,216.150.1.1,medium
+foundrlist.com,trustmrr.com,shared_ip,216.150.1.1,low
+indiehunt.io,postingdude.com,shared_ip,216.150.16.193,low
+launchpanda.dev,makerhunt.io,shared_ip,216.150.1.1,low
+launchpanda.dev,scrolllaunch.com,shared_ip,216.150.1.1,low
+launchpanda.dev,startupa.ge,shared_ip,216.150.1.1,low
+launchpanda.dev,tinylaunch.com,shared_ip,216.150.1.1,low
+launchpanda.dev,toolfolio.io,shared_ip,216.150.1.1,low
+launchpanda.dev,trustmrr.com,shared_ip,216.150.1.1,low
+makerhunt.io,scrolllaunch.com,shared_ip,216.150.1.1,low
+makerhunt.io,startupa.ge,shared_ip,216.150.1.1,low
+makerhunt.io,tinylaunch.com,shared_ip,216.150.1.1,low
+makerhunt.io,toolfolio.io,shared_ip,216.150.1.1,low
+makerhunt.io,trustmrr.com,shared_ip,216.150.1.1,low
+peerpush.com,peerpush.net,favicon_hash,57f4b433ff23a046,medium
+scrolllaunch.com,startupa.ge,shared_ip,216.150.1.1,low
+scrolllaunch.com,tinylaunch.com,shared_ip,216.150.1.1,low
+scrolllaunch.com,toolfolio.io,shared_ip,216.150.1.1,low
+scrolllaunch.com,trustmrr.com,shared_ip,216.150.1.1,low
+startupa.ge,tinylaunch.com,shared_ip,216.150.1.1,low
+startupa.ge,toolfolio.io,shared_ip,216.150.1.1,low
+startupa.ge,trustmrr.com,shared_ip,216.150.1.1,low
+tinylaunch.com,toolfolio.io,shared_ip,216.150.1.1,low
+tinylaunch.com,trustmrr.com,shared_ip,216.150.1.1,low
+toolfolio.io,trustmrr.com,shared_ip,216.150.1.1,low
+postingdude.com,auraplusplus.com,explicit_ownership_statement,"ribution across six owned platforms every month—Aura++, IndieHunt, EarlyHunt, Uno Directory, MakerHunt, SideHunt—",high
+postingdude.com,earlyhunt.com,explicit_ownership_statement,"ribution across six owned platforms every month—Aura++, IndieHunt, EarlyHunt, Uno Directory, MakerHunt, SideHunt—",high
+postingdude.com,indiehunt.io,explicit_ownership_statement,"ribution across six owned platforms every month—Aura++, IndieHunt, EarlyHunt, Uno Directory, MakerHunt, SideHunt—",high
+postingdude.com,makerhunt.io,explicit_ownership_statement,"ribution across six owned platforms every month—Aura++, IndieHunt, EarlyHunt, Uno Directory, MakerHunt, SideHunt—",high
+postingdude.com,sidehunt.io,explicit_ownership_statement,"ribution across six owned platforms every month—Aura++, IndieHunt, EarlyHunt, Uno Directory, MakerHunt, SideHunt—",high
+postingdude.com,uno.directory,explicit_ownership_statement,"ribution across six owned platforms every month—Aura++, IndieHunt, EarlyHunt, Uno Directory, MakerHunt, SideHunt—",high
