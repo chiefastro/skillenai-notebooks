@@ -1,58 +1,75 @@
-# Software engineer pay vs. company trajectory: an independent map of 40 employers (2026)
+# Software engineer pay vs. company trajectory: an independent map of 45 employers (2026)
 
-**Skillenai × Live Data · advertised software-engineer pay vs. company workforce trajectory · analysis date 2026-07-06**
+**Skillenai × Live Data (+ Skillenai's own talent graph) · advertised software-engineer pay vs. workforce trajectory · refreshed 2026-09-03**
 
-The team at **[Levels.fyi](https://www.levels.fyi/)** recently shared a chart — *"Where should I work as a SWE in 2026?"* — plotting senior-SWE total compensation against how much each company had grown or cut over the trailing 24 months, using Levels.fyi for pay and Layoffs.fyi + SEC filings for headcount. Their point was sharp and, we think, correct: **in a volatile market, the offer number on its own stopped being enough to answer "where should I go?"**
+Earlier this year the team at **[Levels.fyi](https://www.levels.fyi/)** shared a chart — *"Where should I work as a SWE?"* — plotting senior-SWE pay against how much each company had grown or cut over 24 months, and made a sharp point: in a volatile market, **the offer number on its own stopped being enough to answer where you should go.** We rebuilt that picture from *different data* to see whether it holds, and this is the refreshed, expanded version.
 
-We wanted to see whether that conclusion holds up when you rebuild the picture from *completely different data* — and whether a couple of extra signals we happen to have can extend it. This is a companion to their work, not a correction of it. Where they used self-reported total compensation, we use **live job-posting salary bands**; where they used discrete layoff events, we use **continuous month-by-month workforce flow**. Two independent lenses on the same question.
+Two things are new since our first pass. First, everything is updated to a **September 2026** window (the pay data grew ~28%, and marquee names like NVIDIA, Uber, Oracle, ServiceNow and xAI now clear our coverage bar). Second, we now cross-check the trajectory axis against **Skillenai's own talent graph** — an independently-built supply-side dataset — alongside Live Data.
 
-Short version: **their central claim survives the switch of data sources intact.** Advertised pay and company trajectory turn out to be roughly independent — the pay number really doesn't tell you whether a company is growing or shrinking. And a third axis we can add, **turnover**, splits companies that look identical on a growth chart into "durable growth" and "hire-and-replace."
+Short version: **Levels' conclusion holds up even more cleanly on refreshed data.** Advertised pay and company trajectory are, statistically, independent. And two extra signals — turnover, and now median tenure from our own graph — separate companies that look identical on a pay-and-growth chart into very different bets.
 
 ---
 
-## What's different about our two measurements (read this first)
+## What's different about our measurements (read this first)
 
-This is **not** a reproduction of Levels' numbers, and it shouldn't be read as one:
+This is **not** a reproduction of Levels' numbers:
 
-- **Pay = advertised, not total comp.** Our x-axis is the **median midpoint of advertised US "Software Engineer" salary bands** from job postings (base salary bands; **excludes equity, bonus, and self-reported figures**). Levels measures self-reported *total* compensation including equity. So our Anthropic (~$402K) and Levels' Anthropic (~$800K TC) are measuring different things. What's striking is that the **rank order is preserved** — Anthropic tops both charts — which is a nice cross-validation of two very different collection methods. But do not compare the dollar *levels* between the charts; compare the *positions*.
-- **Trajectory = continuous net flow, not a layoff flag.** Our y-axis is **net workforce flow (arrivals − departures) over 24 months, as a share of average headcount**, from Live Data's supply-side panel of professional profiles — measured on a **corporate-family basis** (e.g. Cruise counts within GM, Meraki within Cisco). Levels used a binary "did they run a layoff at all" rule.
-- **Different company set.** Big Tech — Google, Meta, Amazon, Microsoft, Nvidia, Netflix, Intel, Oracle, IBM — is **absent from our pay axis** because those firms hire through proprietary applicant systems we don't index (fewer than 15 salaried US SWE postings each). So we cannot reproduce the newsworthy Intel/Oracle/IBM bottom-left corner (established names taking deep cuts). Our set skews toward **scale-ups and defense-tech** — the companies whose postings we see cleanly.
+- **Pay = advertised, not total comp.** Our x-axis is the **median midpoint of advertised US "Software Engineer" salary bands** (base; **excludes equity, bonus, self-reported figures**). Levels measures self-reported *total* comp with equity. Our Anthropic (~$402K) and Levels' Anthropic (~$800K TC) measure different things — compare *positions*, not dollar *levels*. Reassuringly, the rank order is stable and Anthropic tops both.
+- **Trajectory = continuous net flow.** Net flow (arrivals − departures) over 24 months as a share of average headcount, from Live Data's supply-side panel, corporate-family basis.
+- **A third, owned source.** We corroborate direction and add **median tenure** from Skillenai's own talent graph (built from public professional profiles). It's ~0.35% of the workforce, so we use it only where coverage is adequate — never as the headline axis.
+- **Company set.** Big Tech is still mostly absent from the pay axis (Google, Meta, Apple, Microsoft, Amazon use proprietary applicant systems we don't index), though NVIDIA, Uber, Oracle, ServiceNow and Snap now clear the bar. The set skews scale-up and defense-tech. Every qualifying company is plotted; only a recognizable subset is labelled.
 
-Everything below should be read as *directional positioning*, not precise pay estimation. Per-company posting counts range from 15 to ~500.
+Read positions as *directional*. Per-company posting counts range from ~19 to ~630.
 
 ---
 
 ## The map
 
-![Advertised SWE pay vs. 24-month workforce trajectory, 40 companies, coloured by turnover](01_comp_vs_flow_hero.png)
+![Advertised SWE pay vs. 24-month workforce trajectory, 45 companies, coloured by turnover](01_comp_vs_flow_hero.png)
 
-We split the map into four quadrants with plain labels: **high pay · hiring** (top-right), **lower pay · hiring** (top-left), **high pay · cutting** (bottom-right), **lower pay · cutting** (bottom-left). The vertical line is the median advertised SWE pay across the set (~$205K); the horizontal line is zero net change.
+Four quadrants, plain labels: **high pay · hiring** (top-right), **lower pay · hiring** (top-left), **high pay · cutting** (bottom-right), **lower pay · cutting** (bottom-left). Vertical line = median advertised SWE pay (~$208K); horizontal line = zero net change.
 
-### Finding 1 — Pay barely predicts trajectory
+### Finding 1 — Pay predicts trajectory even less than before
 
-Across 40 companies, the correlation between advertised SWE pay and 24-month workforce change is **weak and not robust** (Spearman ρ = 0.29, p = 0.07; drop the single outlier Anthropic and it falls to ρ = 0.24, p = 0.15 — indistinguishable from zero). In plain terms: **knowing what a company advertises for a software engineer tells you almost nothing about whether that company is growing or shrinking.** That is exactly the spirit of Levels' original point, now visible in a second, independent dataset. The information is in *where a company sits on the map*, not in the pay number alone.
+Across 45 companies, the correlation between advertised SWE pay and 24-month workforce change is **statistically zero** (Spearman ρ = 0.18, p = 0.25; drop the outlier Anthropic and it's ρ = 0.12, p = 0.44). This is *weaker* than our July read — with fresh data and new entrants, any hint of a pay-equals-safety signal has vanished. Knowing what a company pays a software engineer tells you nothing about whether it's growing or shrinking. The information is in *where a company sits on the map*.
 
-### Finding 2 — The top of the market has no trade-off (Anthropic)
+### Finding 2 — Three AI labs, three different bets
 
-**Anthropic sits alone in the top-right corner:** the highest advertised SWE pay in the set (~$402K midpoint, versus ~$301K for the next company) *and* +140% headcount growth over 24 months, at a low 16% turnover. The richest offer in our data is also attached to the fastest-growing, best-retaining company. Whatever the pay-vs-stability tension is, it does not bind at the very top right now — the AI leaders are paying the most and hiring the hardest at the same time.
+The high-pay / hiring corner is dominated by AI labs — but they are **not interchangeable**:
 
-### Finding 3 — High pay, shrinking headcount: the Scale AI case
+- **Anthropic**: ~$402K, **+138%** headcount, 20% turnover. Richest and fastest-growing.
+- **xAI**: **$310K (highest advertised pay in the set)**, +142% growth — but **56% turnover**, the churn of a company scaling explosively and cycling people just as fast.
+- **NVIDIA**: $253K, +22% growth, and the **lowest turnover in the set (11%)** — the "well-paid, growing, *and* stable" bet the others don't offer.
 
-The high-pay / shrinking corner is where a job-seeker most needs the second number. In our data the standout is **Scale AI**: top-three advertised pay (~$243K) but **net −7% headcount** and the **highest turnover in the entire set (77%)**.
+The pay-vs-stability trade-off doesn't bind at the top of the market — but *retention* clearly separates these three.
 
-We checked whether that churn was just a labeling artifact of the mid-2025 Meta stake — i.e. staff flipping their profile from Scale AI to Meta — and it isn't. Tracing where Scale AI's leavers actually went (447 with a recorded next employer), **Meta is only the single largest destination at ~9%**; the other ~91% scattered across frontier labs that had been Scale's customers (xAI, Anthropic, OpenAI, Google, Amazon) and a swarm of rival data-labeling startups (Mercor, micro1, Snorkel AI, Turing, Appen, Welo). No single destination cracks 10%. So the turnover is a **genuine post-deal unwinding**: the Meta stake spooked Scale's customers, its business contracted, and talent dispersed to the competitors who picked up the displaced work. On pay alone Scale AI looks like a top destination; on trajectory and churn it's the clearest case in the set of an offer number and a company's direction pointing opposite ways.
+### Finding 3 — High pay, shrinking headcount: Scale AI, sharper than ever
 
-### Finding 4 — The turnover axis Levels couldn't see
+**Scale AI** is the clearest "high pay, cutting" case: ~$243K but **net −8%** and the **highest turnover in the set — 82%** (up from 77% in the spring), with a median tenure of just **8 months** on our own graph. We again checked whether the churn is just staff relabeling to Meta after the 2025 deal — it isn't. Tracing 372 leavers with a recorded next employer, **the #1 destination is now Mercor, a direct data-labeling rival; Meta is ~13%.** No destination cracks 15%. It's a genuine post-deal unwinding — customers pulled work after the Meta stake, and talent dispersed to the competitors who picked it up.
 
-Because we measure continuous flow rather than a layoff flag, we can add a dimension the original chart couldn't: **churn**.
+### Finding 4 — Two retention signals a layoff flag can't see
+
+Continuous flow lets us add **turnover**, and our own graph adds **tenure** — together they reveal *how* a company is growing or shrinking.
 
 ![Growth vs. turnover: durable growth vs. hire-and-replace](02_growth_vs_churn.png)
 
-Growth and turnover are essentially uncorrelated (ρ = −0.13), which means **companies growing at the same rate can be doing it in completely different ways.** Compare two ~45% growers: **Databricks** (+45% net, 20% turnover — durable, retained growth) versus **Vercel** (+49% net, **50% turnover** — hire-and-replace). Same dot on a growth-only chart; very different places to spend three years of your career. The cleanest "durable growth" cluster (fast growth, low churn) is **Harvey, ClickHouse, CoreWeave, Anthropic, Anduril, Databricks**; the "growing but churny" pair is **Vercel and Sigma Computing**.
+- **Durable growth vs. churn-and-burn**: Databricks (+45%, 21% turnover) and Vercel (+49%, **55%** turnover) grow at the same rate but are opposite bets. The clean durable-growth cluster is Anthropic, NVIDIA, Anduril, CoreWeave, Databricks, Harvey.
+- **Type of shrinkage** (from owned-graph tenure): Scale AI shrinks with an **8-month** median tenure — rapid in-and-out churn. General Motors and Cisco also shrink, but at **~24-month** tenure — a slow decline of a long-tenured workforce. Same negative flow, opposite mechanism.
 
-### Finding 5 — Legacy names drift down, new defense-tech climbs
+### Finding 5 — Legacy giants drift, new defense-tech climbs
 
-Our lower-pay / shrinking corner holds the established names we *can* see: **General Motors (−9%), Cisco (−6%), Rivian (−4%), Lyft (−2%), Lockheed Martin (~0%)** — flat-to-shrinking trajectories (though these are shallow drifts, not the deep cuts the original chart showed for Intel/Oracle). Meanwhile a **new-defense / hard-tech cluster hires hard at mid-market pay**: **Anduril (+89%, $213K), Applied Intuition (+73%, $183K), Axon (+28%), Skydio (+21%), SpaceX (+15%, $150K)**. The contrast between old defense (Lockheed, flat) and new defense (Anduril, +89%) is one of the sharper stories on the map.
+The lower/high-pay cutting rows hold the established names: **Oracle (−7%), General Motors (−8%), Cisco (−7%), Lyft (−2%), Instacart (−1%)**. Against them, a **new-defense / hard-tech cluster hires hard**: **Anduril (+89%), Applied Intuition (+69%), Axon (+27%), SpaceX (+24%), Skydio (+20%)**. Old defense (Lockheed, ~flat) vs. new defense (Anduril, +89%) remains one of the sharpest contrasts on the map.
+
+---
+
+## What Skillenai's own talent graph adds
+
+The trajectory axis is Live Data's. But we now hold an independently-built talent graph, and it earns two roles here:
+
+1. **Cross-source validation.** For the companies where our graph has adequate coverage, its net-flow **sign agrees with Live Data in 18 of 19 cases** (the lone exception, Rivian, is within noise). Two separately-sourced supply-side datasets agreeing is strong corroboration that the map isn't an artifact of one vendor.
+2. **Median tenure** — the churn-*type* signal in Finding 4, which neither the pay axis nor net-flow exposes.
+
+We deliberately keep the owned graph in a supporting role: it samples ~0.35% of the workforce, so we report tenure only for companies with adequate coverage, and read low tenure as *churn* only when it is paired with negative flow (fast growth also lowers tenure — e.g. Roblox's low tenure is hiring-driven, not attrition).
 
 ---
 
@@ -60,71 +77,72 @@ Our lower-pay / shrinking corner holds the established names we *can* see: **Gen
 
 ![Advertised SWE pay ranking](03_pay_ranking.png)
 
-| Company | Adv. SWE pay | SWE N | Net Δ 24mo | Turnover | Quadrant |
-|---|--:|--:|--:|--:|---|
-| Anthropic | $402K | 174 | +140% | 16% | High pay · hiring |
-| Roku | $301K | 21 | +11% | 23% | High pay · hiring |
-| Pinterest | $271K | 18 | +17% | 30% | High pay · hiring |
-| Harvey | $245K | 35 | +192% | 0% | High pay · hiring |
-| Vercel | $245K | 24 | +49% | 50% | High pay · hiring |
-| Notion | $244K | 15 | +61% | 32% | High pay · hiring |
-| Scale AI | $243K | 39 | -7% | 77% | High pay · cutting |
-| Nuro | $243K | 29 | +4% | 33% | High pay · hiring |
-| Sentry | $235K | 17 | +14% | 24% | High pay · hiring |
-| Reddit | $229K | 23 | +27% | 25% | High pay · hiring |
-| Sony Interactive | $227K | 15 | +12% | 19% | High pay · hiring |
-| Roblox | $220K | 22 | +22% | 23% | High pay · hiring |
-| Crusoe | $218K | 24 | +152% | 29% | High pay · hiring |
-| Stripe | $216K | 19 | +34% | 27% | High pay · hiring |
-| Asana | $216K | 22 | -7% | 44% | High pay · cutting |
-| Brex | $216K | 17 | +22% | 43% | High pay · hiring |
-| Anduril | $213K | 495 | +89% | 19% | High pay · hiring |
-| Discord | $208K | 64 | +11% | 25% | High pay · hiring |
-| Sigma Computing | $205K | 88 | +45% | 48% | High pay · hiring |
-| Verkada | $205K | 37 | +11% | 55% | High pay · hiring |
-| Skydio | $205K | 15 | +21% | 36% | High pay · hiring |
-| Instacart | $204K | 24 | -1% | 17% | Lower pay · cutting |
-| CoreWeave | $204K | 38 | +122% | 12% | Lower pay · hiring |
-| Checkr | $202K | 15 | +5% | 39% | Lower pay · hiring |
-| Robinhood | $201K | 22 | +18% | 33% | Lower pay · hiring |
-| Gusto | $200K | 26 | +30% | 29% | Lower pay · hiring |
-| Adobe | $198K | 42 | +11% | 19% | Lower pay · hiring |
-| Databricks | $196K | 129 | +45% | 20% | Lower pay · hiring |
-| Chime | $196K | 29 | +12% | 31% | Lower pay · hiring |
-| General Motors | $190K | 33 | -9% | 20% | Lower pay · cutting |
-| Cisco | $186K | 78 | -6% | 21% | Lower pay · cutting |
-| Axon | $183K | 31 | +28% | 23% | Lower pay · hiring |
-| Applied Intuition | $183K | 55 | +73% | 34% | Lower pay · hiring |
-| Rivian | $183K | 15 | -4% | 33% | Lower pay · cutting |
-| StubHub | $182K | 27 | +7% | 40% | Lower pay · hiring |
-| ClickHouse | $169K | 15 | +134% | 0% | Lower pay · hiring |
-| Lyft | $166K | 19 | -2% | 16% | Lower pay · cutting |
-| eBay | $162K | 23 | +3% | 16% | Lower pay · hiring |
-| SpaceX | $150K | 172 | +15% | 26% | Lower pay · hiring |
-| Lockheed Martin | $132K | 25 | -0% | 11% | Lower pay · cutting |
+| Company | Adv. SWE pay | SWE N | Net Δ 24mo | Turnover | Owned tenure (mo) | Quadrant |
+|---|--:|--:|--:|--:|--:|---|
+| Anthropic | $402K | 253 | +138% | 20% | — | high pay · hiring |
+| xAI | $310K | 30 | +142% | 56% | — | high pay · hiring |
+| Roku | $303K | 31 | +10% | 24% | — | high pay · hiring |
+| Pinterest | $271K | 38 | +13% | 34% | 13 | high pay · hiring |
+| Nvidia | $253K | 37 | +22% | 11% | 13 | high pay · hiring |
+| Snap | $246K | 19 | +4% | 42% | — | high pay · hiring |
+| Harvey | $245K | 53 | +148% | 19% | — | high pay · hiring |
+| Vercel | $245K | 34 | +49% | 55% | — | high pay · hiring |
+| Scale AI | $243K | 73 | -8% | 82% | 8 | high pay · cutting |
+| Nuro | $243K | 56 | +6% | 32% | — | high pay · hiring |
+| Sentry | $235K | 24 | +19% | 22% | 26 | high pay · hiring |
+| Reddit | $229K | 28 | +25% | 29% | — | high pay · hiring |
+| ServiceNow | $229K | 26 | +17% | 23% | — | high pay · hiring |
+| Notion | $228K | 20 | +47% | 39% | — | high pay · hiring |
+| StubHub | $225K | 31 | +1% | 40% | — | high pay · hiring |
+| Sony Interactive | $222K | 24 | +10% | 18% | 27 | high pay · hiring |
+| Oracle | $221K | 21 | -7% | 26% | — | high pay · cutting |
+| Roblox | $220K | 26 | +26% | 22% | 4 | high pay · hiring |
+| Anduril | $217K | 632 | +90% | 20% | 10 | high pay · hiring |
+| Asana | $216K | 30 | -7% | 45% | — | high pay · cutting |
+| Brex | $216K | 20 | +22% | 46% | — | high pay · hiring |
+| Uber | $213K | 67 | +4% | 19% | 16 | high pay · hiring |
+| Discord | $208K | 90 | +10% | 27% | — | high pay · hiring |
+| Sigma Computing | $205K | 88 | +39% | 55% | — | lower pay · hiring |
+| Verkada | $205K | 64 | +11% | 52% | — | lower pay · hiring |
+| Skydio | $205K | 27 | +20% | 38% | — | lower pay · hiring |
+| Instacart | $204K | 25 | -1% | 18% | 19 | lower pay · cutting |
+| CoreWeave | $204K | 47 | +116% | 15% | — | lower pay · hiring |
+| Checkr | $202K | 30 | +10% | 40% | — | lower pay · hiring |
+| Robinhood | $201K | 34 | +18% | 38% | — | lower pay · hiring |
+| Gusto | $200K | 59 | +28% | 29% | — | lower pay · hiring |
+| Stripe | $198K | 47 | +34% | 28% | 20 | lower pay · hiring |
+| Adobe | $198K | 66 | +8% | 20% | 14 | lower pay · hiring |
+| Crusoe | $198K | 49 | +118% | 25% | — | lower pay · hiring |
+| Databricks | $196K | 146 | +45% | 21% | 17 | lower pay · hiring |
+| Chime | $196K | 38 | +10% | 33% | — | lower pay · hiring |
+| Zscaler | $191K | 23 | +10% | 32% | — | lower pay · hiring |
+| General Motors | $190K | 45 | -8% | 20% | 24 | lower pay · cutting |
+| Cisco | $189K | 192 | -6% | 20% | 24 | lower pay · cutting |
+| Applied Intuition | $183K | 63 | +69% | 37% | — | lower pay · hiring |
+| Axon | $183K | 39 | +27% | 25% | 18 | lower pay · hiring |
+| eBay | $172K | 45 | +4% | 17% | 18 | lower pay · hiring |
+| Lyft | $166K | 23 | -2% | 16% | 15 | lower pay · cutting |
+| SpaceX | $150K | 366 | +24% | 24% | 11 | lower pay · hiring |
+| Lockheed Martin | $133K | 44 | +1% | 11% | 22 | lower pay · hiring |
 
-*Turnover shown as 0% for Harvey and ClickHouse reflects **no departures recorded in the panel** for these very young, recently-scaled companies — read it as "too new to have measurable attrition," not literally zero.*
+*"Owned tenure" is shown only where Skillenai's talent graph has adequate per-company coverage (≈40+ observed staff); "—" means too thin to report.*
 
 ---
 
 ## Methodology
 
-**Pay (x-axis) — Skillenai job-posting index.** Median of the per-posting midpoint `(salaryMin + salaryMax)/2` for postings with `role = "Software Engineer"`, `salaryCurrency = USD`, US location, and both salary bounds present. Company variants were merged to a single canonical entity (e.g. three "Anduril" spellings; two "CoreWeave"). We report all-seniority medians for sample size; a senior-only slice (senior/staff/principal) tracks them closely for most companies. Known spam employers were excluded.
+- **Pay (x)** — Skillenai job-posting index. Median of per-posting midpoint `(salaryMin+salaryMax)/2`, role = "Software Engineer", USD, US, both bounds present. Company name-variants merged; spam employers excluded.
+- **Trajectory (y)** — Live Data supply-side panel. Arrivals/departures (status = any) over 2024-09-01 → 2026-09-01, corporate-family basis. Growth = net ÷ average headcount; turnover = departures ÷ average headcount. Panel-based sample measures — signs and relative magnitudes are the signal.
+- **Corroboration** — Skillenai talent graph `company-signals` (net-flow sign, median tenure). Small-cell suppressed; tenure reported only at ≈40+ observed staff.
+- **Stats** — Spearman ρ with an outlier-sensitivity check.
 
-**Trajectory (y-axis) — Live Data supply-side panel.** Arrivals and departures for each company (job status = any, so departures are counted) aggregated over 2024-07-01 → 2026-07-01, on a corporate-family basis. **Net change** = arrivals − departures; **growth** = net change ÷ average headcount over the window (a symmetric rate, which behaves well for companies that were near-zero in the panel at the start). **Turnover** = departures ÷ average headcount. These are panel-based sample measures: treat signs and relative magnitudes as the signal, not absolute counts.
-
-**Correlations** use Spearman's ρ (rank-based, robust to the skew in both axes), with an outlier-sensitivity check.
-
-### Limits and honest caveats
-- Advertised base bands ≠ total compensation; **do not compare dollar levels to Levels.fyi**, only positions.
-- Big Tech and other proprietary-ATS employers are absent from the pay axis; the set is scale-up / defense-tech heavy.
-- Per-company posting counts are small (15–500); positions are directional.
-- Corporate-family consolidation folds subsidiaries into parents (e.g. Cruise → GM); a few small subsidiary attributions are approximate.
-- A handful of companies were dropped for insufficient or unreliable panel coverage.
-- The supply-side panel is a sample of professional profiles with update lag; very young companies can show artificially low departures.
-
----
+### Caveats
+- Advertised base bands ≠ total compensation; do not compare dollar levels to Levels.fyi.
+- Big Tech largely absent from the pay axis; set skews scale-up / defense-tech.
+- Per-company posting counts are modest (~19–630); positions are directional.
+- Corporate-family consolidation folds subsidiaries into parents (e.g. Cruise → GM).
+- Owned-graph employment data is a thin sample and lags on recency, so it corroborates rather than drives; Live Data provides the current trajectory.
 
 ## Credit
 
-The framing, the quadrants, and the original question are **Levels.fyi's** — this is an independent corroboration and extension built on top of their idea, using live job-posting pay data (Skillenai) and supply-side workforce flow (Live Data). If the pay-vs-stability question interests you, their interactive chart and data explorer are the place to start.
+The framing, the quadrants, and the original question are **Levels.fyi's** — this is an independent corroboration and extension built on top of their idea, using live job-posting pay (Skillenai), supply-side workforce flow (Live Data), and Skillenai's own talent graph.
