@@ -1,12 +1,10 @@
 # Software engineer pay vs. company trajectory: an independent map of 45 employers (2026)
 
-**Skillenai × Live Data (+ Skillenai's own talent graph) · advertised software-engineer pay vs. workforce trajectory · refreshed 2026-09-03**
+**Skillenai × Live Data (+ Skillenai's own talent graph) · advertised software-engineer pay vs. workforce trajectory · September 2026**
 
-Earlier this year the team at **[Levels.fyi](https://www.levels.fyi/)** shared a chart — *"Where should I work as a SWE?"* — plotting senior-SWE pay against how much each company had grown or cut over 24 months, and made a sharp point: in a volatile market, **the offer number on its own stopped being enough to answer where you should go.** We rebuilt that picture from *different data* to see whether it holds, and this is the refreshed, expanded version.
+The team at **[Levels.fyi](https://www.levels.fyi/)** framed a good question with their *"Where should I work as a SWE?"* chart — plotting senior-SWE pay against how much each company had grown or cut over 24 months, and making a sharp point: in a volatile market, **the offer number on its own stopped being enough to answer where you should go.** We answer it from a different angle: not self-reported total comp and layoff headlines, but **live job-posting salaries**, **continuous month-by-month workforce flow**, and cross-checks against **Skillenai's own talent graph.**
 
-Two things are new since our first pass. First, everything is updated to a **September 2026** window (the pay data grew ~28%, and marquee names like NVIDIA, Uber, Oracle, ServiceNow and xAI now clear our coverage bar). Second, we now cross-check the trajectory axis against **Skillenai's own talent graph** — an independently-built supply-side dataset — alongside Live Data.
-
-Short version: **Levels' conclusion holds up even more cleanly on refreshed data.** Advertised pay and company trajectory are, statistically, independent. And two extra signals — turnover, and now median tenure from our own graph — separate companies that look identical on a pay-and-growth chart into very different bets.
+We map 45 companies where we have solid data on both axes. Short version: **advertised pay and company trajectory are, statistically, independent** — the pay number tells you almost nothing about whether a company is growing or shrinking. Two extra signals — turnover, and median tenure from our own graph — separate companies that look identical on a pay-and-growth chart into very different bets.
 
 ---
 
@@ -17,7 +15,7 @@ This is **not** a reproduction of Levels' numbers:
 - **Pay = advertised, not total comp.** Our x-axis is the **median midpoint of advertised US "Software Engineer" salary bands** (base; **excludes equity, bonus, self-reported figures**). Levels measures self-reported *total* comp with equity. Our Anthropic (~$402K) and Levels' Anthropic (~$800K TC) measure different things — compare *positions*, not dollar *levels*. Reassuringly, the rank order is stable and Anthropic tops both.
 - **Trajectory = continuous net flow.** Net flow (arrivals − departures) over 24 months as a share of average headcount, from Live Data's supply-side panel, corporate-family basis.
 - **A third, owned source.** We corroborate direction and add **median tenure** from Skillenai's own talent graph (built from public professional profiles). It's ~0.35% of the workforce, so we use it only where coverage is adequate — never as the headline axis.
-- **Company set.** Big Tech is still mostly absent from the pay axis (Google, Meta, Apple, Microsoft, Amazon use proprietary applicant systems we don't index), though NVIDIA, Uber, Oracle, ServiceNow and Snap now clear the bar. The set skews scale-up and defense-tech. Every qualifying company is plotted; only a recognizable subset is labelled.
+- **Company set.** Big Tech is mostly absent from the pay axis (Google, Meta, Apple, Microsoft, Amazon use proprietary applicant systems we don't index), though NVIDIA, Uber, Oracle, ServiceNow and Snap do clear it. The set skews scale-up and defense-tech. Every qualifying company is plotted; only a recognizable subset is labelled.
 
 Read positions as *directional*. Per-company posting counts range from ~19 to ~630.
 
@@ -29,9 +27,9 @@ Read positions as *directional*. Per-company posting counts range from ~19 to ~6
 
 Four quadrants, plain labels: **high pay · hiring** (top-right), **lower pay · hiring** (top-left), **high pay · cutting** (bottom-right), **lower pay · cutting** (bottom-left). Vertical line = median advertised SWE pay (~$208K); horizontal line = zero net change.
 
-### Finding 1 — Pay predicts trajectory even less than before
+### Finding 1 — Pay barely predicts a company's trajectory
 
-Across 45 companies, the correlation between advertised SWE pay and 24-month workforce change is **statistically zero** (Spearman ρ = 0.18, p = 0.25; drop the outlier Anthropic and it's ρ = 0.12, p = 0.44). This is *weaker* than our July read — with fresh data and new entrants, any hint of a pay-equals-safety signal has vanished. Knowing what a company pays a software engineer tells you nothing about whether it's growing or shrinking. The information is in *where a company sits on the map*.
+Across 45 companies, the correlation between advertised SWE pay and 24-month workforce change is **statistically zero** (Spearman ρ = 0.18, p = 0.25; drop the outlier Anthropic and it's ρ = 0.12, p = 0.44). High pay is neither a warning sign nor a safety signal — knowing what a company pays a software engineer tells you nothing about whether it's growing or shrinking. The information is in *where a company sits on the map*.
 
 ### Finding 2 — Three AI labs, three different bets
 
@@ -43,9 +41,9 @@ The high-pay / hiring corner is dominated by AI labs — but they are **not inte
 
 The pay-vs-stability trade-off doesn't bind at the top of the market — but *retention* clearly separates these three.
 
-### Finding 3 — High pay, shrinking headcount: Scale AI, sharper than ever
+### Finding 3 — High pay, shrinking headcount: the Scale AI case
 
-**Scale AI** is the clearest "high pay, cutting" case: ~$243K but **net −8%** and the **highest turnover in the set — 82%** (up from 77% in the spring), with a median tenure of just **8 months** on our own graph. We again checked whether the churn is just staff relabeling to Meta after the 2025 deal — it isn't. Tracing 372 leavers with a recorded next employer, **the #1 destination is now Mercor, a direct data-labeling rival; Meta is ~13%.** No destination cracks 15%. It's a genuine post-deal unwinding — customers pulled work after the Meta stake, and talent dispersed to the competitors who picked it up.
+**Scale AI** is the clearest "high pay, cutting" case: ~$243K but **net −8%** and the **highest turnover in the set — 82%**, with a median tenure of just **8 months** on our own graph. We again checked whether the churn is just staff relabeling to Meta after the 2025 deal — it isn't. Tracing 372 leavers with a recorded next employer, **the #1 destination is now Mercor, a direct data-labeling rival; Meta is ~13%.** No destination cracks 15%. It's a genuine post-deal unwinding — customers pulled work after the Meta stake, and talent dispersed to the competitors who picked it up.
 
 ### Finding 4 — Two retention signals a layoff flag can't see
 
