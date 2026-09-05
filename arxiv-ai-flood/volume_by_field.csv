@@ -1,0 +1,78 @@
+field,year,papers
+AI (cs.AI/LG/CL/CV),2015,5622
+AI (cs.AI/LG/CL/CV),2016,9058
+AI (cs.AI/LG/CL/CV),2017,13514
+AI (cs.AI/LG/CL/CV),2018,21872
+AI (cs.AI/LG/CL/CV),2019,32043
+AI (cs.AI/LG/CL/CV),2020,42913
+AI (cs.AI/LG/CL/CV),2021,47665
+AI (cs.AI/LG/CL/CV),2022,52657
+AI (cs.AI/LG/CL/CV),2023,66213
+AI (cs.AI/LG/CL/CV),2024,85966
+AI (cs.AI/LG/CL/CV),2025,106027
+Biology (q-bio.*),2015,2300
+Biology (q-bio.*),2016,2461
+Biology (q-bio.*),2017,2486
+Biology (q-bio.*),2018,2731
+Biology (q-bio.*),2019,2916
+Biology (q-bio.*),2020,4257
+Biology (q-bio.*),2021,3301
+Biology (q-bio.*),2022,3225
+Biology (q-bio.*),2023,3789
+Biology (q-bio.*),2024,4383
+Biology (q-bio.*),2025,5068
+Econ/Finance,2015,875
+Econ/Finance,2016,956
+Econ/Finance,2017,1011
+Econ/Finance,2018,1464
+Econ/Finance,2019,1927
+Econ/Finance,2020,2674
+Econ/Finance,2021,2892
+Econ/Finance,2022,2782
+Econ/Finance,2023,3097
+Econ/Finance,2024,3636
+Econ/Finance,2025,4519
+Mathematics,2015,32291
+Mathematics,2016,33679
+Mathematics,2017,35565
+Mathematics,2018,37382
+Mathematics,2019,40242
+Mathematics,2020,43070
+Mathematics,2021,42027
+Mathematics,2022,42363
+Mathematics,2023,44877
+Mathematics,2024,48751
+Mathematics,2025,52419
+Condensed matter,2015,16763
+Condensed matter,2016,17609
+Condensed matter,2017,17584
+Condensed matter,2018,18263
+Condensed matter,2019,19528
+Condensed matter,2020,20870
+Condensed matter,2021,20470
+Condensed matter,2022,19730
+Condensed matter,2023,20946
+Condensed matter,2024,21965
+Condensed matter,2025,24115
+Astrophysics,2015,14938
+Astrophysics,2016,15179
+Astrophysics,2017,15137
+Astrophysics,2018,15948
+Astrophysics,2019,16602
+Astrophysics,2020,17289
+Astrophysics,2021,17118
+Astrophysics,2022,17143
+Astrophysics,2023,18004
+Astrophysics,2024,19227
+Astrophysics,2025,21870
+CS excl. AI,2015,2225
+CS excl. AI,2016,2625
+CS excl. AI,2017,3009
+CS excl. AI,2018,3689
+CS excl. AI,2019,4365
+CS excl. AI,2020,5025
+CS excl. AI,2021,5566
+CS excl. AI,2022,5346
+CS excl. AI,2023,6444
+CS excl. AI,2024,7964
+CS excl. AI,2025,10258
