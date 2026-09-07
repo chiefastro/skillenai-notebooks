@@ -85,9 +85,11 @@ Rank is the right unit here. It is computed within each period, so the shorter d
 
 ## 4. Experience is paid for a decade
 
-![Line chart of median advertised salary against required years of experience, rising steadily to ten years and then flat, with marker size showing sample size](04_pay_plateau.png)
+![Chart of advertised salary against required years of experience showing median, 95% bootstrap confidence intervals and the P25-P75 band, rising to ten years then flat](04_pay_plateau.png)
 
-Median advertised pay climbs to 10 years of required experience and stops. With role and state fixed effects, each year up to 10 is worth **+5.27%** (p≈0); each year beyond is worth **−1.75%** (p=1.9e-26). Under a conservative specification that also controls seniority — arguably over-controlling, since seniority is *how* experience gets paid — it is +2.40% then −0.14% (n.s.): flat either way.
+Median advertised pay climbs to 10 years of required experience and stops: **$227,500 at 10 years, $227,500 at 11-12 years**, then $208,340 at 13-15. Bands show the middle 50% of postings; error bars are bootstrap 95% CIs on the median.
+
+The **16+ bucket is excluded**: 74% of it (167 of 225 postings) is a single employer, which is a composition artifact rather than a market rate. With that employer removed the bucket holds 58 postings at a $208,340 median - directionally consistent, too thin to plot. With role and state fixed effects, each year up to 10 is worth **+5.27%** (p≈0); each year beyond is worth **−1.75%** (p=1.9e-26). Under a conservative specification that also controls seniority — arguably over-controlling, since seniority is *how* experience gets paid — it is +2.40% then −0.14% (n.s.): flat either way.
 
 Demand thins out fast:
 
