@@ -18,7 +18,21 @@
 
 ## 1. How much does a job title tell you?
 
-For each posting we find the ten postings whose *skills* are closest, and ask how many carry a different job title. No role model, no thresholds, no clustering — just nearest neighbours in skill space.
+Give me a posting's title and ask me to predict its skills: cross-validated, the title explains **6.9%** of the variance (5.4% on the full vocabulary, 8.6% restricted to skills appearing in ≥50 postings).
+
+**This replicates on an independent corpus with an opposite generating process.** A job ad is written by a recruiter to attract applicants; a career-profile description is written by the worker afterwards. Running the identical test on 138,123 profile positions (2018+, 27 roles, 5,200 skill dimensions):
+
+| | job postings | career profiles |
+|---|---|---|
+| records | 44,417 | 138,123 |
+| **CV variance explained by title** | **6.9%** | **3.9%** |
+| shuffled-label baseline | −0.15% | −0.04% |
+| nearest neighbours under another title | 47.6% | 57.6% |
+| **majority under another title** | **52.5%** | **62.2%** |
+
+Titles explain *less* on the profile side, not more.
+
+For the per-role view we find the ten postings whose *skills* are closest, and ask how many carry a different job title. No role model, no thresholds, no clustering — just nearest neighbours in skill space.
 
 ![Horizontal bar chart ranking 32 tech job titles by the share of their ten nearest postings in skill space that carry a different title, from Product Engineer at 81% down to Product Designer at 9%](01_role_blur.png)
 
@@ -42,6 +56,8 @@ Listing every neighbour role holding ≥8% of the ten nearest postings (a variab
 | Data Scientist | 56% | Data Analyst 14%, ML Engineer 11% |
 | Security Engineer | 72% | *nothing above threshold* |
 | Product Designer | **92%** | *nothing above threshold* |
+
+**The per-role ordering is specific to job postings and does not transfer to profiles.** Across the 13 roles measurable on both sides the correlation is weak and not significant (Spearman ρ=0.23, p=0.45): Product Designer is the most self-contained title in job ads (9%) but only middling in how designers describe their own work (33%), while Software Engineer runs the opposite way (69% vs 44%). That may be a real difference between advertising a job and describing having done it, or it may reflect that the two sides identify roles differently — the postings side uses the index's own `role` field, the profile side a regex over free-text titles. Not separable here, so the table below is a claim about **job postings**.
 
 **The asymmetries are the interesting part.** UX Designer sends 51% of its neighbourhood to Product Designer, and Product Designer sends essentially nothing back — that is a title being absorbed, not two titles merging. The same one-way pull shows up in Research Engineer → ML Engineer (26%), Research Scientist → ML Engineer (24%), and Cloud/Platform/Infrastructure → DevOps (23%, 20%, 16%): four titles orbiting one job.
 
@@ -112,6 +128,8 @@ Stated plainly, because these were tested and failed rather than skipped:
 - **Whether jobs ask for more skills than they used to.** Measured against a 2026 vocabulary, skills per position rises 1.36×. Measured on skills present in both eras, it is **0.99×** — flat. The apparent growth is the dictionary, not the jobs.
 
 ## Method
+
+**Title vs skills.** Cross-validated: role means fit on a train half, scored on a held-out half, so the number answers "given only the title, how well can you predict a *new* record's skills". Run identically on both corpora.
 
 **Role blurring.** Postings are binary vectors over 7,562 canonicalised skills (≥10 postings each); cosine nearest neighbours; role labels from the index's own `role` field with spelling and seniority variants merged. 400 sampled query postings per role, roles with ≥300 postings.
 
