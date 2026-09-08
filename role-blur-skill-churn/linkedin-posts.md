@@ -71,9 +71,11 @@ with the five-year-half-life myth scored 871.4 and was rejected.)
 ```
 Give me a tech job posting's title and ask me to predict which skills it requires. I can explain under 10% of the variance.
 
-That is across 44,417 US postings, cross validated, and it replicates on two completely different representations of the data.
+That is across 44,417 US postings, cross validated. Then I ran the identical test on a completely different corpus: 138,123 career profile positions, written by workers describing jobs they had already done rather than by recruiters advertising jobs they wanted to fill.
 
-Here is the same fact in a form you can feel. For each posting, take the ten postings whose skills sit closest to it, and count how many carry a different title. For 52.5% of postings, most of their nearest skill matches are filed under someone else's title.
+Postings: the title explains 6.9% of the variance in skills. Profiles: 3.9%. Titles predict even less when the person who did the job is the one describing it.
+
+Here is the same fact in a form you can feel. For each posting, take the ten postings whose skills sit closest to it, and count how many carry a different title. For 52.5% of postings, most of their nearest skill matches are filed under someone else's title. On profiles it is 62.2%.
 
 The spread is ninefold. A Product Engineer posting looks like another job 81% of the time. A Product Designer posting: 9%.
 
@@ -88,9 +90,10 @@ If you filter your job search by title, you are discarding most of the market.
 What is the least informative job title you have ever been given?
 ```
 
-Score: **1455.3 / 19.3** — highest of the three, unrevised. It was already
-acronym-dense (AI, ML, UX, DevOps), which is the strongest single positive feature
-in the model.
+Score: **1470.4 / 20.5** — highest of the three. The one revision added the
+profile-corpus corroboration (6.9% postings vs 3.9% profiles), +1% impressions
+and +6% engagements over the unrevised 1455.3 / 19.3. It was already
+acronym-dense (AI, ML, UX, DevOps), the strongest single positive feature.
 
 ---
 
