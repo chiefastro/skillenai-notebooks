@@ -131,7 +131,18 @@ Stated plainly, because these were tested and failed rather than skipped:
 
 **Title vs skills.** Cross-validated: role means fit on a train half, scored on a held-out half, so the number answers "given only the title, how well can you predict a *new* record's skills". Run identically on both corpora.
 
-**Role blurring.** Postings are binary vectors over 7,562 canonicalised skills (≥10 postings each); cosine nearest neighbours; role labels from the index's own `role` field with spelling and seniority variants merged. 400 sampled query postings per role, roles with ≥300 postings.
+**Role blurring.** Postings are binary vectors over 7,562 canonicalised skills (≥10 postings each); cosine nearest neighbours; role labels from the index's own `role` field with spelling and seniority variants merged.
+
+*Seniority is normalised.* A `Software Engineer` posting whose neighbour is `Senior Software Engineer` counts as the **same** role. Only 1,295 of 51,859 postings (2.5%) carry a seniority-marked raw title — `Staff Software Engineer`, `Senior Product Manager`, `Senior Software Engineer` — and all of them map onto their base axis; none are dropped. On the profile side the title matcher strips Senior/Staff/Sr./Lead/Principal/Junior/II before matching.
+
+*How much does the grouping choice matter?* Merging can only **lower** measured blur, so the published figures are the conservative end:
+
+| role grouping | groups | neighbours under another title | majority under another |
+|---|---|---|---|
+| raw `role.keyword`, no merging | 39 | 54.2% | 60.6% |
+| **as published** (seniority + alias merged) | 32 | 48.2% | 53.6% |
+
+Aliases are also merged (Software Developer → Software Engineer; Test, QA and Automation Engineer into one axis), which is the more aggressive direction and pushes the number down further. 400 sampled query postings per role, roles with ≥300 postings.
 
 **Skill churn.** 1,029,639 dated position descriptions from 569,143 profiles across two corpus snapshots, deduplicated by profile id. Skills extracted by deterministic n-gram matching (no LLM, so the instrument cannot drift across years). Yearly *shares*, so corpus growth cancels. Ranking is computed among skills only, so prose terms don't compete for rank positions.
 
