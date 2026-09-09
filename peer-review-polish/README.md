@@ -21,6 +21,7 @@ But the evidence that reviews are being *written* by machines is absent, and sev
 - **Model vocabulary fell.** `delve`, `showcase`, `underscore` and their family dropped from 22.6% to 15.9% of reviews.
 - **Model rhetoric fell.** The "not X, but Y" construction went 2.5% → 1.9%.
 - **Non-native English markers fell by a quarter**, 11.4% → 8.7% (z = −4.22, p = 2.4e-05).
+- **The judge was calibrated against known machine content** and separates it from known-human writing at **AUC 0.998** (section 7).
 
 > **Reviewers are not sending machines to do their thinking. They are sending their thinking through a machine on the way out.**
 
@@ -157,6 +158,67 @@ Meta-reviews were collected (1,433 of them) but are reported here only in passin
 
 ---
 
+## 7. Is the judge trustworthy? A calibration against known machine content
+
+The blind judge carries a lot of weight in section 2, and an uncalibrated judge is just an
+opinion with a number attached. So we tested it against content whose provenance we know.
+
+![Judge score distributions for known-human, mainstream and known-machine content](05_judge_calibration.png)
+
+Three labelled sets of blog articles, scored by the same judge, same 0-100 scale, same
+criteria, with the genre noun swapped from "review" to "article":
+
+| Set | n | Label quality | Mean | Median | >=70 | >=85 |
+|---|---:|---|---:|---:|---:|---:|
+| **Known human** (published <= 2021-12-31) | 319 | **Ground truth** -- ChatGPT launched 2022-11-30 | **12.9** | 6 | 5.0% | 2.5% |
+| Mainstream 2026 publications | 319 | Presumed mostly human; *not* ground truth | 57.6 | 68 | 48.6% | 29.8% |
+| **Known content-farm output** (332 denylisted domains) | 318 | Domain-level label | **96.1** | 97 | **100.0%** | 98.7% |
+
+**Discrimination (AUC, where 0.5 is a coin flip):**
+
+| Comparison | AUC |
+|---|---:|
+| Known machine vs known human | **0.998** |
+| Known machine vs mainstream 2026 | 0.971 |
+| Mainstream 2026 vs known human | 0.887 |
+
+At the >=70 threshold the judge catches **100% of known content-farm output** while flagging
+**5.0% of pre-ChatGPT human writing**. It is not returning noise, and it is not merely
+detecting "2026-ness" -- it separates farm content from era-matched mainstream publications
+at 0.971.
+
+**What this establishes for section 2.** ICLR reviews of both years sit far below the machine
+signature: 2024 at a mean of 18.6, close to the 12.9 human baseline; 2026 at 37.5. Neither
+resembles the 96.1 of genuine machine-generated text. More importantly, the load-bearing
+result in section 2 was the **flat top band**, and calibration shows that is exactly where
+this instrument is most decisive -- it places 98.7% of real machine content above 85. If ICLR
+2026 reviews were being drafted by models at scale, the band the judge is best at would have
+moved. It did not.
+
+**What it does not establish.** Two limits, both real:
+
+*Genre transfer.* Content-farm output is fully generated, low-effort SEO filler. The
+peer-review question is polish versus drafting -- a much finer distinction in a different
+genre. A judge can ace the first and still be imprecise on the second. This is a floor test:
+failing it would have invalidated section 2; passing it does not transfer calibration.
+
+*Era drift.* Mainstream 2026 publications score 57.6 -- 4.5x the human baseline, and nearly
+half the known-slop score, with 48.6% above 70. Either real publications are heavily
+AI-assisted in 2026, or the judge partly keys on stylistic conventions that became common
+after 2022 regardless of authorship. We cannot separate those, because the known-human
+control is confounded the same way: it is both pre-AI *and* older writing. Era drift would
+inflate 2026 scores for reasons other than authorship, which is precisely the comparison
+section 2 makes -- so some of the 18.6 -> 37.5 rise in mean score may not be authorship at
+all. It cannot explain the flat top band, since drift would push that up too.
+
+**One label-quality note.** The 333-domain denylist contains `dev.to`, a legitimate developer
+community, with 183 documents. It was excluded from the positive set; leaving it in would have
+put genuine human writing into "known slop". Every other domain in the list matches the
+cheap-cloud-domain pattern of the documented network. That is a 1.5% contamination rate in
+the seed list, worth knowing for anyone else reusing it.
+
+---
+
 ## Methodology
 
 **Collection.** OpenReview's `/notes` endpoint is behind a bot challenge; `/notes/search` is not. Search requires a non-empty query term, so the corpus was assembled from ~90 query terms and deduplicated by note id, then supplemented with venue-targeted pulls via `group=`. This introduces term-selection bias, which is acceptable for per-review text properties and **not** acceptable for estimating venue totals — hence the separate German-tank approach in section 5.
@@ -181,5 +243,6 @@ Meta-reviews were collected (1,433 of them) but are reported here only in passin
 | `llm_judge_scores.csv` | Per-review blind judge scores, signal type, and stated primary signal |
 | `esl_markers.csv` | Non-native English marker rates by venue-year |
 | `submission_volume.csv` | German-tank submission estimates by venue-year |
+| `judge_calibration.csv` | Per-article calibration scores for the three labelled sets |
 
 Raw collected notes (33,844 records) are not committed for size reasons; available on request.
