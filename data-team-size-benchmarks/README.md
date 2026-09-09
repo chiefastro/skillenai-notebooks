@@ -69,33 +69,48 @@ you look exactly like your peers. If you are a 3,000-person tech org with the sa
 are carrying an analyst-heavy org into a scale where most companies have converted to
 engineering, and the queue of ad-hoc requests is probably telling you so.
 
-## Finding 3: Analytics Engineering is the market's biggest supply gap
+## Finding 3: hiring is AI-shaped, the workforce is still analyst-shaped
 
-Comparing the **installed base** (what people currently do) against **open postings** (what
-employers are trying to hire) puts every role on the same axes.
+Put the **workforce** (what people currently do) against **open postings** (what employers are
+trying to hire) and every role lands on the same axes.
 
-![Supply versus demand by data role. Analytics Engineering sits far above the diagonal at 0.9% supply and 4.4% demand.](03_supply_vs_demand.png)
+![Supply versus demand by data role. ML/AI Engineering sits far above the diagonal at 6.3% of people but 36.1% of postings; Analytics/BI sits far below at 46.4% of people but 17.5% of postings.](03_supply_vs_demand.png)
 
-| Role | Share of people | Share of postings | Demand / supply |
+| Role | Share of people | Share of postings | Hiring / workforce |
 |---|---:|---:|---:|
-| Analytics Engineering | 0.9% | 4.4% | **4.7x** |
-| Data Engineering | 20.5% | 33.4% | 1.6x |
-| Data Science | 25.1% | 33.5% | 1.3x |
-| Analytics / BI | 53.4% | 28.7% | **0.5x** |
+| ML / AI Engineering | 6.3% | 36.1% | **5.7x** |
+| Analytics Engineering | 0.8% | 2.7% | **3.3x** |
+| Data Engineering | 17.8% | 20.3% | 1.1x |
+| Data Science | 21.8% | 20.4% | 0.9x |
+| Database Admin | 6.8% | 2.9% | 0.4x |
+| Analytics / BI | 46.4% | 17.5% | **0.4x** |
 
-Analytics Engineering is a rounding error in the workforce — fewer than 1 in 100 people in a
-data role hold the title — but **4.4% of open data roles**, the only role where hiring runs
-several times ahead of the people available to fill it.
+**Read this as a comparison of two mixes, not as a supply shortage.** Both columns are shares of
+their own total, so the diagonal is zero-sum by construction — if one role is over-represented in
+hiring, another must be under-represented. The finding is that the *shape* of what employers are
+buying differs sharply from the shape of who is available.
 
-Analytics / BI is the mirror image: **more than half the installed base, barely a quarter of the
-hiring.** The two facts are the same fact. The analyst-heavy shape that Finding 2 shows at small
-scale is what most of the workforce currently is, and it is not what employers are currently
-buying.
+Two roles are hired well above their share of the workforce. **ML / AI Engineering** is the
+extreme: 6.3% of people in data roles, **36.1% of open data postings**. **Analytics Engineering**
+is second at 3.3x, and is by far the smallest of the six in absolute terms — fewer than 1 in 100
+people in a data role hold the title.
 
-This is the clearest career signal in the dataset. It does not mean analyst roles are
-disappearing — 28.7% of a large market is still a lot of jobs — but the direction of travel is
-unambiguous, and the scarcest credential in the field right now is the one that sits between
-the analyst and the engineer.
+**Data Engineering and Data Science are close to parity** (1.1x and 0.9x). These are the roles
+where the workforce and the hiring market are roughly the same shape.
+
+The two on the other side are **Analytics / BI** and **Database Admin**, both at 0.4x. BI is the
+one that matters, because of its size: **it is 46% of the data workforce and 18% of the hiring.**
+
+That single row is the counterweight to everything above it. Nearly half the people in data roles
+today sit in the category employers are hiring into least, relative to its size. This is the same
+pattern Finding 2 shows across company size — BI-heavy at small scale, engineer-heavy at large —
+except here it appears as a *time* signal rather than a size one. **The market is hiring toward
+the shape that large organizations already have.**
+
+It does not mean analyst roles are disappearing. 17.5% of a large hiring market is a great many
+jobs, and the BI function is not going anywhere. But anyone reading this as a career signal
+should note that the two fastest-growing categories relative to their size are the two that sit
+between analysis and engineering.
 
 ## What this does not show
 
@@ -104,8 +119,15 @@ the analyst and the engineer.
   is roughly uniform across roles, so proportions hold up, but any absolute headcount derived
   from this data is a floor rather than an estimate.
 - **Title ≠ job.** Someone titled "Data Analyst" may be doing analytics engineering work, and
-  vice versa. The supply/demand gap in Finding 3 partly reflects titles catching up to work
-  that is already happening.
+  vice versa. The gaps in Finding 3 partly reflect titles catching up to work that is already
+  happening — especially for ML/AI, where the label moved faster than most people's profiles.
+- **Finding 3 compares two mixes, not two levels.** Both axes are shares of their own total, so
+  the comparison is zero-sum: a role above the diagonal mathematically requires another below it.
+  It says the hiring mix differs from the workforce mix. It does *not* say there is an absolute
+  shortage of any role, and the ratios would change if the set of roles compared changed.
+- **A stock is being compared to a flow.** The workforce is everyone currently in a role; postings
+  are openings advertised in a window. Roles with higher turnover or faster growth generate more
+  postings per person employed, which inflates their ratio independently of headcount growth.
 - **No causality about team effectiveness.** Nothing here says a 1-in-9 team is the *right*
   size, only that it is the normal one. A deliberately lean team and an under-resourced one look
   identical in this data.
@@ -132,7 +154,9 @@ supply and demand so the two sides are directly comparable.
 
 **Role classification.** Titles are bucketed by an ordered rule set (most specific first) into
 Data Engineering, Analytics Engineering, Data Science, Analytics / BI, ML / AI Engineering,
-Database Admin and Data Leadership. Deliberately excluded: QA/test analysts, security analysts,
+Database Admin and Data Leadership. Findings 1 and 2 use all seven. Finding 3 uses the six
+practitioner buckets, excluding Data Leadership — it is a management layer rather than a role
+people are hired into as practitioners, and posting volumes for it are not comparable. Deliberately excluded: QA/test analysts, security analysts,
 programmer-analysts, financial/clinical/supply-chain analysts, data-entry and data-governance
 roles, students, interns, and degree strings ("MS in Data Science").
 

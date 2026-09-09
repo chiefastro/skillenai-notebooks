@@ -136,41 +136,55 @@ fig.tight_layout(); fig.savefig(f"{OUT}/02_mix_by_size.png", dpi=150); plt.close
 
 # ------------------------------------------------- fig 3: supply vs demand
 dem = collections.Counter(json.load(open(DEMAND)))
-CORE = ["Data Engineering", "Analytics Engineering", "Data Science", "Analytics / BI"]
+# All practitioner buckets - the same population as figs 1-2 minus Data Leadership,
+# which is a management layer rather than a role someone is hired into as a practitioner.
+CORE = ["ML / AI Engineering", "Analytics Engineering", "Data Engineering",
+        "Data Science", "Database Admin", "Analytics / BI"]
 sc = sum(NAT[k] for k in CORE); dc = sum(dem[k] for k in CORE)
 sd = [{"role": k, "supply_pct": 100*NAT[k]/sc, "demand_pct": 100*dem[k]/dc,
        "supply_n": NAT[k], "demand_n": dem[k], "ratio": (dem[k]/dc)/(NAT[k]/sc)} for k in CORE]
+sd.sort(key=lambda r: -r["ratio"])
 with open(f"{OUT}/supply_vs_demand.csv", "w", newline="") as f:
     w = csv.DictWriter(f, fieldnames=list(sd[0].keys())); w.writeheader(); w.writerows(sd)
 
-fig, ax = plt.subplots(figsize=(8.2, 6.6))
-lim = 60
+# Diverging encoding: over-hired vs over-supplied relative to the diagonal.
+# (Two hues + direct labels, so the all-pairs CVD cap on categorical scatters does not bite.)
+OVER, UNDER = "#2a78d6", "#e34948"
+fig, ax = plt.subplots(figsize=(9.0, 7.0))
+lim = 55
 ax.plot([0, lim], [0, lim], color=INK2, lw=1.4, ls="--", zorder=2)
-ax.text(lim*0.82, lim*0.82+1.6, "supply = demand", color=INK2, fontsize=9.5, rotation=38, ha="center")
-ax.fill_between([0, lim], [0, lim], [lim, lim], color="#2a78d6", alpha=0.05, zorder=1)
-ax.fill_between([0, lim], [0, 0], [0, lim], color="#eb6834", alpha=0.05, zorder=1)
-ax.text(4, lim-6, "hiring runs AHEAD\nof the installed base", color="#2a78d6",
+ax.text(lim*0.86, lim*0.86+1.4, "equal share", color=INK2, fontsize=9.5, rotation=38, ha="center")
+ax.fill_between([0, lim], [0, lim], [lim, lim], color=OVER, alpha=0.05, zorder=1)
+ax.fill_between([0, lim], [0, 0], [0, lim], color=UNDER, alpha=0.05, zorder=1)
+ax.text(2.5, lim-3, "bigger share of HIRING\nthan of the workforce", color=OVER,
         fontsize=10.5, fontweight="bold", va="top")
-ax.text(lim-4, 5, "more people than\nopen roles", color="#eb6834", fontsize=10.5,
-        fontweight="bold", ha="right")
-OFF = {"Data Engineering":       ((-12,  20), "right"),
-       "Data Science":           (( 16, -34), "left"),
-       "Analytics / BI":         ((-14,  18), "right"),
-       "Analytics Engineering":  (( 16,   4), "left")}
+ax.text(lim-2.5, 3.5, "bigger share of the WORKFORCE\nthan of hiring", color=UNDER,
+        fontsize=10.5, fontweight="bold", ha="right")
+
+OFF = {"ML / AI Engineering":     (( 14,   2), "left"),
+       "Analytics Engineering":   (( 16, -18), "left"),
+       "Data Engineering":        ((-13,  16), "right"),
+       "Data Science":            (( 15, -26), "left"),
+       "Database Admin":          (( 12,  20), "left"),
+       "Analytics / BI":          ((-14,  16), "right")}
 for r in sd:
-    ax.scatter(r["supply_pct"], r["demand_pct"], s=190, color=C[r["role"]],
+    col = OVER if r["ratio"] >= 1 else UNDER
+    ax.scatter(r["supply_pct"], r["demand_pct"], s=190, color=col,
                edgecolor="#fcfcfb", linewidth=2, zorder=5)
     off, ha = OFF[r["role"]]
     ax.annotate(f"{r['role']}\n{r['supply_pct']:.1f}% → {r['demand_pct']:.1f}%  ({r['ratio']:.1f}x)",
                 (r["supply_pct"], r["demand_pct"]), textcoords="offset points",
                 xytext=off, ha=ha, fontsize=10, color=INK, fontweight="bold", zorder=6)
 ax.set_xlim(0, lim); ax.set_ylim(0, lim)
-ax.set_xlabel("Share of people currently in the role  (supply)")
-ax.set_ylabel("Share of open postings  (demand)")
-ax.xaxis.set_major_formatter(PercentFormatter(decimals=0)); ax.yaxis.set_major_formatter(PercentFormatter(decimals=0))
+ax.set_xlabel("Share of people currently in the role  (the workforce)")
+ax.set_ylabel("Share of open postings  (hiring)")
+ax.xaxis.set_major_formatter(PercentFormatter(decimals=0))
+ax.yaxis.set_major_formatter(PercentFormatter(decimals=0))
 ax.grid(color=GRID, zorder=0)
-ax.set_title("Analytics Engineering is the one role the market wants\nmore of than exists",
-             fontsize=14, fontweight="bold", pad=14, loc="left")
+ax.set_title("Hiring is AI-shaped. The workforce is still analyst-shaped.",
+             fontsize=14, fontweight="bold", pad=34, loc="left")
+ax.text(0, 1.017, "Both axes are shares of their own total, so this compares composition — "
+        "it is zero-sum by construction.", transform=ax.transAxes, fontsize=9.5, color=INK2)
 fig.tight_layout(); fig.savefig(f"{OUT}/03_supply_vs_demand.png", dpi=150); plt.close(fig)
 
 # ------------------------------------------------- national mix csv
