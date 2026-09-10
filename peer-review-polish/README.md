@@ -235,6 +235,11 @@ the seed list, worth knowing for anyone else reusing it.
 
 ---
 
+## Reproducing this
+
+All collection and analysis code is in [`scripts/`](scripts/), with a README covering the
+run order and configuration. The OpenReview collector needs no account.
+
 ## Files
 
 | File | Contents |
